@@ -1,2 +1,23 @@
-.imgcontainer { background-color: #000000;}
-.imgcontainer img { opacity: 0.6; }
+.imgcontainer { 
+    background-color: #000000;
+}
+
+.imgcontainer img { 
+    opacity: 0.6; 
+}
+
+.imgcontainer .img-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+}
+
+.imgcontainer .img-center h2{
+    color: white; 
+}
+
+.imgcontainer .img-center h1{
+    color: white; 
+}
+  

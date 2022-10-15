@@ -9,7 +9,7 @@
     </head>
 <body>
 
-<nav class="navbar navbar-expand-sm ">
+<nav class="navbar navbar-expand-lg ">
     <div class="container-fluid fixed-top shadow-sm bg-light">
         <a class="navbar-brand" href="#">
             <img src="images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
@@ -62,8 +62,13 @@
 </nav>
 <div class="imgcontainer">
     <img src="images\front_img.png" class="img-fluid " alt="Responsive image" style="width:100%; height: auto;">
+    <div class="img-center">
+        <h2>Cacti-Succulent Kuching</h2>
+        <h1>Book With Our Newest Application</h1>
+        <button type="button" class="btn btn-outline-light">Login</button>
+        <button type="button" class="btn btn-outline-light">Sign Up</button>
+    </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <div class="container-fluid border" style="width 100%;">
   <footer class="py-1 my-2">
