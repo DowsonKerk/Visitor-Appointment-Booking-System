@@ -4,12 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home</title>
+        <link rel="stylesheet" href="css\index.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
 
-<nav class="navbar navbar-expand-sm">
-    <div class="container-fluid fixed-top shadow-sm">
+<nav class="navbar navbar-expand-sm ">
+    <div class="container-fluid fixed-top shadow-sm bg-light">
         <a class="navbar-brand" href="#">
             <img src="images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
@@ -59,8 +60,10 @@
         </div>
     </div>
 </nav>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="imgcontainer">
+    <img src="images\front_img.png" class="img-fluid " alt="Responsive image" style="width:100%; height: auto;">
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <div class="container-fluid border" style="width 100%;">
   <footer class="py-1 my-2">
