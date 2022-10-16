@@ -48,11 +48,11 @@
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                             Welcome back, Ali.
+                             Welcome
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li><button class="dropdown-item" type="button">Edit Profile</button></li>
-                            <li><button class="dropdown-item" type="button">Logout</button></li>
+                            <li><button class="dropdown-item" type="button">Login</button></li>
+                            <li><button class="dropdown-item" type="button">Sign Up</button></li>
                         </ul>
                     </div>
                 </li>
@@ -65,10 +65,18 @@
     <div class="img-center">
         <h2>Cacti-Succulent Kuching</h2>
         <h1>Book With Our Newest Application</h1>
+        <h5>Sign Up to get more Information</h5>
+        <br>
         <button type="button" class="btn btn-outline-light">Login</button>
         <button type="button" class="btn btn-outline-light">Sign Up</button>
     </div>
 </div>
+
+<div class="cont">
+
+
+
+
 
 <div class="container-fluid border" style="width 100%;">
   <footer class="py-1 my-2">

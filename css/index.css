@@ -8,9 +8,8 @@
 
 .imgcontainer .img-center{
     position: absolute;
-    top: 50%;
+    top: 200px;
     left: 50%;
-
 }
 
 .imgcontainer .img-center h2{
@@ -18,6 +17,10 @@
 }
 
 .imgcontainer .img-center h1{
+    color: white; 
+}
+
+.imgcontainer .img-center h5{
     color: white; 
 }
   
