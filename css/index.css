@@ -8,16 +8,17 @@
 
 .imgcontainer .img-center{
     position: absolute;
-    top: 200px;
+    top: 50%;
     left: 50%;
-}
+    transform: translate(-50%, -50%);
+} 
 
 .imgcontainer .img-center h2{
     color: white; 
 }
 
 .imgcontainer .img-center h1{
-    color: white; 
+    color: white;
 }
 
 .imgcontainer .img-center h5{

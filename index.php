@@ -9,7 +9,7 @@
     </head>
 <body>
 
-<nav class="navbar navbar-expand-lg ">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
         <a class="navbar-brand" href="#">
             <img src="images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
@@ -71,14 +71,14 @@
         <button type="button" class="btn btn-outline-light">Sign Up</button>
     </div>
 </div>
+<div class="row" style="padding:0; margin:0;">
+    <h1 class="text-center">About Us</h1>
 
-<div class="cont">
+</div>
 
 
 
-
-
-<div class="container-fluid border" style="width 100%;">
+<div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
