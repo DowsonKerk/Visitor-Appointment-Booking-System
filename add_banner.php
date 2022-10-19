@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -8,7 +12,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
-    
+<?php include('message.php'); ?>
+   
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
         <a class="navbar-brand" href="#">
@@ -68,94 +73,85 @@
         </div>
     </div>
 </nav>
-
-
-<div class="imgcontainer shadow">
-    <img src="images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <h2>Cacti-Succulent Kuching</h2>
-        <h1>Book With Our Newest Application</h1>
-        <h5>Sign Up to get more Information</h5>
-        <br>
-        <button type="button" class="btn btn-outline-light">Login</button>
-        <button type="button" class="btn btn-outline-light">Sign Up</button>
-    </div>
-</div>
-
-
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
+<br>
+<br>
 <br>
 <br>
 
-<div class="shadow-sm">
-    <img src="images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
+<form method="post" action="code.php" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Product ID</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="product_id" required>
+                </div>
+            </div>
 
-<br>
-<br>
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Product Name</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="product_name">
+                </div>
+            </div>
 
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
-    <div class="row mx-auto my-auto">
-        <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
-        <div class="col d-flex align-items-end justify-content-end p-3">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='add_banner.php';">Add Banner</button>
-            <!-- <button type="button" class="btn btn-primary">Edit Banner</button>
-            <button type="button" class="btn btn-primary">Delete Banner</button> -->
-        </div>
-    </div>
-    <hr>
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Description</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="product_description">
+                </div>
+            </div>
 
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images\image1.png" class="img-fluid rounded-start" alt="...">
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Price</label>
+                <div class="col-md-9">
+                    <input type="number" step="0.01" class="form-control" name="product_price">
+                </div>
+            </div>
+
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Offer Percentage</label>
+                <div class="col-md-9">
+                    <div class=" input-group">
+                        <input type="number" step="1" class="form-control" name="product_offer">
+                        <span class="input-group-text" id="basic-addon2">%</span>
+                    </div>
                 </div>
                 
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title">Bunny Ears, Angel Wings</h5>
-                        <p class="card-text">This paddle cactus is a favorite among indoor and outdoor succulent growers. The green pads of this cacti form shrubs. The pads are not covered in spines, but white or yellow aureoles that look like tufts of cotton. Although they may look soft, use caution when handling them!</p>
-                        <br>
-                        <br>
-                        <p class="card-text d-flex align-items-center justify-content-center"><small class="text-muted">Sales Period: 15/10/2020 to 15/11/2020</small></p>
-                    </div>
-                </div>
+            </div>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">50% Off</h5>
-                        <p class="card-text text-center h2">For 399$</p>
-                    </div>
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Offer Starting Date</label>
+                <div class="col-md-9">
+                    <input type="date" class="form-control" name="product_date_start">
+                </div>
+            </div>
+
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Offer Ended Date</label>
+                <div class="col-md-9">
+                    <input type="date" class="form-control" name="product_date_end">
+                </div>
+            </div>
+        
+            <!-- <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-3">Image</label>
+                <div class="col-md-9">
+                    <img src="https://cdn.synorexcloud.com/assets/images/blank/1x1.jpg" class="border rounded bg-white" style="height: 100px;">
+                    <input type="file" name="image" class="mt-2 form-control">
+                </div>
+            </div> -->
+
+            <div class="form-group row col-md-5 p-3 mx-auto">
+                <label class="col-form-label col-md-1"></label>
+                <div class="col-md-7">
+                    <button type="submit" class="btn btn-primary" name="add_banner">Save</button>
                 </div>
             </div>
         </div>
-        
     </div>
-</div>
 
+</form>
 
 
 
@@ -174,6 +170,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-	
