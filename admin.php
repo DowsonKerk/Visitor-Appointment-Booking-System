@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    require 'dbcon.php';
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -127,7 +132,15 @@
         </div>
     </div>
     <hr>
+    <?php 
+    $query = "SELECT * FROM banner";
+    $query_run = mysqli_query($con, $query);
 
+    if(mysqli_num_rows($query_run) > 0)
+    {
+        foreach($query_run as $banners)
+        {
+    ?>
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -136,22 +149,35 @@
                 
                 <div class="col-md-6 my-auto">
                     <div class="card-body">
-                        <h5 class="card-title">Bunny Ears, Angel Wings</h5>
-                        <p class="card-text">This paddle cactus is a favorite among indoor and outdoor succulent growers. The green pads of this cacti form shrubs. The pads are not covered in spines, but white or yellow aureoles that look like tufts of cotton. Although they may look soft, use caution when handling them!</p>
-                        <br>
-                        <br>
-                        <p class="card-text d-flex align-items-center justify-content-center"><small class="text-muted">Sales Period: 15/10/2020 to 15/11/2020</small></p>
+                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
+                        <p class="card-text"><?php echo $banners['product_description']?></p>
+                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
                     </div>
                 </div>
 
                 <div class="col-md-2 my-auto">
                     <div class="card-body">
-                        <h5 class="card-title text-center">50% Off</h5>
-                        <p class="card-text text-center h2">For 399$</p>
+                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
+                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="edit_banner.php?id=<?php echo $banners['product_id']; ?>" class="btn btn-primary btn-sm">Edit</a>
+                            <form action="Banner.php" method="POST" class="d-inline p-1">
+                                <button type="submit" name="delete_banner" value="<?php echo $banners['product_id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <?php
+            }
+        }
+        ?>
         
     </div>
 </div>
@@ -175,5 +201,28 @@
 </body>
 </html>
 
+<!-- 
+<div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="images\image1.png" class="img-fluid rounded-start" alt="...">
+                </div>
+                
+                <div class="col-md-6 my-auto">
+                    <div class="card-body">
+                        <h5 class="card-title">Bunny Ears, Angel Wings</h5>
+                        <p class="card-text">This paddle cactus is a favorite among indoor and outdoor succulent growers. The green pads of this cacti form shrubs. The pads are not covered in spines, but white or yellow aureoles that look like tufts of cotton. Although they may look soft, use caution when handling them!</p>
+                        <br>
+                        <br>
+                        <p class="card-text d-flex align-items-center justify-content-center"><small class="text-muted">Sales Period: 15/10/2020 to 15/11/2020</small></p>
+                    </div>
+                </div>
 
-	
+                <div class="col-md-2 my-auto">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">50% Off</h5>
+                        <p class="card-text text-center h2">For 399$</p>
+                    </div>
+                </div>
+            </div>
+        </div> -->

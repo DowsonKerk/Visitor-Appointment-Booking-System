@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'dbcon.php';
 ?>
 
 <!doctype html>
@@ -76,35 +77,41 @@ session_start();
 <br>
 <br>
 <br>
+<?php
+if(isset($_GET['id']))
+{
+    $product_id = mysqli_real_escape_string($con, $_GET['id']);
+    $query = "SELECT * FROM banner WHERE product_id='$product_id' ";
+    $query_run = mysqli_query($con, $query);
+
+    if(mysqli_num_rows($query_run) > 0)
+    {
+        $banners = mysqli_fetch_array($query_run);
+?>
 
 <form method="post" action="Banner.php" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-12">
-            <div class="form-group row col-md-5 p-3 mx-auto">
-                <label class="col-form-label col-md-3">Product ID</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" name="product_id" required>
-                </div>
-            </div>
+            <input type="hidden" name="product_id" value="<?php echo $banners['product_id']; ?>">
 
             <div class="form-group row col-md-5 p-3 mx-auto">
                 <label class="col-form-label col-md-3">Product Name</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" name="product_name">
+                    <input type="text" class="form-control" name="product_name" value="<?php echo $banners['product_name']?>">
                 </div>
             </div>
 
             <div class="form-group row col-md-5 p-3 mx-auto">
                 <label class="col-form-label col-md-3">Description</label>
                 <div class="col-md-9">
-                    <textarea type="text" class="form-control" rows="6" name="product_description"></textarea>
+                    <textarea type="text" class="form-control" rows="6" name="product_description"><?php echo $banners['product_description']?></textarea>
                 </div>
             </div>
 
             <div class="form-group row col-md-5 p-3 mx-auto">
                 <label class="col-form-label col-md-3">Price</label>
                 <div class="col-md-9">
-                    <input type="number" step="0.01" class="form-control" name="product_price">
+                    <input type="number" step="0.01" class="form-control" name="product_price" value="<?php echo $banners['product_price']?>">
                 </div>
             </div>
 
@@ -112,7 +119,7 @@ session_start();
                 <label class="col-form-label col-md-3">Offer Percentage</label>
                 <div class="col-md-9">
                     <div class=" input-group">
-                        <input type="number" step="1" class="form-control" name="product_offer">
+                        <input type="number" step="1" class="form-control" name="product_offer" value="<?php echo $banners['product_offer']?>">
                         <span class="input-group-text" id="basic-addon2">%</span>
                     </div>
                 </div>
@@ -122,14 +129,14 @@ session_start();
             <div class="form-group row col-md-5 p-3 mx-auto">
                 <label class="col-form-label col-md-3">Offer Starting Date</label>
                 <div class="col-md-9">
-                    <input type="date" class="form-control" name="product_date_start">
+                    <input type="date" class="form-control" name="product_date_start" value="<?php echo $banners['product_date_start']?>">
                 </div>
             </div>
 
             <div class="form-group row col-md-5 p-3 mx-auto">
                 <label class="col-form-label col-md-3">Offer Ended Date</label>
                 <div class="col-md-9">
-                    <input type="date" class="form-control" name="product_date_end">
+                    <input type="date" class="form-control" name="product_date_end" value="<?php echo $banners['product_date_end']?>">
                 </div>
             </div>
         
@@ -144,14 +151,17 @@ session_start();
             <div class="form-group row col-md-5 p-3 mx-auto">
                 <label class="col-form-label col-md-1"></label>
                 <div class="col-md-7">
-                    <button type="submit" class="btn btn-primary" name="add_banner">Save</button>
+                    <button type="submit" class="btn btn-primary" name="update_banner">Update</button>
                 </div>
             </div>
         </div>
     </div>
 
 </form>
-
+<?php
+    }
+}
+?>
 
 
 <div class="container-fluid border" style="width: 100%;">
