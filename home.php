@@ -2,8 +2,12 @@
     session_start();
     require 'dbcon.php';
     include('Account.php');
+    if (!isLoggedIn()) {
+        $_SESSION['msg'] = "You must log in first";
+        header('location: login.php');
+    }
 ?>
-
+<!-- Logined normal user -->
 <!doctype html>
 <html lang="en">
     <head>
@@ -15,10 +19,10 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
-    
+
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="home.php">
             <img src="images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
@@ -29,20 +33,20 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="index.php">Home</a>
+                    <a class="nav-link active" href="home.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
 
-                <!-- <li class="nav-item p-1">
+                <li class="nav-item p-1">
                     <a class="nav-link" href="#">Booking</a>
                 </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Notification</a>
-                </li>  -->
+                </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
@@ -63,11 +67,11 @@
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                             Welcome!
+                             Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li><button class="dropdown-item" type="button" onclick="location.href='login.php'">Login</button></li>
-                            <li><button class="dropdown-item" type="button" onclick="location.href='register.php'">Sign Up</a></button></li>
+                            <li><button class="dropdown-item" type="button">Edit Profile</button></li>
+                            <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>
                 </li>
@@ -75,19 +79,33 @@
         </div>
     </div>
 </nav>
-
+<?php if (isset($_SESSION['success'])) : ?>
+<br>
+<br>
+<div class="alert alert-success" style=" margin:0;" role="alert">
+        <div class="error success">
+                <?php 
+                    echo $_SESSION['success']; 
+                    unset($_SESSION['success']);
+                ?>
+        </div>
+</div>
+<?php endif ?>
 
 <div class="imgcontainer shadow">
     <img src="images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
     <div class="img-center">
-        <h2>Cacti-Succulent Kuching</h2>
-        <h1>Book With Our Newest Application</h1>
-        <h5>Sign Up to get more Information</h5>
         <br>
-        <button type="button" class="btn btn-outline-light" onclick="location.href='login.php'">Login</button>
-        <button type="button" class="btn btn-outline-light" onclick="location.href='register.php'">Sign Up</button>
+        <br>
+        <h2>Welcome to Cacti-Succulent Kuching</h2>
+        <h1>Booking With Our Newest Application</h1>
+        <h5>Hello, <?php echo $_SESSION['user']['username']; ?>!</h5>
+        <!-- <br>
+        <button type="button" class="btn btn-outline-light">Login</button>
+        <button type="button" class="btn btn-outline-light">Sign Up</button> -->
     </div>
 </div>
+
 
 
 <div class="container mt-5">
@@ -173,10 +191,10 @@
 
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Home</a></li>
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
-      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li> -->
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
       <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>

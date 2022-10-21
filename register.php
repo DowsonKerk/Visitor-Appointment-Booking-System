@@ -2,6 +2,7 @@
     session_start();
     require 'dbcon.php';
     include('Account.php');
+
 ?>
 
 <!doctype html>
@@ -67,7 +68,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button" onclick="location.href='login.php'">Login</button></li>
-                            <li><button class="dropdown-item" type="button" onclick="location.href='register.php'">Sign Up</a></button></li>
+                            <li><button class="dropdown-item active" type="button" onclick="location.href='register.php'">Sign Up</a></button></li>
                         </ul>
                     </div>
                 </li>
@@ -76,104 +77,64 @@
     </div>
 </nav>
 
-
-<div class="imgcontainer shadow">
-    <img src="images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <h2>Cacti-Succulent Kuching</h2>
-        <h1>Book With Our Newest Application</h1>
-        <h5>Sign Up to get more Information</h5>
-        <br>
-        <button type="button" class="btn btn-outline-light" onclick="location.href='login.php'">Login</button>
-        <button type="button" class="btn btn-outline-light" onclick="location.href='register.php'">Sign Up</button>
-    </div>
-</div>
-
-
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
 <br>
 <br>
-
-<div class="shadow-sm">
-    <img src="images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
-
 <br>
 <br>
+<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+                    <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
-    <div class="row mx-auto my-auto">
-        <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
-    </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
-
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="admin\uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
-                </div>
-                
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
+                    <form method="post" action="register.php" enctype="multipart/form-data">
+                    <?php echo display_error(); ?>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="username" name="username" class="form-control form-control-lg"/>
+                        <label class="form-label" for="username">Your Name</label>
                     </div>
-                </div>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
+                    <div class="form-outline mb-4">
+                        <input type="email" id="email" name="email" class="form-control form-control-lg"/>
+                        <label class="form-label" for="email">Your Email</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="password" id="password_1" name="password_1" class="form-control form-control-lg" />
+                        <label class="form-label" for="password_1">Password</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="password" id="password_2"  name="password_2"class="form-control form-control-lg" />
+                        <label class="form-label" for="password_2">Repeat your password</label>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" name="register_btn">Register</button>
+                    </div>
+
+
+                    <p class="text-center text-muted mt-1 mb-0">Have already an account? <a href="login.php" class="fw-bold text-body"><u class="text-primary">Login here</u></a></p>
+
+                    </form>
+
                     </div>
                 </div>
             </div>
         </div>
-
-        <?php
-            }
-        }
-        ?>
-        
     </div>
 </div>
 
+<br>
+<br>
+<br>
 
 
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
       <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li> -->
@@ -190,4 +151,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
-	
