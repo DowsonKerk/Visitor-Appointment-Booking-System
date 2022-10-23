@@ -12,7 +12,7 @@
         unset($_SESSION['user']);
         header("location: ../login.php");
     }
-    ?>
+?>
 
 <!doctype html>
 <html lang="en">
