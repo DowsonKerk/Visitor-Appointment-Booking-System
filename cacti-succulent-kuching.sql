@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2022 at 10:09 PM
+-- Generation Time: Oct 23, 2022 at 06:01 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -56,6 +56,9 @@ INSERT INTO `banner` (`product_id`, `product_name`, `images`, `product_descripti
 CREATE TABLE `users` (
   `id` int(100) NOT NULL,
   `username` varchar(100) NOT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `contact_number` int(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `user_type` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
@@ -65,11 +68,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `user_type`, `password`) VALUES
-(1, 'Dowson Kerk', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
-(2, 'UwU', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
-(20, 'admin', 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
-(21, 'zekai', 'zekai@sohai', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
+INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`, `email`, `user_type`, `password`) VALUES
+(1, 'Dowson Kerk', 'Dowson', '2022-10-12', 123123, 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
+(2, 'kelvin', 'qweqwe', '0000-00-00', 1231231, 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
+(20, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
+(22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', 2147483647, 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef');
 
 --
 -- Indexes for dumped tables
@@ -101,7 +104,7 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
