@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('config.php');
+    include('dbcon.php');
 ?>
 
 <!doctype html>
@@ -79,30 +79,18 @@
 
 <?php
     $sql = "SELECT * FROM notifications ORDER BY id DESC";
-    $res = mysqli_query($conn, $sql);
+    $res = mysqli_query($con, $sql);
     if (mysqli_num_rows($res) > 0){
         while ($row = mysqli_fetch_assoc($res)){
     ?>
-    <small><i><?php echo $row["timemark"] ?></i></small><br \>
-    <?php echo $row["name"]; ?><br \>
-    <?php echo $row["text"]; ?><br \>
-    <?php echo $row["date1"]; ?><br \><br \>
+    <small><i><?php echo $row["timemark"] ?></i></small><br>
+    <?php echo $row["name"]; ?><br>
+    <?php echo $row["text"]; ?><br>
+    <?php echo $row["date1"]; ?><br><br>
 <?php }
     } ?>
 
-<?php
-    $sql = "SELECT * FROM banner ORDER BY timemark DESC";
-    $res = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($res) > 0){
-        while ($row = mysqli_fetch_assoc($res)){
-    ?>
-    <small><i><?php echo $row["timemark"] ?></i></small><br \>
-    <?php echo "PROMOTION!!!"; ?><br \>
-    <?php echo $row["product_name"]; ?><br \>
-    <?php echo "ENDS AT "; ?>
-    <?php echo $row["product_date_end"]; ?><br \><br \>
-<?php }
-    } ?>
+
 
 
 

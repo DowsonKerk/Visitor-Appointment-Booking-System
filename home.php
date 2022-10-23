@@ -45,7 +45,53 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Notification</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Notification
+                        </button>   
+                        <ul class="dropdown-menu dropdown-menu-xxl">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Promotion</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Booking Time</button>
+                            </li>  
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <?php
+                                    $sql = "SELECT * FROM banner ORDER BY create_on DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
+                                    <?php echo "Promotion On"; ?> <?php echo $row["product_name"]; ?><br>
+                                    <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <?php
+                                    $sql = "SELECT * FROM banner ORDER BY create_on DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
+                                    <?php echo "Promotion On"; ?> <?php echo $row["product_name"]; ?><br>
+                                    <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
                 </li>
 
                 <li class="nav-item p-1">
@@ -80,6 +126,9 @@
         </div>
     </div>
 </nav>
+
+
+
 <?php if (isset($_SESSION['success'])) : ?>
 <br>
 <br>
@@ -209,4 +258,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
-	
