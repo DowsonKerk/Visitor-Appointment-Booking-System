@@ -93,7 +93,19 @@
                     <?php echo display_error(); ?>
                     <div class="form-outline mb-4">
                         <input type="text" id="username" name="username" class="form-control form-control-lg"/>
-                        <label class="form-label" for="username">Your Name</label>
+                        <label class="form-label" for="username">Your Username</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="name" name="name" class="form-control form-control-lg"/>
+                        <label class="form-label" for="name">Your Full Name</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="date" id="birthday" name="birthday" class="form-control form-control-lg"/>
+                        <label class="form-label" for="birthday">Birthday</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="contact_num" name="contact_num" class="form-control form-control-lg"/>
+                        <label class="form-label" for="contact_num">Contact Number</label>
                     </div>
 
                     <div class="form-outline mb-4">

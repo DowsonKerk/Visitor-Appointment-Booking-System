@@ -76,7 +76,7 @@
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li><button class="dropdown-item" type="button">Edit Profile</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>

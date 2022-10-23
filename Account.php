@@ -8,7 +8,10 @@ if(isset($_POST['register_btn']))
 {
     
     $username = mysqli_real_escape_string($con, $_POST['username']);
+	$fullname = mysqli_real_escape_string($con, $_POST['name']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
+	$contactnum = mysqli_real_escape_string($con, $_POST['contact_num']);
+    $birthday = mysqli_real_escape_string($con, $_POST['birthday']);
     $password_1 = mysqli_real_escape_string($con, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($con, $_POST['password_2']);
 
@@ -30,13 +33,13 @@ if(isset($_POST['register_btn']))
 
 		if (isset($_POST['user_type'])) {
 			$user_type = e($_POST['user_type']);
-			$query = "INSERT INTO users (username, email, user_type, password) VALUES('$username', '$email', '$user_type', '$password')";
+			$query = "INSERT INTO users (username, full_name, birthday,contact_number, email, user_type, password) VALUES('$username','$fullname','$birthday','$contactnum', '$email', '$user_type', '$password')";
 			mysqli_query($db, $query);
 			$_SESSION['success']  = "New user successfully created!!";
 			header('location: index.php');
 		}else{
-			$query = "INSERT INTO users (username, email, user_type, password) 
-					  VALUES('$username', '$email', 'user', '$password')";
+			$query =  "INSERT INTO users (username, full_name, birthday,contact_number, email, user_type, password) 
+			VALUES('$username','$fullname','$birthday','$contactnum', '$email', 'user', '$password')";
 			mysqli_query($con, $query);
 
 	

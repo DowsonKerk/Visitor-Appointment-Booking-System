@@ -1,13 +1,13 @@
 <?php
-    session_start();
-    require 'dbcon.php';
-    include('Account.php');
-    if (!isLoggedIn()) {
-        $_SESSION['msg'] = "You must log in first";
-        header('location: login.php');
-    }
+ session_start();
+ require 'dbcon.php';
+ include('Account.php');
+ if (!isLoggedIn()) {
+     $_SESSION['msg'] = "You must log in first";
+     header('location: login.php');
+ }
 ?>
-<!-- Logined normal user -->
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -70,7 +70,6 @@
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                               
                             <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
@@ -80,113 +79,78 @@
         </div>
     </div>
 </nav>
-<?php if (isset($_SESSION['success'])) : ?>
-<br>
-<br>
-<div class="alert alert-success" style=" margin:0;" role="alert">
-        <div class="error success">
-                <?php 
-                    echo $_SESSION['success']; 
-                    unset($_SESSION['success']);
-                ?>
-        </div>
-</div>
-<?php endif ?>
 
-<div class="imgcontainer shadow">
-    <img src="images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <br>
-        <br>
-        <h2>Welcome to Cacti-Succulent Kuching</h2>
-        <h1>Booking With Our Newest Application</h1>
-        <h5>Hello, <?php echo $_SESSION['user']['username']; ?>!</h5>
-        <!-- <br>
-        <button type="button" class="btn btn-outline-light">Login</button>
-        <button type="button" class="btn btn-outline-light">Sign Up</button> -->
-    </div>
-</div>
+<br></br><br></br>
 
-
-
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-
-<div class="shadow-sm">
-    <img src="images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
-
-<br>
-<br>
-
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
-    <div class="row mx-auto my-auto">
+<div class="row mx-auto my-auto">
         <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
+            <h1 class="text-center">Profile</h1> 
         </div>
     </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
+<hr>
+<?php
 
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="admin\uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
+  if(isset($_GET['id'])){
+
+  $id = mysqli_real_escape_string($con, $_GET['id']);
+  $sql="SELECT * FROM users WHERE id='$id' ";
+  $result = mysqli_query($con,$sql);
+
+if($userInfo=mysqli_fetch_assoc($result))
+{
+
+?>
+<div style="width:600px; margin:0px auto">
+
+          <form class="" action="" method="POST">
+
+              <input type="hidden" name="id" value="<?php echo $userInfo['id']; ?>" class="form-control">
+              <div class="form-group pb-3">
+                <div>Full Name :
+                  <?php echo $userInfo['full_name']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Username :
+                  <?php echo $userInfo['username']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Birthday :
+                  <?php echo $userInfo['birthday']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Email :
+                  <?php echo $userInfo['email']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Contact Number :
+                  <?php echo $userInfo['contact_number']; ?>
                 </div>
                 
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
+              </div>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+              <div class="form-group pt-3">
+                <button type="submit" name="edit" class="btn btn-primary"><a class="text-light text-decoration-none" href="editprofile.php?id=<?= $userInfo['id']; ?>">Edit</a></button>
+                <button type="submit" name="back" class="btn btn-primary"><a class="text-light text-decoration-none" href="index.php">Back</a></button>
+              </div>
 
-        <?php
+            </form>
+            <?php
+              }
             }
-        }
-        ?>
-        
-    </div>
+          ?>
+     
 </div>
+
+
+<br></br><br></br>
 
 
 
@@ -209,4 +173,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
-	

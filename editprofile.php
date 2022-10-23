@@ -1,13 +1,14 @@
 <?php
-    session_start();
-    require 'dbcon.php';
-    include('Account.php');
-    if (!isLoggedIn()) {
-        $_SESSION['msg'] = "You must log in first";
-        header('location: login.php');
-    }
+ session_start();
+ require 'dbcon.php';
+ include('Account.php');
+ if (!isLoggedIn()) {
+     $_SESSION['msg'] = "You must log in first";
+     header('location: login.php');
+ }
 ?>
-<!-- Logined normal user -->
+
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -70,7 +71,6 @@
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                               
                             <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
@@ -80,113 +80,87 @@
         </div>
     </div>
 </nav>
-<?php if (isset($_SESSION['success'])) : ?>
-<br>
-<br>
-<div class="alert alert-success" style=" margin:0;" role="alert">
-        <div class="error success">
-                <?php 
-                    echo $_SESSION['success']; 
-                    unset($_SESSION['success']);
-                ?>
-        </div>
-</div>
-<?php endif ?>
 
-<div class="imgcontainer shadow">
-    <img src="images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <br>
-        <br>
-        <h2>Welcome to Cacti-Succulent Kuching</h2>
-        <h1>Booking With Our Newest Application</h1>
-        <h5>Hello, <?php echo $_SESSION['user']['username']; ?>!</h5>
-        <!-- <br>
-        <button type="button" class="btn btn-outline-light">Login</button>
-        <button type="button" class="btn btn-outline-light">Sign Up</button> -->
-    </div>
-</div>
+
+<br></br><br></br>
 
 
 
 <div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
 
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Edit profile Details
+                    <a href="profile.php" class="btn btn-danger float-end">BACK</a>
+                </h4>
+            </div>
+            <div class="card-body">
 
-<br>
-<br>
 
-<div class="shadow-sm">
-    <img src="images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
 
-<br>
-<br>
+                <?php
+                    if(isset($_GET['id'])){
 
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
-    <div class="row mx-auto my-auto">
-        <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
-    </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
+                    $id = mysqli_real_escape_string($con, $_GET['id']);
+                    $query = "SELECT * FROM users WHERE id='$id'";
+                    $query_run = mysqli_query($con, $query);
 
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="admin\uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
-                </div>
-                
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
+                    if(mysqli_num_rows($query_run) > 0)
+                    {
+                        $userInfo = mysqli_fetch_array($query_run);
+                        ?>
+                        
+                        <form class="" action="profileUpdate.php" method="POST">
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
-                    </div>
-                </div>
+                            <?php echo display_error(); ?>
+                            <br>
+
+                            <input type="hidden" name="id" value="<?php echo $userInfo['id']; ?>" class="form-control">
+                            
+                            <div class="form-group pb-3">
+                              <label for="name">Your name</label>
+                              <input type="text" name="name" value="<?php echo $userInfo['full_name']; ?>" class="form-control">
+                            </div>
+                            <div class="form-group pb-3">
+                              <label for="username">Your username</label>
+                              <input type="text" name="username" value="<?php echo $userInfo['username']; ?>" class="form-control">
+                            </div>
+                            <div class="form-group pb-3">
+                              <label for="username">Birthday</label>
+                              <input type="date" name="birthday" value="<?php echo $userInfo['birthday']; ?>" class="form-control">
+                            </div>
+                            <div class="form-group pb-3">
+                              <label for="email">Email address</label>
+                              <input type="email" id="email" name="email" value="<?php echo $userInfo['email']; ?>" class="form-control">
+                            </div>
+                            <div class="form-group pb-3">
+                              <label for="mobile">Mobile Number</label>
+                              <input type="text" id="contactnum" name="contactnum" value="<?php echo $userInfo['contact_number']; ?>" class="form-control">
+                            </div>
+
+                            <div class="form-group pt-3">
+                              <button type="submit" id="update_user" name="update_user" class="btn btn-primary" >Update</button>
+                            </div>
+
+                        </form>
+
+                        <?php
+
+                         }
+                    }
+                   
+                ?>
             </div>
         </div>
-
-        <?php
-            }
-        }
-        ?>
-        
     </div>
 </div>
+</div>
+
+  
+
+<br></br><br></br>
 
 
 
@@ -209,4 +183,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
-	
