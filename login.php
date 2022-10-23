@@ -2,7 +2,6 @@
     session_start();
     require 'dbcon.php';
     include('Account.php');
-
 ?>
 
 <!doctype html>
