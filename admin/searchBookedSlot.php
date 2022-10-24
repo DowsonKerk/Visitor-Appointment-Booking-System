@@ -1,5 +1,6 @@
 <?php
     session_start();
+	error_reporting(0);
     include('../dbcon.php');
     include('../Account.php');
     if (!isAdmin()) {
@@ -13,8 +14,7 @@
         header("location: ../login.php");
     }
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -25,7 +25,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
-    
+
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
         <a class="navbar-brand" href="#">
@@ -97,132 +97,94 @@
         </div>
     </div>
 </nav>
+</br></br></br>
 
-
-<div class="imgcontainer shadow">
-    <img src="..\images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <h2>Cacti-Succulent Kuching</h2>
-        <h1>Book With Our Newest Application</h1>
-        <h5>Admin Account</h5>
-        <br>
-    </div>
-</div>
-
-
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-
-<div class="shadow-sm">
-    <img src="..\images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
-
-<br>
-<br>
-
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
-    <div class="row mx-auto my-auto">
-        <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
-        <div class="col d-flex align-items-end justify-content-end p-3">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='add_banner.php';">Add Banner</button>
-            <!-- <button type="button" class="btn btn-primary">Edit Banner</button>
-            <button type="button" class="btn btn-primary">Delete Banner</button> -->
-        </div>
-    </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
-
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
+<?php
+	$SQL = "SELECT * FROM tblBookedSlot";
+	$Result = mysqli_query($con, $SQL);
+	if(mysqli_num_rows($Result) > 0)
+	{
+	?>
+		<div class="container-contact100">
+			<div class="wrap-contact100">							
+				<span class="contact100-form-title">
+					<?php if($_GET['Id'] == "E") echo "Edit Booked Slot"; 
+						else echo "Booked Slot List"; ?>
+				</span>
+			
+                <div class="callout callout-warning">
+				 <?php 
+				 	if($_GET["Id"] == "E")	echo "<h5>Click the list row to edit booked slot!</h5>"; 
+		 			else echo "<h5>Click the list row to view booked slot!</h5>";  ?>
                 </div>
-                
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
+         		<br/>
+				<form class="contact100-form validate-form" method="POST">
+					<table id="example" class="table table-bordered table-hover">
+				 		<thead>
+                			<tr>
+            					<th>Booked Slot Id</th>
+								<th>Booking Slot Availability Id</th>
+								<th>Booked By</th>
+           					</tr>
+                  		</thead>
+                		<tbody>
+						<?php
+							for($i = 0; $i < mysqli_num_rows($Result); $i++)
+							{
+								$RecRow = mysqli_fetch_array($Result);
+								echo "<tr class = \"Row\"";
+								if($_GET['Id'] == "E")
+								echo "onclick = \"location = 'editBookedSlot.php?Id=".$RecRow['bookedSlotId']."'\"";
+								else echo  "onclick = \"location = 'viewBookedSlot.php?Id=".$RecRow['bookedSlotId']."'\"";
+								echo ">";
+								echo "<td>".$RecRow['bookedSlotId']."</td>";
+								echo "<td>".$RecRow['bookingSlotId']."</td>";
+								echo "<td>".$RecRow['bookedBy']."</td>";
+								echo "</tr>";
+								$_SESSION['bookedId'] = $RecRow['bookedSlotId'];
+							}
+						?>
+					  	</tbody>
+					</table>
+				</form>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button type="submit" class="contact100-form-btn" onclick="history.back()">
+							Back					
+						</button>
+					</div>
+				</div>			
+			</div>
+		</div>
+	<?php
+	}	
+ 	else
+	{
+		if($_GET['Id'] == "E") 
+			echo"<script>alert('Fail to search Appointment, try again!')
+			location = 'searchBookedSlot.php?Id=E';</script>";
+		else
+			echo "<script>alert('Fail to search Appointment, try again!')
+			location = 'searchBookedSlot.php';</script>";
+	} 		
+?>		
+</body>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a href="edit_banner.php?id=<?php echo $banners['product_id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="Banner.php" method="POST" class="d-inline p-1">
-                                <button type="submit" name="delete_banner" value="<?php echo $banners['product_id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <?php
-            }
-        }
-        ?>
-        
-    </div>
-</div>
-
-
-
-
+</html>
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li> -->
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-</body>
-</html>
