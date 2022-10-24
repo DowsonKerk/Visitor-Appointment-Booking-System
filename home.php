@@ -51,41 +51,49 @@
                         </button>   
                         <ul class="dropdown-menu dropdown-menu-xxl">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Promotion</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Booking Time</button>
-                            </li>  
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Promotion</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Booking Time</button>
+                                </li>  
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                <?php
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                    <?php
                                     $sql = "SELECT * FROM banner ORDER BY create_on DESC";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
-                                    <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Promotion On"; ?> <?php echo $row["product_name"]; ?><br>
-                                    <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
-                                    </li></button>
+                                    <li>
+                                        <button class="dropdown-item border" type="button">
+                                            <small><i><?php echo $row["create_on"] ?></i></small><br>
+                                            <?php echo "Promotion On "; ?><?php echo $row["product_name"]; ?><br>
+                                            <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
+                                        </button>
+                                    </li>
                                 <?php }
-                                }?>
+                                    }
+                                ?>
                                 </div>
-                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                                 <?php
                                     $sql = "SELECT * FROM banner ORDER BY create_on DESC";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
-                                    <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Promotion On"; ?> <?php echo $row["product_name"]; ?><br>
+                                    <li>
+                                    <button class="dropdown-item border" type="button">
+                                    <small>
+                                        <i><?php echo $row["create_on"] ?></i>
+                                    </small><br>
+                                    <?php echo "Promotion On "; ?> <?php echo $row["product_name"]; ?><br>
                                     <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
-                                    </li></button>
+                                    </button>
+                                    </li>
+                                    
                                 <?php }
                                 }?>
                                 </div>
@@ -256,5 +264,16 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script>
+$('#myDropdown .dropdown-menu').on({
+	"click":function(e){
+      e.stopPropagation();
+    }
+});
+$('.closer').on('click', function () {
+    $('.btn-group').removeClass('open');
+});
+</script>
+
 </body>
 </html>
