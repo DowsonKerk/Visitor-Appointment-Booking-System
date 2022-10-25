@@ -55,8 +55,14 @@
                                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Promotion</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Booking Time</button>
-                            </li>  
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Reminder</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="false">Booking Update</button>
+                            </li> 
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Booking Cancel</button>
+                            </li>   
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -74,17 +80,51 @@
                                 <?php }
                                 }?>
                                 </div>
-                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                                 <?php
-                                    $sql = "SELECT * FROM banner ORDER BY create_on DESC";
+                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
+                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Promotion On"; ?> <?php echo $row["product_name"]; ?><br>
-                                    <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
+                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <?php echo "Reminder"; ?><br> 
+                                    <?php echo "You have an appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><br>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                                <div class="tab-pane fade" id="edit-tab-pane" role="tabpanel" aria-labelledby="edit-tab" tabindex="0">
+                                <?php
+                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
+                                    $sql = "SELECT * FROM tblbookedslot ORDER BY create_on DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["create_on"] ?> </i></small><br>
+                                    <?php echo "You have booked an appointment at "; ?>
+                                    <?php echo $row["create_on"]; ?><br>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                                <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE-->
+                                <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
+                                <?php
+                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
+                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <?php echo "Reminder"; ?><br> 
+                                    <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><br>
                                     </li></button>
                                 <?php }
                                 }?>

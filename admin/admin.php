@@ -51,7 +51,73 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Notification</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Notification
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-xxl">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Upcoming Booking</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Updated Booking</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="false">Cancelled Booking</button>
+                            </li>  
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <?php
+                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <?php echo "Reminder"; ?><br>
+                                    <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
+                                    <?php echo $row["bookingSlotId"]; ?>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <?php
+                                    $sql = "SELECT * FROM tblbookedslot ORDER BY create_on DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["create_on"]; ?></i></small><br>
+                                    <?php echo $row["bookingSlotId"]; ?><br> <?php echo "booked by ID "; ?>
+                                    <?php echo $row["bookedBy"]; ?>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                                <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE -->
+                                <div class="tab-pane fade" id="edit-tab-pane" role="tabpanel" aria-labelledby="edit-tab" tabindex="0">
+                                <?php
+                                    $sql = "SELECT * FROM users ORDER BY create_on_1 DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["create_on_1"] ?></i></small><br>
+                                    <?php echo $row["username"];; ?><br> <?php echo $row["email"]; ?><br>
+                                    <?php echo $row["user_type"]; ?>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
                 </li> 
 
                 <li class="nav-item p-1">
