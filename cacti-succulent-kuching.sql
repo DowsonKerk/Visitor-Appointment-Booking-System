@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 05:57 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Oct 24, 2022 at 08:36 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,6 +51,46 @@ INSERT INTO `banner` (`product_id`, `product_name`, `images`, `product_descripti
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblbookedslot`
+--
+
+CREATE TABLE `tblbookedslot` (
+  `bookedSlotId` varchar(15) NOT NULL,
+  `bookingSlotId` varchar(15) DEFAULT NULL,
+  `bookedBy` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblbookedslot`
+--
+
+INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`) VALUES
+('AID-0001', 'BID-0001', '24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblbookingslot`
+--
+
+CREATE TABLE `tblbookingslot` (
+  `bookingSlotId` varchar(15) NOT NULL,
+  `bookingSlotDate` date DEFAULT NULL,
+  `bookingSlotTime` time DEFAULT NULL,
+  `bookingSlotStatus` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblbookingslot`
+--
+
+INSERT INTO `tblbookingslot` (`bookingSlotId`, `bookingSlotDate`, `bookingSlotTime`, `bookingSlotStatus`) VALUES
+('BID-0001', '2022-10-31', '10:00:00', 'OPEN'),
+('BID-0002', '2022-10-31', '13:00:00', 'OPEN');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -74,7 +114,8 @@ INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`
 (2, 'kelvin', 'qweqwe', '0000-00-00', 1231231, 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
 (20, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
 (22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', 2147483647, 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef'),
-(23, 'UwU', 'Dowson', '2022-09-25', 167735586, 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
+(23, 'UwU', 'Dowson', '2022-09-25', 167735586, 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
+(24, 'abc', 'abc', '2022-10-01', 111111111, '123@gmail.com', 'user', '0192023a7bbd73250516f069df18b500');
 
 --
 -- Indexes for dumped tables
@@ -85,6 +126,18 @@ INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`
 --
 ALTER TABLE `banner`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `tblbookedslot`
+--
+ALTER TABLE `tblbookedslot`
+  ADD PRIMARY KEY (`bookedSlotId`);
+
+--
+-- Indexes for table `tblbookingslot`
+--
+ALTER TABLE `tblbookingslot`
+  ADD PRIMARY KEY (`bookingSlotId`);
 
 --
 -- Indexes for table `users`
@@ -106,7 +159,7 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
