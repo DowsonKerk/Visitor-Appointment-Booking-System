@@ -1,8 +1,8 @@
 <?php
     session_start();
+	error_reporting(0);
     include('../dbcon.php');
     include('../Account.php');
-
     if (!isAdmin()) {
         $_SESSION['msg'] = "You must log in first";
         header('location: ../login.php');
@@ -14,23 +14,21 @@
         header("location: ../login.php");
     }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home</title>
-
         <link rel="icon" href="../images\icon.png" type="image/icon type">
         <link rel="stylesheet" href="..\styles\homepage.css">
-        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
-    
+
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="admin.php">
             <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
@@ -39,17 +37,29 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">
-    
+
                 <li class="nav-item p-1">
-                    <a class="nav-link " href="admin.php">Home</a>
+                    <a class="nav-link" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
-
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Booking</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Booking
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='addBookingSlotAvailability.php'">Add Booking Slot Availability</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchBookingSlotAvailability.php?Id=E'">Edit Booking Slot Availability</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookingSlotAvailability.php?Id=V'">View Booking Slot Availability</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='editBookedSlot.php'">Add Booked Slot</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=E'">Edit Booked Slot</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=V'">View Booked Slot</button></li>
+
+						</ul>
+                    </div>
                 </li>
 
                 <li class="nav-item p-1">
@@ -87,83 +97,82 @@
         </div>
     </div>
 </nav>
+</br></br></br>
 
-  
-<br></br><br></br>
-
-
-    <div class="container mt-4">
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>User Details</h4>
-                    </div>
-                    <div class="card-body">
-
-                        <?php echo display_error(); ?>
-
-                        <table id="myTable"class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Birthday</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $query = "SELECT * FROM users";
-                                    $query_run = mysqli_query($con, $query);
-
-                                    if(mysqli_num_rows($query_run) > 0)
-                                    {
-                                        foreach($query_run as $userInfo)
-                                        {
-                                            ?>
-                                            <tr>
-                                                <td><?= $userInfo['id']; ?></td>
-                                                <td><?= $userInfo['username']; ?></td>
-                                                <td><?= $userInfo['full_name']; ?></td>
-                                                <td><?= $userInfo['birthday']; ?></td>
-                                                <td><?= $userInfo['email']; ?></td>
-                                                <td><?= $userInfo['contact_number']; ?></td>
-                                               
-                                                <td>
-                                                    <a href="adminEdit.php?id=<?= $userInfo['id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                                                    <form action="AdminUpdateProfile.php" method="POST" class="d-inline">
-                                                        <button type="submit" name="delete_user" value="<?=$userInfo['id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                        }
-                                    }
-                                    else
-                                    {
-                                        echo "<h5> No Record Found </h5>";
-                                    }
-                                ?>
-                                
-                            </tbody>
-                        </table>
-
-                    </div>
+<?php
+	$SQL = "SELECT * FROM tblBookedSlot";
+	$Result = mysqli_query($con, $SQL);
+	if(mysqli_num_rows($Result) > 0)
+	{
+	?>
+		<div class="container-contact100">
+			<div class="wrap-contact100">							
+				<span class="contact100-form-title">
+					<?php if($_GET['Id'] == "E") echo "Edit Booked Slot"; 
+						else echo "Booked Slot List"; ?>
+				</span>
+			
+                <div class="callout callout-warning">
+				 <?php 
+				 	if($_GET["Id"] == "E")	echo "<h5>Click the list row to edit booked slot!</h5>"; 
+		 			else echo "<h5>Click the list row to view booked slot!</h5>";  ?>
                 </div>
-            </div>
-        </div>
-    </div>
+         		<br/>
+				<form class="contact100-form validate-form" method="POST">
+					<table id="example" class="table table-bordered table-hover">
+				 		<thead>
+                			<tr>
+            					<th>Booked Slot Id</th>
+								<th>Booking Slot Availability Id</th>
+								<th>Booked By</th>
+           					</tr>
+                  		</thead>
+                		<tbody>
+						<?php
+							for($i = 0; $i < mysqli_num_rows($Result); $i++)
+							{
+								$RecRow = mysqli_fetch_array($Result);
+								echo "<tr class = \"Row\"";
+								if($_GET['Id'] == "E")
+								echo "onclick = \"location = 'editBookedSlot.php?Id=".$RecRow['bookedSlotId']."'\"";
+								else echo  "onclick = \"location = 'viewBookedSlot.php?Id=".$RecRow['bookedSlotId']."'\"";
+								echo ">";
+								echo "<td>".$RecRow['bookedSlotId']."</td>";
+								echo "<td>".$RecRow['bookingSlotId']."</td>";
+								echo "<td>".$RecRow['bookedBy']."</td>";
+								echo "</tr>";
+								$_SESSION['bookedId'] = $RecRow['bookedSlotId'];
+							}
+						?>
+					  	</tbody>
+					</table>
+				</form>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button type="submit" class="contact100-form-btn" onclick="history.back()">
+							Back					
+						</button>
+					</div>
+				</div>			
+			</div>
+		</div>
+	<?php
+	}	
+ 	else
+	{
+		if($_GET['Id'] == "E") 
+			echo"<script>alert('Fail to search Appointment, try again!')
+			location = 'searchBookedSlot.php?Id=E';</script>";
+		else
+			echo "<script>alert('Fail to search Appointment, try again!')
+			location = 'searchBookedSlot.php';</script>";
+	} 		
+?>		
+</body>
 
-
-<br></br><br></br><br></br><br></br>
-
-<div class='container-fluid border" style="width 100%;'>
+</html>
+<div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
@@ -177,9 +186,4 @@
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
-
-</body>
-</html>
