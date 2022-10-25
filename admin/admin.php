@@ -28,7 +28,7 @@
     
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="admin.php">
+        <a class="navbar-brand" href="#">
             <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
@@ -39,7 +39,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="admin.php">Home</a>
+                    <a class="nav-link active" href="#">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -278,7 +278,8 @@
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
-      <li class="nav-item"><a href="notification_admin.php" class="nav-link px-2 text-muted">Notification</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
