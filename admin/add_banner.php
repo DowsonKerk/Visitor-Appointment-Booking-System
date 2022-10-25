@@ -47,12 +47,94 @@ if (isset($_GET['logout'])) {
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Booking</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Booking
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='addBookingSlotAvailability.php'">Add Booking Slot Availability</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchBookingSlotAvailability.php?Id=E'">Edit Booking Slot Availability</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookingSlotAvailability.php?Id=V'">View Booking Slot Availability</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='editBookedSlot.php'">Add Booked Slot</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=E'">Edit Booked Slot</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=V'">View Booked Slot</button></li>
+
+						</ul>
+                    </div>
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Notification</a>
-                </li> 
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                             Notification
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-xxl" style="width: 450px">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item " role="presentation">
+                                <button class="nav-link text-black active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Upcoming Booking</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-black" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Updated Booking</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-black" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="false">Cancelled Booking</button>
+                            </li>  
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <?php
+                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <?php echo "Reminder"; ?><br>
+                                    <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
+                                    <?php echo $row["bookingSlotId"]; ?>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <?php
+                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
+                                    //$id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
+                                    $sql = "SELECT * FROM tblbookedslot ORDER BY create_on DESC LIMIT 5";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["create_on"]; ?></i></small><br>
+                                    <?php echo $row["bookingSlotId"]; ?><br> <?php echo "booked by ID "; ?>
+                                    <?php echo $row["bookedBy"]; ?>
+                                    </li></button>
+                                <?php }
+                                }?>
+                                </div>
+                                <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE -->
+                                <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
+                                <?php
+                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
+                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC LIMIT 5";
+                                    $res = mysqli_query($con, $sql);
+                                    if (mysqli_num_rows($res) > 0){
+                                        while ($row = mysqli_fetch_assoc($res)){
+                                    ?>
+                                    <li><button class="dropdown-item border" type="button">
+                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <?php echo "Reminder"; ?><br> 
+                                    <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><br>
+                                    </li></button>
+                                <?php }
+                                }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</button></li>"; ?>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </li>  
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
@@ -165,7 +247,6 @@ if (isset($_GET['logout'])) {
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
-      <li class="nav-item"><a href="notification_admin.php" class="nav-link px-2 text-muted">Notification</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>

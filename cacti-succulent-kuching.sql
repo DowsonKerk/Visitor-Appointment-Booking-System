@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 08:36 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Oct 25, 2022 at 06:56 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,15 +57,16 @@ INSERT INTO `banner` (`product_id`, `product_name`, `images`, `product_descripti
 CREATE TABLE `tblbookedslot` (
   `bookedSlotId` varchar(15) NOT NULL,
   `bookingSlotId` varchar(15) DEFAULT NULL,
-  `bookedBy` varchar(32) DEFAULT NULL
+  `bookedBy` varchar(32) DEFAULT NULL,
+  `create_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblbookedslot`
 --
 
-INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`) VALUES
-('AID-0001', 'BID-0001', '24');
+INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
+('AID-0001', 'BID-0001', '24', '2022-10-25 13:43:53');
 
 -- --------------------------------------------------------
 
@@ -77,16 +78,18 @@ CREATE TABLE `tblbookingslot` (
   `bookingSlotId` varchar(15) NOT NULL,
   `bookingSlotDate` date DEFAULT NULL,
   `bookingSlotTime` time DEFAULT NULL,
-  `bookingSlotStatus` varchar(10) DEFAULT NULL
+  `bookingSlotTimeNotif` time DEFAULT NULL,
+  `bookingSlotStatus` varchar(10) DEFAULT NULL,
+  `create_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tblbookingslot`
 --
 
-INSERT INTO `tblbookingslot` (`bookingSlotId`, `bookingSlotDate`, `bookingSlotTime`, `bookingSlotStatus`) VALUES
-('BID-0001', '2022-10-31', '10:00:00', 'OPEN'),
-('BID-0002', '2022-10-31', '13:00:00', 'OPEN');
+INSERT INTO `tblbookingslot` (`bookingSlotId`, `bookingSlotDate`, `bookingSlotTime`, `bookingSlotTimeNotif`, `bookingSlotStatus`, `create_on`) VALUES
+('BID-0001', '2022-10-31', '10:00:00', '09:30:00', 'OPEN', '2022-10-25 16:36:20'),
+('BID-0002', '2022-10-31', '13:00:00', '12:30:00', 'OPEN', '2022-10-25 16:36:20');
 
 -- --------------------------------------------------------
 
@@ -160,6 +163,15 @@ ALTER TABLE `banner`
 --
 ALTER TABLE `users`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `notif_30` ON SCHEDULE EVERY 1 MINUTE STARTS '2022-10-24 21:06:04' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tblbookingslot
+SET bookingSlotTimeNotif = bookingSlotTime - INTERVAL 30 MINUTE$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
