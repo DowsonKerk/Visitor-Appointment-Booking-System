@@ -165,14 +165,12 @@
 
 <div class='container-fluid border" style="width 100%;'>
   <footer class="py-1 my-2">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
-      <li class="nav-item"><a href="notification_admin.php" class="nav-link px-2 text-muted">Notification</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li>
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
