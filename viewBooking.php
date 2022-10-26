@@ -1,14 +1,14 @@
 <?php
- session_start();
- require 'dbcon.php';
- include('Account.php');
- if (!isLoggedIn()) {
-     $_SESSION['msg'] = "You must log in first";
-     header('location: login.php');
- }
+session_start();
+error_reporting(0);
+include('dbcon.php');
+include('Account.php');
+if (!isLoggedIn()) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
 ?>
-
-
+<!-- Logined normal user -->
 <!doctype html>
 <html lang="en">
     <head>
@@ -47,10 +47,11 @@
                              Booking
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='viewAvailability.php'">View Booking Slot Availability</button></li>
                             <li><button class="dropdown-item" type="button" onclick="location.href='addBooking.php'">Add Booking</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='editBooking.php'">Edit Booking</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='editBooking.php?Id=V'">View Booking</button></li>
-							<li><button class="dropdown-item" type="button" onclick="location.href='cancelBooking.php?Id=D'">Cancel Booking</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='deleteBooking.php?Id=D'">Delete Booking</button></li>
 						</ul>
                     </div>
                 </li>
@@ -172,6 +173,7 @@
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
+                               
                             <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
@@ -181,92 +183,61 @@
         </div>
     </div>
 </nav>
+                            </br></br>
+                            <?php
+	if(isset($_POST["btnBack"]))
+	{
+		echo "<script>location = 'editBooking.php?Id=V';</script>";
+	}
+	$SQL = "SELECT * FROM tblBookedSlot WHERE tblBookedSlot.bookedSlotId = '".$_GET['Id']."'";
+	$Result = mysqli_query($con, $SQL);
+	if(mysqli_num_rows($Result) > 0)
+	{
+		$bookedSlotRec = mysqli_fetch_array($Result);
+	}
+?>
+	<div class="container-contact100">
+		<form method="POST" enctype="multipart/form-data">
+			<span class="contact100-form-title">
+				View Booked Slot
+			</span>
+			<div class="wrap-contact100">		
+				<div class="wrap-input100 validate-input"><span class="label-input100">Booked Sloy Id</span></br>
+					<input class="input100" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
+				<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input"><span class="label-input100">Booking Slot Availability Id</span></br>
+					<input class="input100" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
 
+				<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input"><span class="label-input100">Booked By</span></br>
+					<input class="input100" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
+				<span class="focus-input100"></span>
+				</div>
+				
+				<br/>
+				
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn" type="submit" name="btnBack">
+							<span>
+								Back
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
 
-<br></br><br></br>
-
-
-
-<div class="container mt-5">
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>Edit profile Details
-                    <a href="profile.php" class="btn btn-danger float-end">BACK</a>
-                </h4>
-            </div>
-            <div class="card-body">
-
-
-
-                <?php
-                    if(isset($_GET['id'])){
-
-                    $id = mysqli_real_escape_string($con, $_GET['id']);
-                    $query = "SELECT * FROM users WHERE id='$id'";
-                    $query_run = mysqli_query($con, $query);
-
-                    if(mysqli_num_rows($query_run) > 0)
-                    {
-                        $userInfo = mysqli_fetch_array($query_run);
-                        ?>
-                        
-                        <form class="" action="profileUpdate.php" method="POST">
-
-                            <?php echo display_error(); ?>
-                            <br>
-
-                            <input type="hidden" name="id" value="<?php echo $userInfo['id']; ?>" class="form-control">
-                            
-                            <div class="form-group pb-3">
-                              <label for="name">Your name</label>
-                              <input type="text" name="name" value="<?php echo $userInfo['full_name']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="username">Your username</label>
-                              <input type="text" name="username" value="<?php echo $userInfo['username']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="username">Birthday</label>
-                              <input type="date" name="birthday" value="<?php echo $userInfo['birthday']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="email">Email address</label>
-                              <input type="email" id="email" name="email" value="<?php echo $userInfo['email']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="mobile">Mobile Number</label>
-                              <input type="text" id="contactnum" name="contactnum" value="<?php echo $userInfo['contact_number']; ?>" class="form-control">
-                            </div>
-
-                            <div class="form-group pt-3">
-                              <button type="submit" id="update_user" name="update_user" class="btn btn-primary" >Update</button>
-                            </div>
-
-                        </form>
-
-                        <?php
-
-                         }
-                    }
-                   
-                ?>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-  
-
-<br></br><br></br>
-
-
-
+</html>
 <div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2 fixed-bottom">
+  <footer class="py-1 my-2">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
@@ -279,7 +250,4 @@
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-</body>
-</html>

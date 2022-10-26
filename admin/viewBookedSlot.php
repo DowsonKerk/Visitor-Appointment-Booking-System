@@ -76,8 +76,8 @@
                                 <button class="nav-link text-black" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Updated Booking</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link text-black" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="false">Cancelled Booking</button>
-                            </li>  
+                                <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Cancelled Booking</button>
+                            </li>   
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -113,22 +113,22 @@
                                 <?php }
                                 }?>
                                 </div>
-                                <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE -->
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
                                 <?php
+                        
                                     // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
-                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC LIMIT 5";
+                                    $sql = "SELECT * FROM tbldeleted ORDER BY create_on DESC LIMIT 5";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
-                                    <?php echo "Reminder"; ?><br> 
-                                    <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><br>
+                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
+                                    <?php echo "Booking Canceled"; ?><br> 
+                                    <?php echo "Appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
                                     </li></button>
                                 <?php }
-                                }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</button></li>"; ?>
+                                }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
                                 </div>
                             </div>
                         </ul>
@@ -220,8 +220,8 @@
 </body>
 
 </html>
-<div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2">
+<div class="container-fluid border" style="width: 100%; ">
+  <footer class="py-1 my-2 fixed-bottom">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>

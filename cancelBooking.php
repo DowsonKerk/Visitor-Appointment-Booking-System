@@ -1,14 +1,14 @@
 <?php
- session_start();
- require 'dbcon.php';
- include('Account.php');
- if (!isLoggedIn()) {
-     $_SESSION['msg'] = "You must log in first";
-     header('location: login.php');
- }
+session_start();
+error_reporting(0);
+include('dbcon.php');
+include('Account.php');
+if (!isLoggedIn()) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: login.php');
+}
 ?>
-
-
+<!-- Logined normal user -->
 <!doctype html>
 <html lang="en">
     <head>
@@ -172,6 +172,7 @@
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
+                               
                             <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
@@ -181,92 +182,77 @@
         </div>
     </div>
 </nav>
+                </br></br>
+
+<?php
+	$SQL = "SELECT * FROM tblBookedSlot WHERE bookedBy = '".$_SESSION['user']['id']."'";
+	$Result = mysqli_query($con, $SQL);
+    
+	if(mysqli_num_rows($Result) > 0)
+	{
+?>
+	<div class="container-contact100">
+		<div class="wrap-contact100">							
+			<span class="contact100-form-title">
+                <?php 
+				    if($_GET['Id'] == "") echo "Edit Booking Slot "; 
+				    else echo "View Booking Slot"; 
+				?>
+			</span>
+                <div class="callout callout-warning">
+                    <?php 
+				 	    if($_GET["Id"] == "")	echo "<h5>Click the list row to edit Booking slot!</h5>"; 
+		 			    else echo "<h5>Click the button to delete booking!</h5>";  
+                    ?>
+                </div><br/>
+				<form class="contact100-form validate-form" method="POST">
+					<table id="example" class="table table-bordered table-hover">
+				 		<thead>
+                			<tr>
+            					<th>Booked Slot Id</th>
+								<th>Booking Slot Availability Id</th>
+								<th>Booked By</th>
+                                <th></th>
+           					</tr>
+                  		</thead>
+                		<tbody>
+						<?php
+
+							for($i = 0; $i < mysqli_num_rows($Result); $i++)
+							{
+								$RecRow = mysqli_fetch_array($Result);
+								echo "<tr class = \"Row\"";
+								echo ">";
+								echo "<td>".$RecRow['bookedSlotId']."</td>";
+								echo "<td>".$RecRow['bookingSlotId']."</td>";
+								echo "<td>".$RecRow['bookedBy']."</td>";
+                                echo "<td>"?><a href="deleteProcess.php?id=<?php echo $RecRow["bookedSlotId"]; ?>" class="btnLogout" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td><?php
+								echo "</tr>";
+								$_SESSION['bookedId'] = $RecRow['bookedSlotId'];
+							}
+						?>
+					  	</tbody>
+					</table>
+				</form>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button type="submit" class="contact100-form-btn" onclick="history.back()">
+							Back					
+						</button>
+					</div>
+				</div>			
+			</div>
+		</div>
+	<?php
+	}			
+    ?>
 
 
-<br></br><br></br>
-
-
-
-<div class="container mt-5">
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4>Edit profile Details
-                    <a href="profile.php" class="btn btn-danger float-end">BACK</a>
-                </h4>
-            </div>
-            <div class="card-body">
-
-
-
-                <?php
-                    if(isset($_GET['id'])){
-
-                    $id = mysqli_real_escape_string($con, $_GET['id']);
-                    $query = "SELECT * FROM users WHERE id='$id'";
-                    $query_run = mysqli_query($con, $query);
-
-                    if(mysqli_num_rows($query_run) > 0)
-                    {
-                        $userInfo = mysqli_fetch_array($query_run);
-                        ?>
-                        
-                        <form class="" action="profileUpdate.php" method="POST">
-
-                            <?php echo display_error(); ?>
-                            <br>
-
-                            <input type="hidden" name="id" value="<?php echo $userInfo['id']; ?>" class="form-control">
-                            
-                            <div class="form-group pb-3">
-                              <label for="name">Your name</label>
-                              <input type="text" name="name" value="<?php echo $userInfo['full_name']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="username">Your username</label>
-                              <input type="text" name="username" value="<?php echo $userInfo['username']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="username">Birthday</label>
-                              <input type="date" name="birthday" value="<?php echo $userInfo['birthday']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="email">Email address</label>
-                              <input type="email" id="email" name="email" value="<?php echo $userInfo['email']; ?>" class="form-control">
-                            </div>
-                            <div class="form-group pb-3">
-                              <label for="mobile">Mobile Number</label>
-                              <input type="text" id="contactnum" name="contactnum" value="<?php echo $userInfo['contact_number']; ?>" class="form-control">
-                            </div>
-
-                            <div class="form-group pt-3">
-                              <button type="submit" id="update_user" name="update_user" class="btn btn-primary" >Update</button>
-                            </div>
-
-                        </form>
-
-                        <?php
-
-                         }
-                    }
-                   
-                ?>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-  
-
-<br></br><br></br>
-
-
-
+</body>
+</html>
 <div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2 fixed-bottom">
+  <footer class="py-1 my-2 ">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
@@ -279,7 +265,4 @@
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-</body>
-</html>

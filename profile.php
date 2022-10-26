@@ -41,6 +41,20 @@
                 </li>
 
                 <li class="nav-item p-1">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Booking
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item" type="button" onclick="location.href='addBooking.php'">Add Booking</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='editBooking.php'">Edit Booking</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='editBooking.php?Id=V'">View Booking</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='cancelBooking.php?Id=D'">Cancel Booking</button></li>
+						</ul>
+                    </div>
+                </li>
+                
+                <li class="nav-item p-1">
                     <div class="dropdown" >
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                              Notification
@@ -115,16 +129,17 @@
                                 <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE-->
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
                                 <?php
+                                    $id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
                                     // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
-                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC LIMIT 5";
+                                    $sql = "SELECT * FROM tbldeleted WHERE bookedBy= $id ORDER BY create_on DESC LIMIT 5";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
-                                    <?php echo "Reminder"; ?><br> 
-                                    <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><br>
+                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
+                                    <?php echo "Booking Canceled"; ?><br> 
+                                    <?php echo "Appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
                                     </li></button>
                                 <?php }
                                 }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
@@ -241,11 +256,10 @@ if($userInfo=mysqli_fetch_assoc($result))
 
 
 <div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2">
+  <footer class="py-1 my-2 ">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
       <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>

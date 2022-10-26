@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2022 at 06:56 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Generation Time: Oct 26, 2022 at 07:14 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -94,6 +94,26 @@ INSERT INTO `tblbookingslot` (`bookingSlotId`, `bookingSlotDate`, `bookingSlotTi
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbldeleted`
+--
+
+CREATE TABLE `tbldeleted` (
+  `bookedSlotId` varchar(15) NOT NULL,
+  `bookingSlotId` varchar(15) NOT NULL,
+  `bookedBy` varchar(32) NOT NULL,
+  `create_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbldeleted`
+--
+
+INSERT INTO `tbldeleted` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
+('AID-0002', 'BID-0001', '23', '2022-10-26 16:59:48');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -102,7 +122,7 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `full_name` varchar(100) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `contact_number` int(100) DEFAULT NULL,
+  `contact_number` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `user_type` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
@@ -113,12 +133,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`, `email`, `user_type`, `password`) VALUES
-(1, 'Dowson Kerk', 'Dowson', '2022-10-12', 123123, 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
-(2, 'kelvin', 'qweqwe', '0000-00-00', 1231231, 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
+(1, 'Dowson Kerk', 'Dowson', '2022-10-12', '123123', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
 (20, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
-(22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', 2147483647, 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef'),
-(23, 'UwU', 'Dowson', '2022-09-25', 167735586, 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
-(24, 'abc', 'abc', '2022-10-01', 111111111, '123@gmail.com', 'user', '0192023a7bbd73250516f069df18b500');
+(22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', '2147483647', 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef'),
+(23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
 
 --
 -- Indexes for dumped tables
