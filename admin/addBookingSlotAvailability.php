@@ -28,7 +28,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="home.php">
             <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
@@ -39,7 +39,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link active" href="home.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
