@@ -219,18 +219,20 @@
 		}
 	}
 ?>
-	<div class="container-contact100">
-		<form method="POST" enctype="multipart/form-data" >
-			<span>
-				<?php 
-				if($_GET['Id'] != "") echo "Edit Booking Slot Availability"; 
-				else echo "Add Booking Slot Availability"; 
-				?>
-			</span>
+	<div class="row">
+		<form method="POST" enctype="multipart/form-data">
+            <div class="form-group row col-md-5 p-3 mx-auto">
+			    <h5>
+				    <?php 
+				    if($_GET['Id'] != "") echo "Edit Booking Slot Availability"; 
+				    else echo "Add Booking Slot Availability"; 
+				    ?>
+			    </h5>
+            </div>
 			<div>		
-				<div class="wrap-input100 validate-input" data-validate = "Booking Slot Availability ID is required">
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Booking Slot Availability ID is required">
 					<span class="label-input100">Booking Slot Availability ID</span>
-					<input class="input100" type="text" name="txtbookingSlotId" id="txtbookingSlotId" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
+					<input class="form-control" type="text" name="txtbookingSlotId" id="txtbookingSlotId" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
 					else 
 					{
 						$SQL = "SELECT COUNT(bookingSlotId) AS foundbooking FROM tblBookingSlot";
@@ -242,17 +244,17 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Date is required">
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Date is required">
 					<span class="label-input100">Date</span>
-					<div>
+					<div class="col-form-label col-md-3">
 						<input class="input100" type="date" id="bookingSlotDate" name="bookingSlotDate" placeholder="Date(dd-mmm-yy)" min=<?php echo date('Y-m-d');
      					?> required value="<?php echo $BookingSlotRec['bookingSlotDate'];?>"/>
 					</div>
 				</div>
 				
-				<div class="wrap-input100 validate-input" data-validate = "Time is required">
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Time is required">
 					<span class="label-input100">Time</span>
-					<div>
+					<div class="col-form-label col-md-3">
 					<select class="custom-select" name="bookingSlotTime" required>
 							<option selected disabled value="">Choose Booking Slot Time...</option>
 							<?php 
@@ -269,9 +271,9 @@
 					</div>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Status is required">
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Status is required">
 					<span class="label-input100">Status</span>
-					<div>
+					<div class="col-form-label col-md-3">
 						<select class="custom-select" name="bookingSlotStatus" id="bookingSlotStatus" required>
 							<option selected disabled value="">Choose Status...</option>
 							<?php 
@@ -290,15 +292,16 @@
 				</div>
 
 			</div>	
-			<div class="container-contact100-form-btn">
-				<div class="wrap-contact100-form-btn">
-					<div class="contact100-form-bgbtn"></div>
-					<button class="contact100-form-btn" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
+			<div class="row">
+				<div class="form-group row col-md-5 p-3 mx-auto">
+					<div class="col-md-7">
+					<button class="btn btn-primary" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
 						<span>
 							<?php if($_GET['Id'] != "") echo "Save"; else echo "Add"; ?>
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>
+                    </div>
 				</div>
 			</div>
 		</form>
