@@ -183,37 +183,43 @@
 ?>
 	<div class="container-contact100">
 		<form method="POST" enctype="multipart/form-data">
-			<span class="contact100-form-title">
-				View Booking Slot Availability
-			</span>
-			<div class="wrap-contact100">		
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booking Slot Availability Id</span></br>
-					<input class="input100" type="text" name="bookingSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
-				<span class="focus-input100"></span>
-				</div>
-				
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booking Slot Availability Date</span></br>
-					<input class="input100" type="text" name="bookingSlotDate" value="<?php echo $bookingSlotRec["bookingSlotDate"];?>" required autofocus autocomplete="off" readonly="readonly">
-
-				<span class="focus-input100"></span>
-				</div>
-				
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booking Slot Availability Time</span></br>
-					<input class="input100" type="text" name="bookingSlotTime" value="<?php echo $bookingSlotRec["bookingSlotTime"];?>" required autofocus autocomplete="off" readonly="readonly">
+            <div class="form-group row col-md-5 p-3 mx-auto">
+			    <h5>
+				    View Booking Slot Availability
+                </h5>
+            </div>
+			<div class="row">		
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
+					<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
 				<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booking Slot Availability Status</span></br>
-					<input class="input100" type="text" name="bookingSlotStatus" value="<?php echo $bookingSlotRec["bookingSlotStatus"];?>" required autofocus autocomplete="off" readonly="readonly">
+                <br/>
+				
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Date</span></br>
+					<input class="form-control" type="text" name="bookingSlotDate" value="<?php echo $bookingSlotRec["bookingSlotDate"];?>" required autofocus autocomplete="off" readonly="readonly">
 				<span class="focus-input100"></span>
+				</div>
+
+                <br/>
+				
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Time</span></br>
+					<input class="form-control" type="text" name="bookingSlotTime" value="<?php echo $bookingSlotRec["bookingSlotTime"];?>" required autofocus autocomplete="off" readonly="readonly">
+				<span class="focus-input100"></span>
+				</div>
+
+                <br/>
+
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Status</span></br>
+					<input class="form-control" type="text" name="bookingSlotStatus" value="<?php echo $bookingSlotRec["bookingSlotStatus"];?>" required autofocus autocomplete="off" readonly="readonly">
 				</div>
 				
 				<br/>
 				
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn" type="submit" name="btnBack">
+				<div class="row">
+					<div class="form-group row col-md-5 p-3 mx-auto">
+						<div class="col-md-7"></div>
+						<button class="contact100-form-bgbtn" type="submit" name="btnBack">
 							<span>
 								Back
 							</span>

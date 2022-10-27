@@ -241,7 +241,6 @@
 						$BID= "1" + $Row['foundbooking'];
 						echo $bookingSlotId = "BID-".sprintf('%04d',$BID);
 					}?>" readonly="readonly"/>
-					<span class="focus-input100"></span>
 				</div>
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Date is required">
@@ -255,7 +254,7 @@
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Time is required">
 					<span class="label-input100">Time</span>
 					<div class="col-form-label col-md-3">
-					<select class="custom-select" name="bookingSlotTime" required>
+					    <select class="custom-select" name="bookingSlotTime" required>
 							<option selected disabled value="">Choose Booking Slot Time...</option>
 							<?php 
                             $timee = array("8:00:00", "9:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00");
@@ -288,14 +287,13 @@
 	  						?>
 						</select>
 					</div>
-					<span class="focus-input100"></span>
 				</div>
 
 			</div>	
 			<div class="row">
 				<div class="form-group row col-md-5 p-3 mx-auto">
 					<div class="col-md-7">
-					<button class="btn btn-primary" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
+					<button class="contact100-form-bgbtn" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
 						<span>
 							<?php if($_GET['Id'] != "") echo "Save"; else echo "Add"; ?>
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
