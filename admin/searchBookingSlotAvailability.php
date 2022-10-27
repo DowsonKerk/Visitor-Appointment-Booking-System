@@ -188,17 +188,17 @@
 	if(mysqli_num_rows($Result) > 0)
 	{
 	?>
-		<div class="container-contact100">
-			<div class="wrap-contact100">							
-				<span class="contact100-form-title">
+		<div class="row">
+			<div class="form-group row col-md-5 p-3 mx-auto">							
+				<h5>
 					<?php if($_GET['Id'] == "E") echo "Edit Booking Slot Availability"; 
 						else echo "Booking Slot Availability List"; ?>
-				</span>
+				</h5>
 			
                 <div class="callout callout-warning">
 				 <?php 
-				 	if($_GET["Id"] == "E")	echo "<h5>Click the list row to edit booking slot availability!</h5>"; 
-		 			else echo "<h5>Click the list row to view booking slot availability!</h5>";  ?>
+				 	if($_GET["Id"] == "E")	echo "<span>Click the list row to edit booking slot availability!</span>"; 
+		 			else echo "<span>Click the list row to view booking slot availability!</span>";  ?>
                 </div>
          		<br/>
 				<form class="contact100-form validate-form" method="POST">

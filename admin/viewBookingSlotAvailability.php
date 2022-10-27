@@ -219,10 +219,8 @@
 				<div class="row">
 					<div class="form-group row col-md-5 p-3 mx-auto">
 						<div class="col-md-7"></div>
-						<button class="contact100-form-bgbtn" type="submit" name="btnBack">
-							<span>
-								Back
-							</span>
+						<button class="btn btn-primary" type="submit" name="btnBack">						
+								Back							
 						</button>
 					</div>
 				</div>

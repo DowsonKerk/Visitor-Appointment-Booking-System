@@ -293,7 +293,7 @@
 			<div class="row">
 				<div class="form-group row col-md-5 p-3 mx-auto">
 					<div class="col-md-7">
-					<button class="contact100-form-bgbtn" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
+					<button class="btn btn-primary" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
 						<span>
 							<?php if($_GET['Id'] != "") echo "Save"; else echo "Add"; ?>
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
