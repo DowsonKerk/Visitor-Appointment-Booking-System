@@ -176,16 +176,16 @@
 	{
 	?>
 		<div class="row">
-			<div class="wrap-contact100">							
-				<span class="contact100-form-title">
+			<div class="form-group row col-md-5 p-3 mx-auto">							
+				<h5>
 					<?php if($_GET['Id'] == "E") echo "Edit Booked Slot"; 
 						else echo "Booked Slot List"; ?>
-				</span>
+				</h5>
 			
                 <div class="callout callout-warning">
 				 <?php 
-				 	if($_GET["Id"] == "E")	echo "<h5>Click the list row to edit booked slot!</h5>"; 
-		 			else echo "<h5>Click the list row to view booked slot!</h5>";  ?>
+				 	if($_GET["Id"] == "E")	echo "<span>Click the list row to edit booked slot!</span>"; 
+		 			else echo "<span>Click the list row to view booked slot!</span>";  ?>
                 </div>
          		<br/>
 				<form class="contact100-form validate-form" method="POST">
@@ -217,12 +217,13 @@
 					  	</tbody>
 					</table>
 				</form>
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button type="submit" class="contact100-form-btn" onclick="history.back()">
-							Back					
-						</button>
+				<div class="row">
+					<div class="form-group row col-md-5 p-3 mx-auto">
+						<div class="col-md-7">
+						    <button type="submit" class="btn btn-primary" onclick="history.back()">
+							    Back					
+						    </button>
+                        </div>
 					</div>
 				</div>			
 			</div>
