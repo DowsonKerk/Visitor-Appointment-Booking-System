@@ -175,7 +175,7 @@
 	if(mysqli_num_rows($Result) > 0)
 	{
 	?>
-		<div class="container-contact100">
+		<div class="row">
 			<div class="wrap-contact100">							
 				<span class="contact100-form-title">
 					<?php if($_GET['Id'] == "E") echo "Edit Booked Slot"; 

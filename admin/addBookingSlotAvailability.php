@@ -296,7 +296,6 @@
 					<button class="btn btn-primary" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
 						<span>
 							<?php if($_GET['Id'] != "") echo "Save"; else echo "Add"; ?>
-							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 						</span>
 					</button>
                     </div>

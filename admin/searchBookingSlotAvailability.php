@@ -234,10 +234,11 @@
 				</form>
 				<div class="row">
 					<div class="form-group row col-md-5 p-3 mx-auto">
-						<div class="col-md-7"></div>
-						<button type="submit" class="btn btn-primary" onclick="history.back()">
-							Back					
-						</button>
+						<div class="col-md-7">
+						    <button type="submit" class="btn btn-primary" onclick="history.back()">
+							    Back					
+						    </button>
+                        </div>
 					</div>
 				</div>			
 			</div>

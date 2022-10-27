@@ -218,10 +218,11 @@
             </div>
 			<div class="row">
 				<div class="form-group row col-md-5 p-3 mx-auto">
-					<div class="col-md-7"></div>
-					<button class="btn btn-primary" type="submit" name="btnBack">						
+					<div class="col-md-7">
+					    <button class="btn btn-primary" type="submit" name="btnBack">						
 							Back							
-					</button>
+					    </button>
+                    </div>
 				</div>
 			</div>
         </form>
