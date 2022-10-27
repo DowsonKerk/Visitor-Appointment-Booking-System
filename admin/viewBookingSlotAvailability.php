@@ -181,7 +181,7 @@
 		$bookingSlotRec = mysqli_fetch_array($Result);
 	}
 ?>
-	<div class="container-contact100">
+	<div class="row">
 		<form method="POST" enctype="multipart/form-data">
             <div class="form-group row col-md-5 p-3 mx-auto">
 			    <h5>
@@ -215,17 +215,16 @@
 				</div>
 				
 				<br/>
-				
-				<div class="row">
-					<div class="form-group row col-md-5 p-3 mx-auto">
-						<div class="col-md-7"></div>
-						<button class="btn btn-primary" type="submit" name="btnBack">						
-								Back							
-						</button>
-					</div>
+            </div>
+			<div class="row">
+				<div class="form-group row col-md-5 p-3 mx-auto">
+					<div class="col-md-7"></div>
+					<button class="btn btn-primary" type="submit" name="btnBack">						
+							Back							
+					</button>
 				</div>
 			</div>
-		</form>
+    </form>
 	</div>
 </body>
 </html>
