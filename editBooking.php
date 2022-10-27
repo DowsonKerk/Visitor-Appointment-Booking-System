@@ -54,95 +54,59 @@ if (!isLoggedIn()) {
 						</ul>
                     </div>
                 </li>
+
                 <li class="nav-item p-1">
-                    <div class="dropdown" >
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                              Notification
                         </button>   
-                        <ul class="dropdown-menu"  style="width: 450px">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist" >
+                        <ul class="dropdown-menu dropdown-menu-xxl">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link text-black active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Promotion</button>
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Promotion</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link text-black" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Reminder</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link text-black" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit-tab-pane" type="button" role="tab" aria-controls="edit-tab-pane" aria-selected="false">Booking Update</button>
-                                </li> 
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Booking Cancel</button>
-                                </li>   
+                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Booking Time</button>
+                                </li>  
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                <?php
-                                    $sql = "SELECT * FROM banner ORDER BY create_on DESC LIMIT 5";
+                                    <?php
+                                    $sql = "SELECT * FROM banner ORDER BY create_on DESC";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
-                                    <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Promotion On"; ?> <?php echo $row["product_name"]; ?><br>
-                                    <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
-                                    </li></button>
+                                    <li>
+                                        <button class="dropdown-item border" type="button">
+                                            <small><i><?php echo $row["create_on"] ?></i></small><br>
+                                            <?php echo "Promotion On "; ?><?php echo $row["product_name"]; ?><br>
+                                            <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
+                                        </button>
+                                    </li>
                                 <?php }
-                                }else echo "<li><button class="."dropdown-item border text-align-center"." type="."button".">No Promotion</li>";?>
+                                    }
+                                ?>
                                 </div>
                                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                                 <?php
-                                    $id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
-                                    //$sql = "SELECT  FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 5";
-                                    $sql = "SELECT * FROM tblbookingslot ORDER BY bookingSlotTimeNotif DESC LIMIT 5";
+                                    $sql = "SELECT * FROM banner ORDER BY create_on DESC";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
-                                    <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
-                                    <?php echo "Reminder"; ?><br> 
-                                    <?php echo "You have an appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><br>
-                                    </li></button>
+                                    <li>
+                                    <button class="dropdown-item border" type="button">
+                                    <small>
+                                        <i><?php echo $row["create_on"] ?></i>
+                                    </small><br>
+                                    <?php echo "Promotion On "; ?> <?php echo $row["product_name"]; ?><br>
+                                    <?php echo "Promotion ended at "; ?><?php echo $row["product_date_end"]; ?>
+                                    </button>
+                                    </li>
+                                    
                                 <?php }
-                                }else echo "<li><button class="."dropdown-item border text-center"." type="."button".">No Appoinment Made</li>";?>
-                                </div>
-                                <div class="tab-pane fade" id="edit-tab-pane" role="tabpanel" aria-labelledby="edit-tab" tabindex="0">
-                                <?php
-                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
-                                    $id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
-                                    $sql = "SELECT * FROM tblbookedslot WHERE bookedBy= $id ORDER BY create_on DESC LIMIT 5";
-                                    $res = mysqli_query($con, $sql);
-                                    if (mysqli_num_rows($res) > 0){
-                                        while ($row = mysqli_fetch_assoc($res)){
-                                    ?>
-                                    <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["create_on"] ?> </i></small><br>
-                                    <?php echo "You have booked an appointment at "; ?>
-                                    <?php echo $row["create_on"]; ?><br>
-                                    </li></button>
-                                <?php }
-                                }else echo "<li><button class="."dropdown-item border"." type="."button".">No Booked Appoinment</li>";?>
-
-
-                                </div>
-                                <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE-->
-                                <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
-                                <?php
-                                    $id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
-                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
-                                    $sql = "SELECT * FROM tbldeleted WHERE bookedBy= $id ORDER BY create_on DESC LIMIT 5";
-                                    $res = mysqli_query($con, $sql);
-                                    if (mysqli_num_rows($res) > 0){
-                                        while ($row = mysqli_fetch_assoc($res)){
-                                    ?>
-                                    <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Booking Canceled"; ?><br> 
-                                    <?php echo "Appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
-                                    </li></button>
-                                <?php }
-                                }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
+                                }?>
                                 </div>
                             </div>
                         </ul>
@@ -191,26 +155,19 @@ if (!isLoggedIn()) {
 	{
 	?>
 		<div class="container-contact100">
-			<div class="wrap-contact100">							
-				<span class="contact100-form-title">
-                <?php 
-				if($_GET['Id'] == "") echo "Edit Booking Slot "; 
-				else echo "View Booking Slot"; 
-				?>
-				</span>
-			
+			<div class="wrap-contact100"></br>								
                 <div class="callout callout-warning">
                 <?php 
-				 	if($_GET["Id"] == "")	echo "<h5>Click the list row to edit Booking slot!</h5>"; 
-		 			else echo "<h5>Click the list row to view booking slot!</h5>";  ?>
+				 	if($_GET["Id"] == "")	echo "<h5>Click the list row to edit Booking slot time!</h5>"; 
+		 			else echo "<h5>Click the list row to view Booking slot time!</h5>";  ?>
                 </div>
          		<br/>
 				<form class="contact100-form validate-form" method="POST">
 					<table id="example" class="table table-bordered table-hover">
 				 		<thead>
                 			<tr>
-            					<th>Booked Slot Id</th>
-								<th>Booking Slot Availability Id</th>
+            					<th>Booked Slot ID</th>
+								<th>Booking Slot Availability ID</th>
 								<th>Booked By</th>
            					</tr>
                   		</thead>
@@ -237,9 +194,9 @@ if (!isLoggedIn()) {
 				<div class="container-contact100-form-btn">
 					<div class="wrap-contact100-form-btn">
 						<div class="contact100-form-bgbtn"></div>
-						<button type="submit" class="contact100-form-btn" onclick="history.back()">
+						<center><button type="submit" class="contact100-form-btn" onclick="history.back()">
 							Back					
-						</button>
+						</button></center>
 					</div>
 				</div>			
 			</div>
@@ -251,10 +208,11 @@ if (!isLoggedIn()) {
 
 </html>
 <div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2 fixed-bottom">
+  <footer class="py-1 my-2">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
       <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
