@@ -138,8 +138,7 @@
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
                                     <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Booking Canceled"; ?><br> 
-                                    <?php echo "Appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
+                                    <?php echo "Your appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
                                     </li></button>
                                 <?php }
                                 }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
