@@ -136,7 +136,6 @@
                     </div>
                 </li>  
  
-
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
@@ -191,29 +190,19 @@
 			<div class="row">		
 				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
 					<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
-				<span class="focus-input100"></span>
 				</div>
 
-                <br/>
-				
 				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Date</span></br>
 					<input class="form-control" type="text" name="bookingSlotDate" value="<?php echo $bookingSlotRec["bookingSlotDate"];?>" required autofocus autocomplete="off" readonly="readonly">
-				<span class="focus-input100"></span>
 				</div>
 
-                <br/>
-				
 				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Time</span></br>
 					<input class="form-control" type="text" name="bookingSlotTime" value="<?php echo $bookingSlotRec["bookingSlotTime"];?>" required autofocus autocomplete="off" readonly="readonly">
-				<span class="focus-input100"></span>
 				</div>
-
-                <br/>
 
 				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Status</span></br>
 					<input class="form-control" type="text" name="bookingSlotStatus" value="<?php echo $bookingSlotRec["bookingSlotStatus"];?>" required autofocus autocomplete="off" readonly="readonly">
 				</div>
-				
 				<br/>
             </div>
 			<div class="row">

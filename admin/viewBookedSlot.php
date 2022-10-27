@@ -180,38 +180,34 @@
 		$bookedSlotRec = mysqli_fetch_array($Result);
 	}
 ?>
-	<div class="container-contact100">
+	<div class="row">
 		<form method="POST" enctype="multipart/form-data">
-			<span class="contact100-form-title">
-				View Booked Slot
-			</span>
-			<div class="wrap-contact100">		
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booked Sloy Id</span></br>
-					<input class="input100" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
-				<span class="focus-input100"></span>
+        <div class="form-group row col-md-5 p-3 mx-auto">
+			    <h5>
+				    View Booked Slot
+                </h5>
+            </div>
+			<div class="row">		
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Sloy Id</span></br>
+					<input class="form-control" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
 				</div>
 				
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booking Slot Availability Id</span></br>
-					<input class="input100" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
-
-				<span class="focus-input100"></span>
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
+					<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
 				</div>
 				
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booked By</span></br>
-					<input class="input100" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
-				<span class="focus-input100"></span>
-				</div>
-				
-				<br/>
-				
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button class="contact100-form-btn" type="submit" name="btnBack">
-							<span>
-								Back
-							</span>
-						</button>
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked By</span></br>
+					<input class="form-control" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
+				</div>				
+				<br/>			
+            </div>	
+				<div class="row">
+					<div class="form-group row col-md-5 p-3 mx-auto">
+						<div class="col-md-7">
+						    <button class="btn btn-primary" type="submit" name="btnBack">						
+								Back						
+						    </button>
+                        </div>
 					</div>
 				</div>
 			</div>
