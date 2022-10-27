@@ -232,10 +232,10 @@
 					  	</tbody>
 					</table>
 				</form>
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<button type="submit" class="contact100-form-btn" onclick="history.back()">
+				<div class="row">
+					<div class="form-group row col-md-5 p-3 mx-auto">
+						<div class="col-md-7"></div>
+						<button type="submit" class="btn btn-primary" onclick="history.back()">
 							Back					
 						</button>
 					</div>
