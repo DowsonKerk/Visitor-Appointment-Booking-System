@@ -88,7 +88,7 @@
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
                                     <?php echo "Reminder"; ?><br>
                                     <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
                                     <?php echo $row["bookingSlotId"]; ?>
