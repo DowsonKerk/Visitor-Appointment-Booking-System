@@ -222,23 +222,23 @@
                             
                             <div class="form-group pb-3">
                               <label for="name">Your name</label>
-                              <input type="text" name="name" value="<?php echo $userInfo['full_name']; ?>" class="form-control" required>
+                              <input type="text" name="name" value="<?php echo $userInfo['full_name']; ?>" class="form-control" required />
                             </div>
                             <div class="form-group pb-3">
                               <label for="username">Your username</label>
-                              <input type="text" name="username" value="<?php echo $userInfo['username']; ?>" class="form-control" required>
+                              <input type="text" name="username" value="<?php echo $userInfo['username']; ?>" class="form-control" required />
                             </div>
                             <div class="form-group pb-3">
                               <label for="username">Birthday</label>
-                              <input type="date" name="birthday" value="<?php echo $userInfo['birthday']; ?>" class="form-control" required>
+                              <input type="date" name="birthday" value="<?php echo $userInfo['birthday']; ?>" class="form-control" required />
                             </div>
                             <div class="form-group pb-3">
                               <label for="email">Email address</label>
-                              <input type="email" id="email" name="email" value="<?php echo $userInfo['email']; ?>" class="form-control" required>
+                              <input type="email" id="email" name="email" value="<?php echo $userInfo['email']; ?>" class="form-control" required />
                             </div>
                             <div class="form-group pb-3">
                               <label for="mobile">Mobile Number</label>
-                              <input type="text" id="contactnum" name="contactnum" value="<?php echo $userInfo['contact_number']; ?>" class="form-control" required>
+                              <input type="text" id="contactnum" name="contactnum" value="<?php echo $userInfo['contact_number']; ?>" class="form-control" required />
                             </div>
 
                             <div class="form-group pt-3">
