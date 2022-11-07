@@ -1,0 +1,31 @@
+.imgcontainer { 
+    background-color: #000000;
+}
+
+.imgcontainer img { 
+    opacity: 0.6; 
+}
+
+.imgcontainer .img-center{
+    position: absolute;
+    top: 14rem;
+    left: 45rem;
+    box-sizing: border-box;
+    max-height: calc(100% - 14rem);
+    padding: 3rem;
+    font-size: 1rem;
+    overflow: hidden;
+} 
+
+.imgcontainer .img-center h2{
+    color: white; 
+}
+
+.imgcontainer .img-center h1{
+    color: white;
+}
+
+.imgcontainer .img-center h5{
+    color: white; 
+}
+
