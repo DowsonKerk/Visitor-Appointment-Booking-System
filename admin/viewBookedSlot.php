@@ -194,7 +194,7 @@
                 </h5>
             </div>
 			<div class="row">		
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Sloy Id</span></br>
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Slot Id</span></br>
 					<input class="form-control" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
 				</div>
 				
