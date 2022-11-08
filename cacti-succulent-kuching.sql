@@ -121,6 +121,7 @@ CREATE TABLE `tblproductcatalogue` (
   `stockId` varchar(15) NOT NULL,
   `stockName` varchar(50) DEFAULT NULL,
   `stockDetail` varchar(50) DEFAULT NULL,
+  `stockType` varchar(50) DEFAULT NULL,
   `stockPicture` varchar(100) DEFAULT NULL,
   `stockPrice` varchar(10) DEFAULT NULL,
   `stockQuantity` varchar(10) DEFAULT NULL,

@@ -178,6 +178,7 @@
     $stockId = strtoupper(trim($_POST['txtstockId']));
     $stockName = strtoupper(trim($_POST['txtstockName']));
     $stockDetail = strtoupper(trim($_POST['txtstockDetail']));
+    $stockType = strtoupper(trim($_POST['txtstockType']));
     $stockPicture = strtoupper(trim($_POST['txtstockPicture']));
     $stockPrice = strtoupper(trim($_POST['txtstockPrice']));
     $stockQuantity = strtoupper(trim($_POST['txtstockQuantity']));
@@ -212,8 +213,8 @@
 			$Row = mysqli_fetch_array($Result);
 			$SID= "1" + $Row['foundstock'];
 			$stockId = "SID-".sprintf('%04d',$SID);
-			$AddStock = mysqli_query($con, "INSERT INTO tblProductCatalogue(stockId, stockName, stockDetail, stockPicture, stockQuantity, stockStatus)
-			VALUES('$stockId', '$stockName', '$stockDetail', '$stockPicture', '$stockPrice', '$stockQuantity', '$stockStatus')");
+			$AddStock = mysqli_query($con, "INSERT INTO tblProductCatalogue(stockId, stockName, stockDetail, stockType, stockPicture, stockQuantity, stockStatus)
+			VALUES('$stockId', '$stockName', '$stockDetail', '$stockType', '$stockPicture', '$stockPrice', '$stockQuantity', '$stockStatus')");
 			if($addStock)
 			{	
 				echo "<script>alert('Add Stock Successfully!')
@@ -273,12 +274,12 @@
 					</div>
 				</div>
 
-                <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Name is required">
-					<span class="label-input100">Stock Name</span>
+                <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Type is required">
+					<span class="label-input100">Stock Type</span>
 					<div class="col-form-label col-md-3">
-						<input class="input100" type="text" id="txtstockName" name="txtstockName" placeholder="Enter Stock Name"<?php if($_GET['Id'] != ""){?> 
-                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockName"]; else {if(isset($_POST['txtstockName'])) 
-                                echo $_POST['txtstockName']; }?>" required autocomplete="off">
+						<input class="input100" type="text" id="txtstockType" name="txtstockType" placeholder="Enter Stock Type"<?php if($_GET['Id'] != ""){?> 
+                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockType"]; else {if(isset($_POST['txtstockType'])) 
+                                echo $_POST['txtstockType']; }?>" required autocomplete="off">
 					</div>
 				</div>
 
