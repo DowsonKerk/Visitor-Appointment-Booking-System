@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2022 at 07:14 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Nov 08, 2022 at 06:51 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -114,6 +114,22 @@ INSERT INTO `tbldeleted` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_o
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblproductcatalogue`
+--
+
+CREATE TABLE `tblproductcatalogue` (
+  `stockId` varchar(15) NOT NULL,
+  `stockName` varchar(50) DEFAULT NULL,
+  `stockDetail` varchar(50) DEFAULT NULL,
+  `stockPicture` varchar(100) DEFAULT NULL,
+  `stockPrice` varchar(10) DEFAULT NULL,
+  `stockQuantity` varchar(10) DEFAULT NULL,
+  `stockStatus` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -159,6 +175,12 @@ ALTER TABLE `tblbookedslot`
 --
 ALTER TABLE `tblbookingslot`
   ADD PRIMARY KEY (`bookingSlotId`);
+
+--
+-- Indexes for table `tblproductcatalogue`
+--
+ALTER TABLE `tblproductcatalogue`
+  ADD PRIMARY KEY (`stockId`);
 
 --
 -- Indexes for table `users`
