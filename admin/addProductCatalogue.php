@@ -179,27 +179,27 @@
     $stockName = strtoupper(trim($_POST['txtstockName']));
     $stockDetail = strtoupper(trim($_POST['txtstockDetail']));
     $stockType = strtoupper(trim($_POST['txtstockType']));
-    $stockPicture = strtoupper(trim($_POST['txtstockPicture']));
     $stockPrice = strtoupper(trim($_POST['txtstockPrice']));
     $stockQuantity = strtoupper(trim($_POST['txtstockQuantity']));
     $stockStatus = strtoupper(trim($_POST['txtstockStatus']));
+
     $temp = explode(".", $_FILES['file']['name']);
     $stockPicture = 'stockPicture.'.end($temp);
 	
-	// if(isset($_POST["btnSave"]))
-	// {
-	// 	$UpdateBookingSlot = mysqli_query($con, "UPDATE tblBookingSlot SET bookingSlotDate = '".$bookingSlotDate."', bookingSlotTime = '".$bookingSlotTime."', bookingSlotStatus = '".$bookingSlotStatus."' WHERE bookingSlotId = '".$_GET['Id']."'");
-	// 	if($UpdateBookingSlot)
-	// 	{	
-	// 		echo "<script>alert('Booking Slot Updated Successfully!')
-	// 		location = 'searchBookingSlotAvailability.php?Id=E';</script>";	
-	// 	}
-	// }
+	if(isset($_POST["btnSave"]))
+	{
+		$UpdateBookingSlot = mysqli_query($con, "UPDATE tblBookingSlot SET bookingSlotDate = '".$bookingSlotDate."', bookingSlotTime = '".$bookingSlotTime."', bookingSlotStatus = '".$bookingSlotStatus."' WHERE bookingSlotId = '".$_GET['Id']."'");
+		if($UpdateBookingSlot)
+		{	
+			echo "<script>alert('Booking Slot Updated Successfully!')
+			location = 'searchBookingSlotAvailability.php?Id=E';</script>";	
+		}
+	}
 	if(isset($_POST["btnAdd"]))
 	{		
-		$Check = "SELECT * FROM tblProductCatalogue WHERE stockName = '".$stockName."' and stockStatus = 'A'";
+		$Check = "SELECT * FROM tblProductCatalogue WHERE stockName = '".$stockName."' and stockStatus = 'Y'";
 		$CheckResult = mysqli_query($con, $Check);
-		if(mysqli_num_rows($CheckResult) > 1)
+		if(mysqli_num_rows($CheckResult) > 0)
 		{
 			echo "<script>alert('Stock of item  existed, try again!')
 			location = 'addProductCatalogue.php';</script>";
@@ -213,9 +213,9 @@
 			$Row = mysqli_fetch_array($Result);
 			$SID= "1" + $Row['foundstock'];
 			$stockId = "SID-".sprintf('%04d',$SID);
-			$AddStock = mysqli_query($con, "INSERT INTO tblProductCatalogue(stockId, stockName, stockDetail, stockType, stockPicture, stockQuantity, stockStatus)
+			$AddStock = mysqli_query($con, "INSERT INTO tblProductCatalogue(stockId, stockName, stockDetail, stockType, stockPicture, stockPrice, stockQuantity, stockStatus)
 			VALUES('$stockId', '$stockName', '$stockDetail', '$stockType', '$stockPicture', '$stockPrice', '$stockQuantity', '$stockStatus')");
-			if($addStock)
+			if($AddStock)
 			{	
 				echo "<script>alert('Add Stock Successfully!')
 				location = 'addProductCatalogue.php';</script>";	
@@ -245,7 +245,7 @@
 			<div>		
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock ID is required">
 					<span class="label-input100">Stock ID</span>
-					<input class="form-control" type="text" name="txtstockId" id="txtstockId" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
+					<input class="form-control" type="text" id="txtstockId" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
 					else 
 					{
 						$SQL = "SELECT COUNT(stockId) AS foundstock FROM tblProductCatalogue";
@@ -257,30 +257,18 @@
 				</div>
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Name is required">
-					<span class="label-input100">Stock Name</span>
-					<div class="col-form-label col-md-3">
-						<input class="input100" type="text" id="txtstockName" name="txtstockName" placeholder="Enter Stock Name"<?php if($_GET['Id'] != ""){?> 
-                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockName"]; else {if(isset($_POST['txtstockName'])) 
-                                echo $_POST['txtstockName']; }?>" required autocomplete="off">
-					</div>
+					<span class="label-input100">Stock Name</span>					
+                    <input class="form-control" type="text" name="txtstockName" placeholder="Enter Stock Name" <?php if($_GET['Id'] != ""){?> readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockName"]; else {if(isset($_POST['txtstockName'])) echo $_POST['txtstockName'];}?>" required autocomplete="off">					
 				</div>
-				
+
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Detail is required">
-					<span class="label-input100">Stock Detail</span>
-					<div class="col-form-label col-md-3">
-                    <textarea class="input100" name="txtstockDeatil" placeholder="Description..." required autocomplete="off">
-                        <?php if($_GET['Id'] != "") echo $StockRec["stockDeatil"]; else {if(isset($_POST['txtstockDetail'])) 
-                            echo $_POST['txtstockDetail']; }?></textarea>
-					</div>
+					<span class="label-input100">Stock Detail</span>					
+                    <textarea class="form-control" name="txtstockDetail" placeholder="Detail..." required autocomplete="off"><?php if($_GET['Id'] != "") echo $StockRec["stockDetail"]; else {if(isset($_POST['txtstockDetail'])) echo $_POST['txtstockDetail']; }?></textarea>					
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Type is required">
-					<span class="label-input100">Stock Type</span>
-					<div class="col-form-label col-md-3">
-						<input class="input100" type="text" id="txtstockType" name="txtstockType" placeholder="Enter Stock Type"<?php if($_GET['Id'] != ""){?> 
-                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockType"]; else {if(isset($_POST['txtstockType'])) 
-                                echo $_POST['txtstockType']; }?>" required autocomplete="off">
-					</div>
+					<span class="label-input100">Stock Type</span>	
+					<input class="form-control" type="text" name="txtstockType" placeholder="Enter Stock Type"<?php if($_GET['Id'] != ""){?> readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockType"]; else {if(isset($_POST['txtstockType'])) echo $_POST['txtstockType']; }?>" required autocomplete="off">
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Picture is required">
@@ -291,57 +279,45 @@
 						if($StockRec['stockPicture'] == "") 
 						{
 						?>
-							<img height="150" width="150" align="left" src="images/stockPicture.png" title="Picture"/>
+							<img height="150" width="150" align="left" title="Picture"/>
 						<?php 
 						}
 						else
 						{?>
-							<img height="150" width="150" align="left" src="uploaded/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
+							<img height="150" width="150" align="left" src="images/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
 						<?php 
 						} 
 					}
 					?>
-						<input class="input100" type="file" required id="customFile" name="file" value="<?php if(isset($_POST['uploadedfile'])) echo $_POST['file']; ?>" accept='image/*'/>
+					<input class="form-control" type="file" required id="customFile" name="file" value="<?php if(isset($_POST['uploadedfile'])) echo $_POST['file']; ?>" accept='image/*'/>
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Price is required">
-					<span class="label-input100">Stock Price(RM)</span>
-					<div class="col-form-label col-md-3">
-						<input class="input100" type="text" id="txtstockPrice" name="txtstockPrice" placeholder="Enter stock unit price(RM)"<?php if($_GET['Id'] != ""){?> 
-                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockPrice"]; else {if(isset($_POST['txtstockPrice'])) 
-                                echo $_POST['txtstockPrice']; }?>" required autocomplete="off">
-					</div>
+					<span class="label-input100">Stock Price(RM)</span>				
+					<input class="form-control" type="text" name="txtstockPrice" placeholder="Enter stock unit price(RM)"<?php if($_GET['Id'] != ""){?>readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockPrice"]; else {if(isset($_POST['txtstockPrice'])) echo $_POST['txtstockPrice']; }?>" required autocomplete="off">	
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Quantity is required">
-					<span class="label-input100">Stock Quantity</span>
-					<div class="col-form-label col-md-3">
-						<input class="input100" type="text" id="txtstockQuantity" name="txtstockQuantity" placeholder="Enter stock quantity"<?php if($_GET['Id'] != ""){?> 
-                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockQuantity"]; else {if(isset($_POST['txtstockQuantity'])) 
-                                echo $_POST['txtstockQuantity']; }?>" required autocomplete="off">
-					</div>
+					<span class="label-input100">Stock Quantity</span>					
+					<input class="form-control" type="text" name="txtstockQuantity"  placeholder="Enter stock quantity"<?php if($_GET['Id'] != ""){?> readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockQuantity"]; else {if(isset($_POST['txtstockQuantity'])) echo $_POST['txtstockQuantity']; }?>" required autocomplete="off">				
 				</div>
-
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Status is required">
 					<span class="label-input100">Stock Status</span>
-					<div class="col-form-label col-md-3">
-						<select class="custom-select" name="txtstockStatus" id="txtstockStatus" required>
-							<option selected disabled value="">Choose Status...</option>
+						<select class="form-control" name="txtstockStatus" required>
+						    <option selected disabled value="">Choose Status...</option>
 							<?php 
 							$Status = array("Yes", "No");
 	  						for($i = 0; $i < count($Status); $i++)
 							{
 								echo "<option value = \"".substr($Status[$i], 0, 1)."\"";
-								if($StockRec['stockStatus'] == substr($Gender{$i}, 0, 1))
+								if($StockRec['stockStatus'] == substr($Status{$i}, 0, 1))
 								echo "SELECTED"; 
 								echo ">".$Status[$i]."</option>";
 							} 
 	  						?>
-						</select>
-					</div>
+					</select>
 				</div>
-
 			</div>	
 			<div class="row">
 				<div class="form-group row col-md-5 p-3 mx-auto">
@@ -374,3 +350,24 @@
 
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script>
+	$( document ).ready( function () {
+		$( ".custom-file-input" ).on( "change", function () {
+			var fileName = $( this ).val().split( "\\" ).pop();
+			$( this ).siblings( ".custom-file-label" ).addClass( "selected" ).html( fileName );
+		} );
+	});
+	
+	$( function () {
+		$( '.custom-file-input' ).change( function () {
+			var val = $( this ).val().toLowerCase(),
+				regex = new RegExp( "(.*?)\.(jpg|png|gif|bmp|jpeg)$" );
+
+			if ( !( regex.test( val ) ) ) {
+				var _validFileExtensions = [ ".jpg", ".jpeg", ".bmp", ".gif", ".png" ];
+				$( this ).val( '' );
+				alert( "Sorry, " + val + " is invalid!\nAllowed extensions are: " + _validFileExtensions.join( ", " ) );
+			}
+		} );
+	} );
+</script>
