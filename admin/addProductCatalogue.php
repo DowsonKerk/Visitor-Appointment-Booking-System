@@ -175,3 +175,168 @@
     </div>
 </nav>
 </br></br></br>
+
+<?php
+    $stockId = strtoupper(trim($_POST['txtstockId']));
+    $stockName = strtoupper(trim($_POST['txtstockName']));
+    $stockDetail = strtoupper(trim($_POST['txtstockDetail']));
+    $stockPicture = strtoupper(trim($_POST['txtstockPicture']));
+    $stockPrice = strtoupper(trim($_POST['txtstockPrice']));
+    $stockQuantity = strtoupper(trim($_POST['txtstockQuantity']));
+    $stockStatus = strtoupper(trim($_POST['txtstockStatus']));
+    $temp = explode(".", $_FILES['file']['name']);
+    $stockPicture = 'stockPicture.'.end($temp);
+	
+	// if(isset($_POST["btnSave"]))
+	// {
+	// 	$UpdateBookingSlot = mysqli_query($con, "UPDATE tblBookingSlot SET bookingSlotDate = '".$bookingSlotDate."', bookingSlotTime = '".$bookingSlotTime."', bookingSlotStatus = '".$bookingSlotStatus."' WHERE bookingSlotId = '".$_GET['Id']."'");
+	// 	if($UpdateBookingSlot)
+	// 	{	
+	// 		echo "<script>alert('Booking Slot Updated Successfully!')
+	// 		location = 'searchBookingSlotAvailability.php?Id=E';</script>";	
+	// 	}
+	// }
+	if(isset($_POST["btnAdd"]))
+	{		
+		$Check = "SELECT * FROM tblProductCatalogue WHERE stockName = '".$stockName."' and stockStatus = 'A'";
+		$CheckResult = mysqli_query($con, $Check);
+		if(mysqli_num_rows($CheckResult) > 1)
+		{
+			echo "<script>alert('Stock of item  existed, try again!')
+			location = 'addProductCatalogue.php';</script>";
+		}
+		else
+		{		
+            $didUpload = move_uploaded_file($_FILES['file']['tmp_name'],"uploaded/".$stockPicture);
+
+			$SQL = "SELECT COUNT(stockId) AS foundstock FROM tblProductCatalogue";
+			$Result = mysqli_query($con, $SQL);
+			$Row = mysqli_fetch_array($Result);
+			$SID= "1" + $Row['foundstock'];
+			$stockId = "SID-".sprintf('%04d',$SID);
+			$AddStock = mysqli_query($con, "INSERT INTO tblProductCatalogue(stockId, stockName, stockDetail, stockPicture, stockQuantity, stockStatus)
+			VALUES('$stockId', '$stockName', '$stockDetail', '$stockPicture', '$stockPrice', '$stockQuantity', '$stockStatus')");
+			if($addStock)
+			{	
+				echo "<script>alert('Add Stock Successfully!')
+				location = 'addProductCatalogue.php';</script>";	
+			}
+		}	
+	}
+	if($_GET['Id'] != "") 
+	{
+		$SQL = "SELECT * FROM tblProductCatalogue WHERE stockId = '".$_GET['Id']."'";
+		$Result = mysqli_query($con, $SQL);
+		if(mysqli_num_rows($Result) > 0)
+		{
+			$StockRec = mysqli_fetch_array($Result);
+		}
+	}
+?>
+	<div class="row">
+		<form method="POST" enctype="multipart/form-data">
+            <div class="form-group row col-md-5 p-3 mx-auto">
+			    <h5>
+				    <?php 
+				    if($_GET['Id'] != "") echo "Edit Product Catalogue"; 
+				    else echo "Add Product Catalogue"; 
+				    ?>
+			    </h5>
+            </div>
+			<div>		
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock ID is required">
+					<span class="label-input100">Stock ID</span>
+					<input class="form-control" type="text" name="txtstockId" id="txtstockId" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
+					else 
+					{
+						$SQL = "SELECT COUNT(stockId) AS foundstock FROM tblProductCatalogue";
+						$Result = mysqli_query($con, $SQL);
+						$Row = mysqli_fetch_array($Result);
+						$SID= "1" + $Row['foundstock'];
+						echo $stockId = "SID-".sprintf('%04d',$SID);
+					}?>" readonly="readonly"/>
+				</div>
+
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Name is required">
+					<span class="label-input100">Stock Name</span>
+					<div class="col-form-label col-md-3">
+						<input class="input100" type="text" id="txtstockName" name="txtstockName" placeholder="Enter Stock Name"<?php if($_GET['Id'] != ""){?> 
+                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockName"]; else {if(isset($_POST['txtstockName'])) 
+                                echo $_POST['txtstockName']; }?>" required autocomplete="off">
+					</div>
+				</div>
+				
+                <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Name is required">
+					<span class="label-input100">Stock Name</span>
+					<div class="col-form-label col-md-3">
+						<input class="input100" type="text" id="txtstockName" name="txtstockName" placeholder="Enter Stock Name"<?php if($_GET['Id'] != ""){?> 
+                            readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockName"]; else {if(isset($_POST['txtstockName'])) 
+                                echo $_POST['txtstockName']; }?>" required autocomplete="off">
+					</div>
+				</div>
+				
+
+
+
+
+
+
+                <div class="wrap-input100 validate-input" data-validate = "Description required">
+					<span class="label-input100">Description</span>
+					<textarea class="input100" name="txastockDescription" placeholder="Description..." required autocomplete="off"><?php if($_GET['Id'] != "") echo $StockRec["stockDescription"]; else {if(isset($_POST['txastockDescription'])) echo $_POST['txastockDescription']; }?></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+
+
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Status is required">
+					<span class="label-input100">Status</span>
+					<div class="col-form-label col-md-3">
+						<select class="custom-select" name="bookingSlotStatus" id="bookingSlotStatus" required>
+							<option selected disabled value="">Choose Status...</option>
+							<?php 
+							$Status = array("Open", "Close");
+	  						for($i = 0; $i < count($Status); $i++)
+							{
+								echo "<option value = \"".$Status[$i]."\"";
+								if($BookingSlotRec['bookingSlotStatus'] == $Status[$i])
+								echo "SELECTED"; 
+								echo ">".$Status[$i]."</option>";
+							} 
+	  						?>
+						</select>
+					</div>
+				</div>
+
+			</div>	
+			<div class="row">
+				<div class="form-group row col-md-5 p-3 mx-auto">
+					<div class="col-md-7">
+					<button class="btn btn-primary" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
+						<span>
+							<?php if($_GET['Id'] != "") echo "Save"; else echo "Add"; ?>
+						</span>
+					</button>
+                    </div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+<div class="container-fluid border" style="width: 100%;">
+  <footer class="py-1 my-2">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
+  </footer>
+</div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
