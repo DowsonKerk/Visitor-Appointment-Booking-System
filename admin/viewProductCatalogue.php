@@ -153,6 +153,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalog.php?Id=E'">Edit Product Catalog</button></li>
 						</ul>
                     </div>
                 </li>
