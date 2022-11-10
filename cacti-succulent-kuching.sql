@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2022 at 01:34 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Generation Time: Nov 10, 2022 at 02:26 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,7 +66,8 @@ CREATE TABLE `tblbookedslot` (
 --
 
 INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
-('AID-0001', 'BID-0001', '24', '2022-10-25 13:43:53');
+('AID-0001', 'BID-0001', '24', '2022-10-25 13:43:53'),
+('AID-0002', 'BID-0001', '25', '2022-11-10 12:44:22');
 
 -- --------------------------------------------------------
 
@@ -144,6 +145,20 @@ INSERT INTO `tblproductcatalogue` (`stockId`, `stockName`, `stockDetail`, `stock
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblreview`
+--
+
+CREATE TABLE `tblreview` (
+  `reviewId` int(15) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `rating` int(1) NOT NULL,
+  `submitDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -166,7 +181,8 @@ INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`
 (1, 'Dowson Kerk', 'Dowson', '2022-10-12', '123123', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
 (20, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
 (22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', '2147483647', 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef'),
-(23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
+(23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
+(25, 'ahbert', 'Wong Chung Hing', '2000-04-02', '0109771761', 'bertbert0402@gmail.com', 'user', '8a5e98f6f0324362aa9d9ec9ced1a3fd');
 
 --
 -- Indexes for dumped tables
@@ -197,6 +213,12 @@ ALTER TABLE `tblproductcatalogue`
   ADD PRIMARY KEY (`stockId`);
 
 --
+-- Indexes for table `tblreview`
+--
+ALTER TABLE `tblreview`
+  ADD PRIMARY KEY (`reviewId`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -213,10 +235,16 @@ ALTER TABLE `banner`
   MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
 
 --
+-- AUTO_INCREMENT for table `tblreview`
+--
+ALTER TABLE `tblreview`
+  MODIFY `reviewId` int(15) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 DELIMITER $$
 --
