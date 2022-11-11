@@ -1,6 +1,12 @@
 <?php
-session_start();
-require 'dbconnect.php';
+ session_start();
+ require 'dbcon.php';
+ include('PostEnquiry.php');
+ include('Account.php');
+ if (!isLoggedIn()) {
+     $_SESSION['msg'] = "You must log in first";
+     header('location: login.php');
+ }
 ?>
 
 <!doctype html>
@@ -86,16 +92,19 @@ require 'dbconnect.php';
 
         <!--Grid column-->
         <div class="col-md-9 mb-md-0 mb-5 mx-auto">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+            <form id="contact-form" name="contact-form" action="" method="POST">
 
                 <!--Grid row-->
                 <div class="row">
 
+                    <?php echo display_error2(); ?>
+               
+
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="full name">
-                            <label for="floatingInput">Full Name</label>
+                            <input type="text" class="form-control" name="fullName" id="fullName" placeholder="full name">
+                            <label for="fullName">Full Name</label>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -103,8 +112,9 @@ require 'dbconnect.php';
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" id="email" name="email" class="form-control" placeholder="kel@gamil.com">
-                            <label for="email" class="">Your Email</label>
+
+                            <input type="text" id="enquiryEmail" name="enquiryEmail" class="form-control" placeholder="kel@gamil.com">
+                            <label for="enquiryEmail" class="">Your Email</label>
     
                         </div>
                     </div>
@@ -153,11 +163,13 @@ require 'dbconnect.php';
                 </div>
                 <!--Grid row-->
 
+                 <div class="text-center text-md-left">
+                    <button type="post" id="post_enquiry" name="post_enquiry" class="btn btn-primary" >Send</button>
+                </div>
+            
             </form>
 
-            <div class="text-center text-md-left">
-            <a class="btn btn-primary" onclick="validateForm();">Send</a>
-            </div>
+           
             <div class="status"></div>
         </div>
         <!--Grid column-->

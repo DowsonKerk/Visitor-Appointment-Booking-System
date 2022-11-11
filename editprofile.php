@@ -243,7 +243,7 @@
                             </div>
 
                             <div class="form-group pt-3">
-                              <button type="submit" id="update_user" name="update_user" class="btn btn-primary" >Update</button>
+                              <button type="post" id="update_user" name="update_user" class="btn btn-primary" >Update</button>
                             </div>
 
                             
