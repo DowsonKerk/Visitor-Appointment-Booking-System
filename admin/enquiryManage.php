@@ -231,7 +231,7 @@
                                        
                                        
                                         <td>
-                                            <a href="viewEnquiry.php?id=<?= $enquiryInfo['form_Id']; ?>" class="btn btn-primary btn-sm">View</a>
+                                            <a href="viewEnquiry.php?form_Id=<?= $enquiryInfo['form_Id']; ?>" class="btn btn-primary btn-sm">View</a>
                                             <form action="AdminEnquiry.php" method="POST" class="d-inline">
                                                 <button type="submit" name="delete_enquiry" value="<?=$enquiryInfo['form_Id'];?>" class="btn btn-danger btn-sm">Delete</button>
                                             </form>

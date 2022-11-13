@@ -9,13 +9,11 @@ document.addEventListener('submit',(e) => {
     else{
     }
     
-    
-    
-    
 });
 
 function checkInputs(){
 
+    const form = document.getElementById('form');
     const nameValue = document.getElementById("name").value.trim();
     const usernameValue = document.getElementById("username").value.trim();
     const emailValue = document.getElementById("email").value.trim();
