@@ -168,113 +168,87 @@
 </nav>
 
 
-<div class="imgcontainer shadow">
-    <img src="..\images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <h2>Cacti-Succulent Kuching</h2>
-        <h1>Book With Our Newest Application</h1>
-        <h5>Admin Account</h5>
-        <br>
-    </div>
-</div>
+
+<br></br><br></br>
 
 
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-
-<div class="shadow-sm">
-    <img src="..\images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
-
-<br>
-<br>
-
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
-    <div class="row mx-auto my-auto">
+<div class="row mx-auto my-auto">
         <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
-        <div class="col d-flex align-items-end justify-content-end p-3">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='add_banner.php';">Add Banner</button>
-            <!-- <button type="button" class="btn btn-primary">Edit Banner</button>
-            <button type="button" class="btn btn-primary">Delete Banner</button> -->
+            <h1 class="text-center">Enquiry Form</h1> 
         </div>
     </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
+<hr>
+<?php
 
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
+  if(isset($_GET['form_Id'])){
+
+  $form_Id = mysqli_real_escape_string($con, $_GET['form_Id']);
+  $sql="SELECT * FROM enquiry WHERE form_Id='$form_Id' ";
+  $result = mysqli_query($con,$sql);
+
+if($formInfo=mysqli_fetch_assoc($result))
+{
+
+?>
+<div style="width:600px; margin:0px auto">
+
+          <form class="" action="" method="POST">
+
+              <input type="hidden" name="form_Id" value="<?php echo $formInfo['form_Id']; ?>" class="form-control">
+
+              <div class="form-group pb-3">
+                <div>Full Name :
+                  <?php echo $formInfo['full_name']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Email :
+                  <?php echo $formInfo['email']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Phone Number :
+                  <?php echo $formInfo['phone_number']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Subject :
+                  <?php echo $formInfo['user_subject']; ?>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group pb-3">
+                <div>Comment :
+                    <textarea rows="3" cols="50" class ="form-control" readonly><?php echo $formInfo['comment']; ?></textarea>
                 </div>
                 
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
+              </div>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a href="edit_banner.php?id=<?php echo $banners['product_id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="Banner.php" method="POST" class="d-inline p-1">
-                                <button type="submit" name="delete_banner" value="<?php echo $banners['product_id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+              <div class="form-group pt-3">
+                <button type="submit" name="edit" class="btn btn-primary"><a class="text-light text-decoration-none" >Reply</a></button>
+                <button type="submit" name="back" class="btn btn-primary"><a class="text-light text-decoration-none" href="enquiryManage.php">Back</a></button>
+              </div>
 
-        <?php
+            </form>
+            <?php
+              }
             }
-        }
-        ?>
-        
-    </div>
+          ?>
+     
 </div>
 
 
 
+
+
+
+
+
+
+<br></br><br></br>
 
 <div class="container-fluid border" style="width: 100%;margin-top:auto;">
   <footer class="py-1 my-2 ">
