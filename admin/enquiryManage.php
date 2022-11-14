@@ -2,6 +2,7 @@
     session_start();
     include('../dbcon.php');
     include('../Account.php');
+
     if (!isAdmin()) {
         $_SESSION['msg'] = "You must log in first";
         header('location: ../login.php');
@@ -13,22 +14,23 @@
         header("location: ../login.php");
     }
 ?>
-
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home</title>
+
         <link rel="icon" href="../images\icon.png" type="image/icon type">
         <link rel="stylesheet" href="..\styles\homepage.css">
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
     
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="admin.php">
+        <a class="navbar-brand" href="#">
             <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
@@ -37,14 +39,15 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">
-
+    
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="admin.php">Home</a>
+                    <a class="nav-link " href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
+
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,6 +60,7 @@
 							<li><button class="dropdown-item" type="button" onclick="location.href='editBookedSlot.php'">Add Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=E'">Edit Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=V'">View Booked Slot</button></li>
+
 						</ul>
                     </div>
                 </li>
@@ -87,7 +91,7 @@
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
                                     <?php echo "Reminder"; ?><br>
                                     <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
                                     <?php echo $row["bookingSlotId"]; ?>
@@ -133,13 +137,14 @@
                         </ul>
                     </div>
                 </li>  
+ 
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
+                    <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="admincustomerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -147,16 +152,7 @@
                 </li>
                 
                 <li class="nav-item p-1">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                             Product Catalogue
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end">
-							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
-                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
-                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
-                        </ul>
-                    </div>
+                    <a class="nav-link" href="#">Product Catalogue</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -166,7 +162,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
-                            <li><a href="../home.php?logout='1'" class="text-decoration-none text-black"><button class="dropdown-item" type="button">Logout</button></a></li>
+                            <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>
                 </li>
@@ -175,116 +171,109 @@
     </div>
 </nav>
 
+  
+<br></br><br></br>
 
-<div class="imgcontainer shadow">
-    <img src="..\images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <h2>Cacti-Succulent Kuching</h2>
-        <h1>Book With Our Newest Application</h1>
-        <h5>Admin Account</h5>
-        <br>
-    </div>
+<?php if (isset($_SESSION['message'])) : ?>
+<br>
+<br>
+<div class="alert alert-danger" style=" margin:0;" role="alert">
+        <div>
+                <?php 
+                    echo $_SESSION['message']; 
+                    unset($_SESSION['message']);
+                ?>
+        </div>
 </div>
+<?php endif ?>
 
 
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
 
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
+<div class="container mt-4">
 
-<br>
-<br>
 
-<div class="shadow-sm">
-    <img src="..\images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Enquiry Form</h4>
+            </div>
+            <div class="card-body">
 
-<br>
-<br>
+                <?php echo display_error(); ?>
 
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
-    <div class="row mx-auto my-auto">
-        <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
-        <div class="col d-flex align-items-end justify-content-end p-3">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='add_banner.php';">Add Banner</button>
-            <!-- <button type="button" class="btn btn-primary">Edit Banner</button>
-            <button type="button" class="btn btn-primary">Delete Banner</button> -->
-        </div>
-    </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
+                <table id="myTable"class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Form_ID</th>
+                            <th>FUll Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $query = "SELECT * FROM enquiry";
+                            $query_run = mysqli_query($con, $query);
 
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
-                </div>
-                
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
+                                foreach($query_run as $enquiryInfo)
+                                {
+                                    ?>
+                                    <tr>
+                                        <td><?= $enquiryInfo['form_Id']; ?></td>
+                                        <td><?= $enquiryInfo['full_name']; ?></td>
+                                        <td><?= $enquiryInfo['email']; ?></td>
+                                        <td><?= $enquiryInfo['phone_number']; ?></td>
+                                        <td><?= $enquiryInfo['user_subject']; ?></td>
+                                       
+                                       
+                                        <td>
+                                            <a href="viewEnquiry.php?form_Id=<?= $enquiryInfo['form_Id']; ?>" class="btn btn-primary btn-sm">View</a>
+                                            <form action="AdminEnquiry.php" method="POST" class="d-inline">
+                                                <button type="submit" name="delete_enquiry" value="<?=$enquiryInfo['form_Id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                echo "<h5> No Record Found </h5>";
+                            }
+                        ?>
+                        
+                    </tbody>
+                </table>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a href="edit_banner.php?id=<?php echo $banners['product_id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="Banner.php" method="POST" class="d-inline p-1">
-                                <button type="submit" name="delete_banner" value="<?php echo $banners['product_id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <?php
-            }
-        }
-        ?>
-        
     </div>
+</div>
 </div>
 
 
 
 
-<div class="container-fluid border" style="width: 100%;margin-top:auto;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br></br><br></br><br></br><br></br>
+
+<div class='container-fluid border" style="width 100%;'>
   <footer class="py-1 my-2 ">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
@@ -299,5 +288,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
 </body>
 </html>

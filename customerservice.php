@@ -188,11 +188,15 @@
 <br></br><br></br>
 <div class="row col-12">  
 
-    <hr>
+    
     <div class="row mx-auto my-auto">
+        <div class="col-9 mx-auto">  
+        <hr>
         <h5 class="text-center">Customer Service</h5> 
+        <hr>
+        </div>
     </div>
-    <hr>
+
     <div class="row col-5 mx-auto">
         <div class="justify-content-center text-center my-auto">
             <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion" aria-expanded="false" aria-controls="collapsequestion">
@@ -220,7 +224,7 @@
 
                         <div class="collapse p-1" id="collapsequestion2">
                             <div class="card card-body">
-                                You can contact the admin by open the chatting panel and chat with the admin.
+                                You can contact the admin by open the chatting panel and chat with the admin or submit the enquiry form.
                             </div>
                         </div>
                     </div>
@@ -259,28 +263,17 @@
         <section class="users">
         <header>
             <div class="content">
-            <?php 
-
-            $sql = mysqli_query($con, "SELECT * FROM users WHERE id = {$_SESSION['user']['id']}");
-            if(mysqli_num_rows($sql) > 0){
-            $row = mysqli_fetch_assoc($sql);
-            }
-            ?>
-            <div class="details">
-                <span><?php echo $row['username'] ?></span>
-            </div>
+                <div class="details">
+                    <span class="text">Click The button below to start chat with admin</span>
+                </div>
             </div>
         </header>
         <div class="search">
-            <span class="text">Select an user to start chat</span>
             <input type="text" placeholder="Enter name to search...">
-            <button><i class="fas fa-search"></i></button>
         </div>
-        <div class="users-list">
-            <a href="chat.php?user_id=1">
-            <button>Chat With Admin</button>
+            <a href="chat.php?user_id=1" class="text-decoration-none">
+            <button class="btn btn-dark shadow p-1">Chat With Admin</button>
             </a>
-        </div>
         </section>
     </div>
     </div>
@@ -290,6 +283,7 @@
 
 
 <br></br><br></br>
+<br></br><br>
 
 
 

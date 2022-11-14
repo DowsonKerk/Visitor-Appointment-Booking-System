@@ -1,31 +1,34 @@
 <?php
-    session_start();
-    include('../dbcon.php');
-    include('../Account.php');
-    if (!isAdmin()) {
-        $_SESSION['msg'] = "You must log in first";
-        header('location: ../login.php');
-    }
-    
-    if (isset($_GET['logout'])) {
-        session_destroy();
-        unset($_SESSION['user']);
-        header("location: ../login.php");
-    }
+session_start();
+include('../dbcon.php');
+include('../Account.php');
+if (!isAdmin()) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: ../login.php');
+}
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['user']);
+    header("location: ../login.php");
+}
 ?>
+
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home</title>
+        <title>Customer Service</title>
         <link rel="icon" href="../images\icon.png" type="image/icon type">
-        <link rel="stylesheet" href="..\styles\homepage.css">
+        <link rel="stylesheet" href="../styles\homepage.css">
+        <link rel="stylesheet" href="../styles\chat.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     </head>
 <body>
-    
+
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
         <a class="navbar-brand" href="admin.php">
@@ -39,12 +42,13 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="admin.php">Home</a>
+                    <a class="nav-link" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
+
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,7 +80,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Cancelled Booking</button>
-                            </li>  
+                            </li>    
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -87,7 +91,7 @@
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
                                     <?php echo "Reminder"; ?><br>
                                     <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
                                     <?php echo $row["bookingSlotId"]; ?>
@@ -133,9 +137,10 @@
                         </ul>
                     </div>
                 </li>  
+ 
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
+                    <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
@@ -153,9 +158,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
-                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
-                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
-                        </ul>
+						</ul>
                     </div>
                 </li>
 
@@ -166,7 +169,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
-                            <li><a href="../home.php?logout='1'" class="text-decoration-none text-black"><button class="dropdown-item" type="button">Logout</button></a></li>
+                            <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>
                 </li>
@@ -176,123 +179,95 @@
 </nav>
 
 
-<div class="imgcontainer shadow">
-    <img src="..\images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <h2>Cacti-Succulent Kuching</h2>
-        <h1>Book With Our Newest Application</h1>
-        <h5>Admin Account</h5>
-        <br>
-    </div>
-</div>
-
-
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-
-<div class="shadow-sm">
-    <img src="..\images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
-
-<br>
-<br>
-
+<br></br><br></br>
 <div class="row col-12">  
-    <div class="row col-10 mx-auto">
-    <hr>
+
+    
     <div class="row mx-auto my-auto">
-        <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
-        <div class="col d-flex align-items-end justify-content-end p-3">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='add_banner.php';">Add Banner</button>
-            <!-- <button type="button" class="btn btn-primary">Edit Banner</button>
-            <button type="button" class="btn btn-primary">Delete Banner</button> -->
+        <div class="col-9 mx-auto">  
+        <hr>
+        <h5 class="text-center">Customer Service</h5> 
+        <hr>
         </div>
     </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
 
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
-                </div>
-                
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
-
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a href="edit_banner.php?id=<?php echo $banners['product_id']; ?>" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="Banner.php" method="POST" class="d-inline p-1">
-                                <button type="submit" name="delete_banner" value="<?php echo $banners['product_id'];?>" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </div>
-                    </div>
+    <div class="row mx-auto">
+    <div class="wrapper">
+        <section class="users">
+        <header>
+            <div class="content">
+                <div class="details">
+                    <span class="text">Click The button below to start chat with admin</span>
                 </div>
             </div>
+        </header>
+        <div class="search">
+            <input type="text" placeholder="Enter name to search...">
         </div>
-
-        <?php
-            }
-        }
-        ?>
-        
+            <a href="adminchat.php?user_id=1" class="text-decoration-none">
+            <button class="btn btn-dark shadow p-1">Chat With Admin</button>
+            </a>
+        </section>
     </div>
+    </div>
+   
+    
 </div>
 
+<div class="wrapper">
+    <section class="users">
+      <header>
+        <div class="content">
+          <?php 
+            $sql = mysqli_query($con, "SELECT * FROM users WHERE id = {$_SESSION['user']['id']}");
+            if(mysqli_num_rows($sql) > 0){
+              $row = mysqli_fetch_assoc($sql);
+            }
+          ?>
+          <img src="../images/admin.png" alt="">
+          <div class="details">
+            <span><?php echo $row['username'] ?></span>
+          </div>
+        </div>
+      </header>
+        <h4 class="text header">User List</h4>
+      <div class="users-list">
+         <?php 
+            $sql = mysqli_query($con, "SELECT * FROM users WHERE id != {$_SESSION['user']['id']}");
+            if(mysqli_num_rows($sql) > 0){
+              $list = mysqli_fetch_assoc($sql);
+            }
+          ?>
+            <a href="adminchat.php?user_id=<?php echo $list['id'] ?>">
+                <div class="content">
+                <img src="php/images/'. $row['img'] .'" alt="">
+                <div class="details">
+                    <span><?php echo $list['username'] ?></span>
+                    <p> $msg </p>
+                </div>
+                </div>
+                <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
+            </a> 
+      </div>
+    </section>
+  </div>
+
+
+<br></br><br></br>
+<br></br><br>
 
 
 
-<div class="container-fluid border" style="width: 100%;margin-top:auto;">
-  <footer class="py-1 my-2 ">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
+<div class="container-fluid border foot">
+  <footer class="py-1 my-2">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li> -->
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
@@ -300,4 +275,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
+<script src="Users.js"></script>
 </html>

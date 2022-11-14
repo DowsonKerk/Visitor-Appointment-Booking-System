@@ -7,13 +7,13 @@
         header('location: login.php');
     }
 ?>
-<!-- Logined normal user -->
+
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home</title>
+        <title>Search Function</title>
         <link rel="icon" href="images\icon.png" type="image/icon type">
         <link rel="stylesheet" href="styles\homepage.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -149,20 +149,20 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
+                    <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">
                     <a class="nav-link" href="#">Report</a>
-                </li>
+                </li> -->
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product Catalogue</a>
-                </li> -->
+                    <a class="nav-link" href="productcatalogue.php">Product Catalogue</a>
+                </li>
 
                 <li class="nav-item p-1">
                     <div class="dropdown">
@@ -196,108 +196,74 @@
 </div>
 <?php endif ?>
 
-<div class="imgcontainer shadow">
-    <img src="images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <br>
-        <br>
-        <h2>Welcome to Cacti-Succulent Kuching</h2>
-        <h1>Booking With Our Newest Application</h1>
-        <h5>Hello, <?php echo $_SESSION['user']['username']; ?>!</h5>
-        <!-- <br>
-        <button type="button" class="btn btn-outline-light">Login</button>
-        <button type="button" class="btn btn-outline-light">Sign Up</button> -->
-    </div>
-</div>
-
-
-
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-
-<div class="shadow-sm">
-    <img src="images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
-
-<br>
-<br>
-
+<br><br><br>
 <div class="row col-12">  
     <div class="row col-10 mx-auto">
-    <hr>
     <div class="row mx-auto my-auto">
         <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
+            <h2 class="text-center">Product Catalogue</h2>
         </div>
     </div>
-    <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
 
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="admin\uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
-                </div>
-                
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
-                    </div>
-                </div>
+    <form  action="search.php" method="POST">
+        <div class="d-flex justify-content-center mx-auto">
+            <div class="form-outline" style="width: 50%;">
+                <input type="text" name="search" class="form-control" placeholder="Search">
             </div>
+            <button type="submit" name="submit-search" class="btn btn-primary">Search</button>
         </div>
+    </form>
+    <br><br><br>
 
-        <?php
+    <?php 
+        if (isset($_POST['submit-search']))
+        {
+            $search = mysqli_real_escape_string($con, $_POST['search']);
+            $query = "SELECT * FROM tblproductcatalogue WHERE stockName LIKE '%$search%' OR stockType LIKE '%$search%'";
+            $query_run = mysqli_query($con, $query);
+            $query_res = mysqli_num_rows($query_run);
+
+            echo "<div class=fs-5><div class=fw-light>Search term \"", $search, "\"</div></div>";
+            echo "<div class=fs-5><div class=fw-light><p>",$query_res, " results found</p></div></div>";
+
+            if ($query_res > 0)
+            {
+                while ($productcatalogue = mysqli_fetch_assoc($query_run))
+                {
+        ?>
+                <a href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>"><div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" alt="...">
+                        </div>
+                            
+                        <div class="col-md-10 my-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            <?php        
+                }
+            }
+            else{
+                echo "<div class = fs-3><div class=fw-semibold><p class = text-center>No Result<br></p></div></div>";
+                echo "<div class = fs-5><p class = text-center>Sorry. We cannot find any matches for your search term.</p></div>";  
             }
         }
         ?>
-        
     </div>
 </div>
-
 
 
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2 ">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li> -->
       <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
