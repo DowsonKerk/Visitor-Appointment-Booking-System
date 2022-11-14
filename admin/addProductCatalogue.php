@@ -186,11 +186,11 @@
     $stockStatus = strtoupper(trim($_POST['txtstockStatus']));
 
     $temp = explode(".", $_FILES['file']['name']);
-    $stockPicture = 'stockPicture.'.end($temp);
+    $stockPicture = $stockName.'.'.end($temp);
 	
 	if(isset($_POST["btnSave"]))
 	{
-        $didUpload = move_uploaded_file($_FILES['file']['tmp_name'],"uploaded/".$stockPicture); 
+        $didUpload = move_uploaded_file($_FILES['file']['tmp_name'],"uploadedimage/".$stockPicture); 
 
 		$UpdateStock = mysqli_query($con, "UPDATE tblProductCatalogue SET stockName = '".$stockName."', stockDetail = '".$stockDetail."', stockType = '".$stockType."', stockPicture = '".$stockPicture."', stockPrice = '".$stockPrice."', stockQuantity = '".$stockQuantity."', stockStatus = '".$stockStatus."' WHERE stockId = '".$_GET['Id']."'");
 		if($UpdateStock)
@@ -210,7 +210,7 @@
 		}
 		else
 		{		
-            $didUpload = move_uploaded_file($_FILES['file']['tmp_name'],"uploaded/".$stockPicture);
+            $didUpload = move_uploaded_file($_FILES['file']['tmp_name'],"uploadedimage/".$stockPicture);
 
 			$SQL = "SELECT COUNT(stockId) AS foundstock FROM tblProductCatalogue";
 			$Result = mysqli_query($con, $SQL);
@@ -276,24 +276,24 @@
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Picture is required">
-					<span class="label-input100">Stock Picture</span><br/>
+                <span class="label-input100">Stock Picture</span><br/>
 					<?php
 					if($_GET['Id'] != "") 
 					{
 						if($StockRec['stockPicture'] == "") 
 						{
 						?>
-							<img height="150" width="150" align="left" title="Picture"/>
+							<img height="150" width="150" align="left" src="images/photo.png" title="Stock Picture"/>
 						<?php 
 						}
 						else
 						{?>
-							<img height="150" width="150" align="left" src="images/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
+							<img height="150" width="150" align="left" src="uploadedimage/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
 						<?php 
 						} 
 					}
 					?>
-					<input class="form-control" type="file" required id="customFile" name="file" value="<?php if(isset($_POST['uploadedfile'])) echo $_POST['file']; ?>" accept='image/*'/>
+						<input class="input100 custom-file" type="file" required id="customFile" name="file" value="<?php if(isset($_POST['uploadedfile'])) echo $_POST['file']; ?>" accept='image/*'/>
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Price is required">

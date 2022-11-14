@@ -214,7 +214,7 @@
 								echo "<tr class = \"Row\"";
 								if($_GET['Id'] == "E")
 								echo "onclick = \"location = 'addProductCatalogue.php?Id=".$RecRow['stockId']."'\"";
-								else echo  "onclick = \"location = 'viewProducCatalogue.php?Id=".$RecRow['stockId']."'\"";
+								else echo  "onclick = \"location = 'viewProductCatalogue.php?Id=".$RecRow['stockId']."'\"";
 								echo ">";
 								echo "<td>".$RecRow['stockId']."</td>";
 								echo "<td>".$RecRow['stockName']."</td>";
