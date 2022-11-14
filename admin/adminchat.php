@@ -1,11 +1,17 @@
 <?php
- session_start();
- require 'dbcon.php';
- include('Account.php');
- if (!isLoggedIn()) {
-     $_SESSION['msg'] = "You must log in first";
-     header('location: login.php');
- }
+session_start();
+include('../dbcon.php');
+include('../Account.php');
+if (!isAdmin()) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: ../login.php');
+}
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['user']);
+    header("location: ../login.php");
+}
 ?>
 
 
@@ -16,8 +22,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Customer Service</title>
         <link rel="icon" href="images\icon.png" type="image/icon type">
-        <link rel="stylesheet" href="styles\homepage.css">
-        <link rel="stylesheet" href="styles\chat.css">
+        <link rel="stylesheet" href="../styles\homepage.css">
+        <link rel="stylesheet" href="../styles\chat.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     </head>
@@ -26,7 +32,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
         <a class="navbar-brand" href="home.php">
-            <img src="images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
+            <img src="../images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -188,102 +194,45 @@
 <br></br><br></br>
 <div class="row col-12">  
 
-    
+    <hr>
     <div class="row mx-auto my-auto">
-        <div class="col-9 mx-auto">  
-        <hr>
         <h5 class="text-center">Customer Service</h5> 
-        <hr>
-        </div>
     </div>
-
+    <hr>
     <div class="row col-5 mx-auto">
-        <div class="justify-content-center text-center my-auto">
-            <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion" aria-expanded="false" aria-controls="collapsequestion">
-                Most Frequent Ask Question
-            </button>
-
-            <div class="collapse p-1" id="collapsequestion">
-                <div class="row">
-                    <div class="p-1">
-                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion1" aria-expanded="false" aria-controls="collapsequestion">
-                        How do you book a appointment?
-                        </button>
-
-                        <div class="collapse p-1" id="collapsequestion1">
-                            <div class="card card-body">
-                                You should be able to book the appointment under the navigation bar "Booking".
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-1">
-                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion2" aria-expanded="false" aria-controls="collapsequestion">
-                            How can u contact the admin?
-                        </button>
-
-                        <div class="collapse p-1" id="collapsequestion2">
-                            <div class="card card-body">
-                                You can contact the admin by open the chatting panel and chat with the admin or submit the enquiry form.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-1">
-                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion3" aria-expanded="false" aria-controls="collapsequestion">
-                            Most Frequent Ask Question
-                        </button>
-
-                        <div class="collapse p-1" id="collapsequestion3">
-                            <div class="card card-body">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-1">
-                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion4" aria-expanded="false" aria-controls="collapsequestion">
-                            Most Frequent Ask Question
-                        </button>
-
-                        <div class="collapse p-1" id="collapsequestion4">
-                            <div class="card card-body">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                            </div>
-                        </div>
-                    </div>            
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row col-5 mx-auto">
-    <div class="wrapper">
-        <section class="users">
+      <div class="wrapper"> 
+      <section class="chat-area">
         <header>
-            <div class="content">
-                <div class="details">
-                    <span class="text">Click The button below to start chat with admin</span>
-                </div>
-            </div>
+          <?php 
+            $user_id = mysqli_real_escape_string($con, $_GET['user_id']);
+            $sql = mysqli_query($con, "SELECT * FROM users WHERE id = {$user_id}");
+            if(mysqli_num_rows($sql) > 0){
+              $row = mysqli_fetch_assoc($sql);
+            }
+          ?>
+          <a href="admincustomerservice.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+          <img src="images\admin.png" alt="">
+          <div class="details">
+            <span><?php echo $row['username'] ?></span>
+          </div>
         </header>
-        <div class="search">
-            <input type="text" placeholder="Enter name to search...">
+        <div class="chat-box">
         </div>
-            <a href="chat.php?user_id=1" class="text-decoration-none">
-            <button class="btn btn-dark shadow p-1">Chat With Admin</button>
-            </a>
-        </section>
-    </div>
-    </div>
+        <form action="#" class="typing-area">
+          <input type="text" class="id" name="id" value="<?php echo $_SESSION['user']['id']; ?>" hidden>
+          <input type="text" class="incoming_id" name="incoming_id" value="<?php echo $user_id; ?>" hidden>
+          <input type="text" name="message" class="input-field" placeholder="Type a message here..." autocomplete="off">
+          <button><i class="fab fa-telegram-plane"></i></button>
+        </form>
+      </section>
+  </div>
+</div>
    
     
 </div>
 
 
 <br></br><br></br>
-<br></br><br>
 
 
 
@@ -304,5 +253,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
-<script src="Users.js"></script>
+<script src="adminChat.js"></script>
 </html>
