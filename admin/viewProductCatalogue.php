@@ -213,7 +213,7 @@
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Picture</span><br/>
-							<img height="150" width="150" align="left" src="uploaded/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
+					<img height="150" width="150" align="left" src="uploadedimage/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Price</span>
