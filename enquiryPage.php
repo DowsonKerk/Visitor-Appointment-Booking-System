@@ -184,25 +184,6 @@
 <!--Section: Contact v.2-->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class='container-fluid border" style="width 100%;'>
   <footer class="py-1 my-2">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">

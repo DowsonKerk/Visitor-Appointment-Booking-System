@@ -180,77 +180,55 @@ if (isset($_GET['logout'])) {
 
 
 <br></br><br></br>
-<div class="row col-12">  
-
-    
-    <div class="row mx-auto my-auto">
-        <div class="col-9 mx-auto">  
-        <hr>
-        <h5 class="text-center">Customer Service</h5> 
-        <hr>
-        </div>
-    </div>
-
-    <div class="row mx-auto">
-    <div class="wrapper">
+<div class="col-12 ">  
+ 
+    <div class="wrapper mx-auto">
         <section class="users">
         <header>
             <div class="content">
-                <div class="details">
-                    <span class="text">Click The button below to start chat with admin</span>
-                </div>
+            <?php 
+                $sql = mysqli_query($con, "SELECT * FROM users WHERE id = {$_SESSION['user']['id']}");
+                if(mysqli_num_rows($sql) > 0){
+                $row = mysqli_fetch_assoc($sql);
+                }
+            ?>
+            <img src="../images/admin.png" alt="">
+            <div class="details">
+                <span><?php echo $row['username'] ?></span>
+            </div>
             </div>
         </header>
-        <div class="search">
-            <input type="text" placeholder="Enter name to search...">
+        <br>
+        <h4 class="text header">User List</h4>
+        <br>
+        <div class="users-list">
+                <?php 
+                $query = "SELECT * FROM users WHERE id != {$_SESSION['user']['id']}";
+                $query_run = mysqli_query($con, $query);
+
+                if(mysqli_num_rows($query_run) > 0)
+                {
+                foreach($query_run as $list)
+                {
+                ?>
+                <a class="text-decoration-none" href="adminchat.php?user_id=<?php echo $list['id'] ?>">
+                    <div class="content">
+                    <img src="../images/users.png" alt="">
+                        <div class="details">
+                            <span><?php echo $list['username'] ?></span>
+                        </div>
+                    </div>  
+                </a>
+                <?php
+                    }
+                }
+            ?>
         </div>
-            <a href="adminchat.php?user_id=1" class="text-decoration-none">
-            <button class="btn btn-dark shadow p-1">Chat With Admin</button>
-            </a>
         </section>
     </div>
-    </div>
-   
-    
 </div>
 
-<div class="wrapper">
-    <section class="users">
-      <header>
-        <div class="content">
-          <?php 
-            $sql = mysqli_query($con, "SELECT * FROM users WHERE id = {$_SESSION['user']['id']}");
-            if(mysqli_num_rows($sql) > 0){
-              $row = mysqli_fetch_assoc($sql);
-            }
-          ?>
-          <img src="../images/admin.png" alt="">
-          <div class="details">
-            <span><?php echo $row['username'] ?></span>
-          </div>
-        </div>
-      </header>
-        <h4 class="text header">User List</h4>
-      <div class="users-list">
-         <?php 
-            $sql = mysqli_query($con, "SELECT * FROM users WHERE id != {$_SESSION['user']['id']}");
-            if(mysqli_num_rows($sql) > 0){
-              $list = mysqli_fetch_assoc($sql);
-            }
-          ?>
-            <a href="adminchat.php?user_id=<?php echo $list['id'] ?>">
-                <div class="content">
-                <img src="php/images/'. $row['img'] .'" alt="">
-                <div class="details">
-                    <span><?php echo $list['username'] ?></span>
-                    <p> $msg </p>
-                </div>
-                </div>
-                <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
-            </a> 
-      </div>
-    </section>
-  </div>
+
 
 
 <br></br><br></br>

@@ -81,54 +81,7 @@
     border-radius: 5px;
     font-size: 17px;
   }
-  .users .search{
-    margin: 20px 0;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .users .search .text{
-    font-size: 18px;
-  }
-  .users .search input{
-    position: absolute;
-    height: 42px;
-    width: calc(100% - 50px);
-    font-size: 16px;
-    padding: 0 13px;
-    border: 1px solid #e6e6e6;
-    outline: none;
-    border-radius: 5px 0 0 5px;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.2s ease;
-  }
-  .users .search input.show{
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .users .search button{
-    position: relative;
-    z-index: 1;
-    width: 47px;
-    height: 42px;
-    font-size: 17px;
-    cursor: pointer;
-    border: none;
-    background: #fff;
-    color: #333;
-    outline: none;
-    border-radius: 0 5px 5px 0;
-    transition: all 0.2s ease;
-  }
-  .users .search button.active{
-    background: #333;
-    color: #fff;
-  }
-  .search button.active i::before{
-    content: '\f00d';
-  }
+
   .users-list{
     max-height: 350px;
     overflow-y: auto;

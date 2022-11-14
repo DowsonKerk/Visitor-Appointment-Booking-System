@@ -211,7 +211,7 @@ if (isset($_GET['logout'])) {
             }
           ?>
           <a href="admincustomerservice.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-          <img src="images\admin.png" alt="">
+          <img src="../images/users.png" alt="">
           <div class="details">
             <span><?php echo $row['username'] ?></span>
           </div>

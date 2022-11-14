@@ -255,22 +255,6 @@
 </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <br></br><br></br><br></br><br></br>
 
 <div class='container-fluid border" style="width 100%;'>
