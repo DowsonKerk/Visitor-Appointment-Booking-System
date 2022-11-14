@@ -188,37 +188,31 @@
 ?>
 	<div class="row">
 		<form method="POST" enctype="multipart/form-data">
-        <div class="form-group row col-md-5 p-3 mx-auto">
+            <div class="form-group row col-md-5 p-3 mx-auto">
 			    <h5>
 				    View Booked Slot
                 </h5>
             </div>
-			<div class="row">		
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Slot Id</span></br>
-					<input class="form-control" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
-					<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked By</span></br>
-					<input class="form-control" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>				
-				<br/>			
-            </div>	
-				<div class="row">
-					<div class="form-group row col-md-5 p-3 mx-auto">
-						<div class="col-md-7">
-						    <button class="btn btn-primary" type="submit" name="btnBack">						
-								Back						
-						    </button>
-                        </div>
-					</div>
+			<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Slot Id</span></br>
+				<input class="form-control" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
+			</div>			
+			<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
+				<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
+			</div>
+        	<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked By</span></br>
+				<input class="form-control" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
+			</div>				
+			<div class="row">
+				<div class="form-group row col-md-5 p-3 mx-auto">
+					<div class="col-md-7">
+					    <button class="btn btn-primary" type="submit" name="btnBack">						
+							Back						
+					    </button>
+                    </div>
 				</div>
 			</div>
-		</form>
-	</div>
+	    </form>
+    </div>
 </body>
 
 </html>

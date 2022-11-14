@@ -201,7 +201,7 @@
                 			<tr>
             					<th>Stock Id</th>
 								<th>Stock Name</th>
-								<th>Stock Price</th>
+								<th>Stock Price(RM)</th>
                                 <th>Stock Quantity</th>
                                 <th>Stock Status</th>
            					</tr>
