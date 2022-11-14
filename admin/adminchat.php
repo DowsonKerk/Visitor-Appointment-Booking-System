@@ -42,7 +42,7 @@ if (isset($_GET['logout'])) {
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="home.php">Home</a>
+                    <a class="nav-link" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -153,17 +153,22 @@ if (isset($_GET['logout'])) {
                                 <?php }
                                 }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
                                 </div>
+
+
+                               
+                                
                             </div>
                         </ul>
                     </div>
                 </li>
 
+
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
+                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link" href="admincustomerservice.php">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">

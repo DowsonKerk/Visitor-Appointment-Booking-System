@@ -136,11 +136,11 @@
 
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
+                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Customer Service</a>
+                    <a class="nav-link" href="admincustomerservice.php">Customer Service</a>
                 </li>
 
                 <li class="nav-item p-1">

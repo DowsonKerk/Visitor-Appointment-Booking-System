@@ -118,8 +118,6 @@ if (isset($_GET['logout'])) {
                                 </div>
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
                                 <?php
-                        
-                                    // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
                                     $sql = "SELECT * FROM tbldeleted ORDER BY create_on DESC LIMIT 5";
                                     $res = mysqli_query($con, $sql);
                                     if (mysqli_num_rows($res) > 0){
@@ -139,8 +137,9 @@ if (isset($_GET['logout'])) {
                 </li>  
  
 
+  
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
+                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">

@@ -48,10 +48,6 @@
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
-                
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Customer Service</a>
-                </li>
 
                 <!-- <li class="nav-item p-1">
                     <a class="nav-link" href="#">Report</a>

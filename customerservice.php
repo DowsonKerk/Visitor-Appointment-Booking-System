@@ -153,7 +153,7 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
+                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
@@ -231,12 +231,12 @@
 
                     <div class="p-1">
                         <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion3" aria-expanded="false" aria-controls="collapsequestion">
-                            Most Frequent Ask Question
+                            How to make an enqiry?
                         </button>
 
                         <div class="collapse p-1" id="collapsequestion3">
                             <div class="card card-body">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                You can access the enquiry 
                             </div>
                         </div>
                     </div>
@@ -268,9 +268,6 @@
                 </div>
             </div>
         </header>
-        <div class="search">
-            <input type="text" placeholder="Enter name to search...">
-        </div>
             <a href="chat.php?user_id=1" class="text-decoration-none">
             <button class="btn btn-dark shadow p-1">Chat With Admin</button>
             </a>
