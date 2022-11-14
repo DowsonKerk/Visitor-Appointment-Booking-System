@@ -153,7 +153,9 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
-						</ul>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
+                        </ul>
                     </div>
                 </li>
 
@@ -188,11 +190,13 @@
 	
 	if(isset($_POST["btnSave"]))
 	{
-		$UpdateBookingSlot = mysqli_query($con, "UPDATE tblBookingSlot SET bookingSlotDate = '".$bookingSlotDate."', bookingSlotTime = '".$bookingSlotTime."', bookingSlotStatus = '".$bookingSlotStatus."' WHERE bookingSlotId = '".$_GET['Id']."'");
-		if($UpdateBookingSlot)
+        $didUpload = move_uploaded_file($_FILES['file']['tmp_name'],"uploaded/".$stockPicture); 
+
+		$UpdateStock = mysqli_query($con, "UPDATE tblProductCatalogue SET stockName = '".$stockName."', stockDetail = '".$stockDetail."', stockType = '".$stockType."', stockPicture = '".$stockPicture."', stockPrice = '".$stockPrice."', stockQuantity = '".$stockQuantity."', stockStatus = '".$stockStatus."' WHERE stockId = '".$_GET['Id']."'");
+		if($UpdateStock)
 		{	
-			echo "<script>alert('Booking Slot Updated Successfully!')
-			location = 'searchBookingSlotAvailability.php?Id=E';</script>";	
+			echo "<script>alert('Product Catalogue Updated Successfully!')
+			location = 'searchProductCatalogue.php?Id=E';</script>";	
 		}
 	}
 	if(isset($_POST["btnAdd"]))
@@ -258,7 +262,7 @@
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Name is required">
 					<span class="label-input100">Stock Name</span>					
-                    <input class="form-control" type="text" name="txtstockName" placeholder="Enter Stock Name" <?php if($_GET['Id'] != ""){?> readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockName"]; else {if(isset($_POST['txtstockName'])) echo $_POST['txtstockName'];}?>" required autocomplete="off">					
+                    <input class="form-control" type="text" name="txtstockName" placeholder="Enter Stock Name" <?php if($_GET['Id'] != ""){?><?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockName"]; else {if(isset($_POST['txtstockName'])) echo $_POST['txtstockName'];}?>" required autocomplete="off">					
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Detail is required">
@@ -268,7 +272,7 @@
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Type is required">
 					<span class="label-input100">Stock Type</span>	
-					<input class="form-control" type="text" name="txtstockType" placeholder="Enter Stock Type"<?php if($_GET['Id'] != ""){?> readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockType"]; else {if(isset($_POST['txtstockType'])) echo $_POST['txtstockType']; }?>" required autocomplete="off">
+					<input class="form-control" type="text" name="txtstockType" placeholder="Enter Stock Type"<?php if($_GET['Id'] != ""){?> <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockType"]; else {if(isset($_POST['txtstockType'])) echo $_POST['txtstockType']; }?>" required autocomplete="off">
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Picture is required">
@@ -294,12 +298,12 @@
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Price is required">
 					<span class="label-input100">Stock Price(RM)</span>				
-					<input class="form-control" type="text" name="txtstockPrice" placeholder="Enter stock unit price(RM)"<?php if($_GET['Id'] != ""){?>readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockPrice"]; else {if(isset($_POST['txtstockPrice'])) echo $_POST['txtstockPrice']; }?>" required autocomplete="off">	
+					<input class="form-control" type="text" name="txtstockPrice" placeholder="Enter stock unit price(RM)"<?php if($_GET['Id'] != ""){?><?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockPrice"]; else {if(isset($_POST['txtstockPrice'])) echo $_POST['txtstockPrice']; }?>" required autocomplete="off">	
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Quantity is required">
 					<span class="label-input100">Stock Quantity</span>					
-					<input class="form-control" type="text" name="txtstockQuantity"  placeholder="Enter stock quantity"<?php if($_GET['Id'] != ""){?> readonly="readonly" <?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockQuantity"]; else {if(isset($_POST['txtstockQuantity'])) echo $_POST['txtstockQuantity']; }?>" required autocomplete="off">				
+					<input class="form-control" type="text" name="txtstockQuantity"  placeholder="Enter stock quantity"<?php if($_GET['Id'] != ""){?><?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockQuantity"]; else {if(isset($_POST['txtstockQuantity'])) echo $_POST['txtstockQuantity']; }?>" required autocomplete="off">				
 				</div>
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Status is required">
