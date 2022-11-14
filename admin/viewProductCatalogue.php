@@ -217,7 +217,7 @@
 				<input class="form-control" type="text" name="stockQuantity" value="<?php echo $StockRec["stockQuantity"];?>" required autofocus autocomplete="off" readonly="readonly">
 			</div>
             <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Status</span>
-				<input class="form-control" type="text" name="stockStatus" value="<?php echo $StockRec["stockStatus"];?>" required autofocus autocomplete="off" readonly="readonly">
+				<input class="form-control" type="text" name="stockStatus" value="<?php if ($StockRec["stockStatus"] == Y){echo "Yes"; } else echo "No";?>" required autofocus autocomplete="off" readonly="readonly">
 			</div>
     		<div class="row">
 				<div class="form-group row col-md-5 p-3 mx-auto">
