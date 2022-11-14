@@ -13,7 +13,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Product Catalogue</title>
+        <title>Search Function</title>
         <link rel="icon" href="images\icon.png" type="image/icon type">
         <link rel="stylesheet" href="styles\homepage.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -197,61 +197,66 @@
 <?php endif ?>
 
 <br><br><br>
+<div class="row col-12">  
+    <div class="row col-10 mx-auto">
     <div class="row mx-auto my-auto">
         <div class="col">
             <h2 class="text-center">Product Catalogue</h2>
         </div>
     </div>
 
-    <br>
 
     <form  action="search.php" method="POST">
         <div class="d-flex justify-content-center mx-auto">
-            <div class="form-outline" style="width: 45%;">
+            <div class="form-outline" style="width: 50%;">
                 <input type="text" name="search" class="form-control" placeholder="Search">
             </div>
             <button type="submit" name="submit-search" class="btn btn-primary">Search</button>
         </div>
     </form>
-
     <br><br><br>
-<div class="row col-12">
+
     <?php 
-        $query = "SELECT * FROM tblproductcatalogue";
-        $query_run = mysqli_query($con, $query);
-
-        if(mysqli_num_rows($query_run) > 0)
+        if (isset($_POST['submit-search']))
         {
-            foreach($query_run as $productcatalogue)
-            {
-        ?>
-<div class="col-4" style="padding: 0;">  
-    <div class="row col-10 mx-auto">
+            $search = mysqli_real_escape_string($con, $_POST['search']);
+            $query = "SELECT * FROM tblproductcatalogue WHERE stockName LIKE '%$search%' OR stockType LIKE '%$search%'";
+            $query_run = mysqli_query($con, $query);
+            $query_res = mysqli_num_rows($query_run);
 
-    
-            <a href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>"><div class="card mb-2">
-                <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    
-                    <div class="col-md-10 my-auto">
-                        <div class="card-body">
-                            <h5 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h5>
+            echo "<div class=fs-5><div class=fw-light>Search term \"", $search, "\"</div></div>";
+            echo "<div class=fs-5><div class=fw-light><p>",$query_res, " results found</p></div></div>";
+
+            if ($query_res > 0)
+            {
+                while ($productcatalogue = mysqli_fetch_assoc($query_run))
+                {
+        ?>
+                <a href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>"><div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-2">
+                            <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" alt="...">
+                        </div>
+                            
+                        <div class="col-md-10 my-auto">
+                            <div class="card-body">
+                                <h5 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div></a>
-
-            
+                </div></a>
+            <?php        
+                }
+            }
+            else{
+                echo "<div class = fs-3><div class=fw-semibold><p class = text-center>No Result<br></p></div></div>";
+                echo "<div class = fs-5><p class = text-center>Sorry. We cannot find any matches for your search term.</p></div>";  
+            }
+        }
+        ?>
     </div>
 </div>
 
-            <?php
-                }
-            }
-            ?>
-</div>
 
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2 ">
