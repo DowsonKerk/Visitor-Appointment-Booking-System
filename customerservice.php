@@ -1,22 +1,25 @@
 <?php
-    session_start();
-    require 'dbcon.php';
-    include('Account.php');
-    if (!isLoggedIn()) {
-        $_SESSION['msg'] = "You must log in first";
-        header('location: login.php');
-    }
+ session_start();
+ require 'dbcon.php';
+ include('Account.php');
+ if (!isLoggedIn()) {
+     $_SESSION['msg'] = "You must log in first";
+     header('location: login.php');
+ }
 ?>
-<!-- Logined normal user -->
+
+
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home</title>
+        <title>Customer Service</title>
         <link rel="icon" href="images\icon.png" type="image/icon type">
         <link rel="stylesheet" href="styles\homepage.css">
+        <link rel="stylesheet" href="styles\chat.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     </head>
 <body>
 
@@ -33,7 +36,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="home.php">Home</a>
+                    <a class="nav-link" href="home.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -53,7 +56,7 @@
 						</ul>
                     </div>
                 </li>
-                
+
                 <li class="nav-item p-1">
                     <div class="dropdown" >
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
@@ -126,7 +129,7 @@
 
 
                                 </div>
-                                
+
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
                                 <?php
                                     $id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
@@ -138,7 +141,8 @@
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
                                     <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Your appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
+                                    <?php echo "Booking Canceled"; ?><br> 
+                                    <?php echo "Appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
                                     </li></button>
                                 <?php }
                                 }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
@@ -153,7 +157,7 @@
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link active" href="customerservice.php">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">
@@ -170,7 +174,6 @@
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                               
                             <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
@@ -182,119 +185,116 @@
 </nav>
 
 
-
-<?php if (isset($_SESSION['success'])) : ?>
-<br>
-<br>
-<div class="alert alert-success" style=" margin:0;" role="alert">
-        <div class="error success">
-                <?php 
-                    echo $_SESSION['success']; 
-                    unset($_SESSION['success']);
-                ?>
-        </div>
-</div>
-<?php endif ?>
-
-<div class="imgcontainer shadow">
-    <img src="images\front_img.png" class="img-fluid" alt="Responsive image" style="width:100%; height: auto;">
-    <div class="img-center">
-        <br>
-        <br>
-        <h2>Welcome to Cacti-Succulent Kuching</h2>
-        <h1>Booking With Our Newest Application</h1>
-        <h5>Hello, <?php echo $_SESSION['user']['username']; ?>!</h5>
-        <!-- <br>
-        <button type="button" class="btn btn-outline-light">Login</button>
-        <button type="button" class="btn btn-outline-light">Sign Up</button> -->
-    </div>
-</div>
-
-
-
-<div class="container mt-5">
-    <div class="row col-12" style="padding:0; margin:0;">
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <h1 class="text-center">About Us</h1>
-            <hr>
-        </div>
-
-        <div class="col-6 my-auto p-3">
-            <hr>
-            <p class="text-center">
-                Our Company is a local homegrown business specialized in selling various type and size of succulent plants. 
-                <br><br>Our Company also sell different type of gardening tools, soils and fertilizers at an affordable cost. 
-                <br><br>Our primary mission is to establish a long-lasting relationship of trust and commitment with each visitor through providing the highest level of customer service
-            </p> 
-            <hr>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-
-<div class="shadow-sm">
-    <img src="images\three_cactus.jpg" class="img-fluid shadow-lg" alt="Responsive image" style="width:100%; height: auto;">
-</div>
-
-<br>
-<br>
-
+<br></br><br></br>
 <div class="row col-12">  
-    <div class="row col-10 mx-auto">
+
     <hr>
     <div class="row mx-auto my-auto">
-        <div class="col">
-            <h1 class="text-center">Sales Ongoing</h1> 
-        </div>
+        <h5 class="text-center">Customer Service</h5> 
     </div>
     <hr>
-    <?php 
-    $query = "SELECT * FROM banner";
-    $query_run = mysqli_query($con, $query);
+    <div class="row col-5 mx-auto">
+        <div class="justify-content-center text-center my-auto">
+            <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion" aria-expanded="false" aria-controls="collapsequestion">
+                Most Frequent Ask Question
+            </button>
 
-    if(mysqli_num_rows($query_run) > 0)
-    {
-        foreach($query_run as $banners)
-        {
-    ?>
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="admin\uploadedimage\<?php echo $banners['images']?>" class="img-fluid rounded-start" alt="...">
-                </div>
-                
-                <div class="col-md-6 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $banners['product_name']?></h5>
-                        <p class="card-text"><?php echo $banners['product_description']?></p>
-                        <p class="card-text d-flex align-items-center justify-content-center pt-5"><small class="text-muted">Sales Period: <?php echo $banners['product_date_start']?> to  <?php echo $banners['product_date_end']?></small></p>
-                    </div>
-                </div>
+            <div class="collapse p-1" id="collapsequestion">
+                <div class="row">
+                    <div class="p-1">
+                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion1" aria-expanded="false" aria-controls="collapsequestion">
+                        How do you book a appointment?
+                        </button>
 
-                <div class="col-md-2 my-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><?php echo $banners['product_offer']?>% Off</h5>
-                        <p class="card-text text-center h2">For <?php echo $banners['product_price']?>$</p>
+                        <div class="collapse p-1" id="collapsequestion1">
+                            <div class="card card-body">
+                                You should be able to book the appointment under the navigation bar "Booking".
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="p-1">
+                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion2" aria-expanded="false" aria-controls="collapsequestion">
+                            How can u contact the admin?
+                        </button>
+
+                        <div class="collapse p-1" id="collapsequestion2">
+                            <div class="card card-body">
+                                You can contact the admin by open the chatting panel and chat with the admin.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-1">
+                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion3" aria-expanded="false" aria-controls="collapsequestion">
+                            Most Frequent Ask Question
+                        </button>
+
+                        <div class="collapse p-1" id="collapsequestion3">
+                            <div class="card card-body">
+                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-1">
+                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion4" aria-expanded="false" aria-controls="collapsequestion">
+                            Most Frequent Ask Question
+                        </button>
+
+                        <div class="collapse p-1" id="collapsequestion4">
+                            <div class="card card-body">
+                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                            </div>
+                        </div>
+                    </div>            
                 </div>
             </div>
         </div>
-
-        <?php
-            }
-        }
-        ?>
-        
     </div>
+
+
+    <div class="row col-5 mx-auto">
+    <div class="wrapper">
+        <section class="users">
+        <header>
+            <div class="content">
+            <?php 
+
+            $sql = mysqli_query($con, "SELECT * FROM users WHERE id = {$_SESSION['user']['id']}");
+            if(mysqli_num_rows($sql) > 0){
+            $row = mysqli_fetch_assoc($sql);
+            }
+            ?>
+            <div class="details">
+                <span><?php echo $row['username'] ?></span>
+            </div>
+            </div>
+        </header>
+        <div class="search">
+            <span class="text">Select an user to start chat</span>
+            <input type="text" placeholder="Enter name to search...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="users-list">
+            <a href="chat.php?user_id=1">
+            <button>Chat With Admin</button>
+            </a>
+        </div>
+        </section>
+    </div>
+    </div>
+   
+    
 </div>
 
 
+<br></br><br></br>
 
-<div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2 ">
+
+
+<div class="container-fluid border foot">
+  <footer class="py-1 my-2">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
@@ -310,4 +310,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
+<script src="Users.js"></script>
 </html>

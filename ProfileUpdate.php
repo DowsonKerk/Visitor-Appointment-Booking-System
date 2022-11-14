@@ -4,9 +4,6 @@ require 'dbcon.php';
 
 
 
-
-
-
 if(isset($_POST['update_user']))
 {
 
