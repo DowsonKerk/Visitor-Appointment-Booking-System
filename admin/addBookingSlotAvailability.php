@@ -57,7 +57,6 @@
 							<li><button class="dropdown-item" type="button" onclick="location.href='editBookedSlot.php'">Add Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=E'">Edit Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=V'">View Booked Slot</button></li>
-
 						</ul>
                     </div>
                 </li>
@@ -149,7 +148,14 @@
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product Catalogue</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Product Catalogue
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
+						</ul>
+                    </div>
                 </li>
 
                 <li class="nav-item p-1">
@@ -245,50 +251,41 @@
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Date is required">
 					<span class="label-input100">Date</span>
-					<div class="col-form-label col-md-3">
-						<input class="input100" type="date" id="bookingSlotDate" name="bookingSlotDate" placeholder="Date(dd-mmm-yy)" min=<?php echo date('Y-m-d');
-     					?> required value="<?php echo $BookingSlotRec['bookingSlotDate'];?>"/>
-					</div>
+					<input class="form-control" type="date" id="bookingSlotDate" name="bookingSlotDate" placeholder="Date(dd-mmm-yy)" min=<?php echo date('Y-m-d');
+     				?> required value="<?php echo $BookingSlotRec['bookingSlotDate'];?>"/>
 				</div>
 				
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Time is required">
 					<span class="label-input100">Time</span>
-					<div class="col-form-label col-md-3">
-					    <select class="custom-select" name="bookingSlotTime" required>
-							<option selected disabled value="">Choose Booking Slot Time...</option>
-							<?php 
-                            $timee = array("8:00:00", "9:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00");
-                              for($i = 0; $i < count($timee); $i++)
-                            {
-                                echo "<option value = ".$timee[$i]."";
-                                if($BookingSlotRec['bookingSlotTime'] == $timee[$i])
-                                echo "SELECTED"; 
-                                echo ">".$timee[$i]."</option>";
-                            } 
-                              ?>
-						</select>
-					</div>
+					<select class="form-control" name="bookingSlotTime" required>
+						<option selected disabled value="">Choose Booking Slot Time...</option>
+						<?php 
+                        $timee = array("8:00:00", "9:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00");
+                          for($i = 0; $i < count($timee); $i++)
+                        {
+                            echo "<option value = ".$timee[$i]."";
+                            if($BookingSlotRec['bookingSlotTime'] == $timee[$i])
+                            echo "SELECTED"; 
+                            echo ">".$timee[$i]."</option>";
+                        }?>
+					</select>
 				</div>
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Status is required">
-					<span class="label-input100">Status</span>
-					<div class="col-form-label col-md-3">
-						<select class="custom-select" name="bookingSlotStatus" id="bookingSlotStatus" required>
-							<option selected disabled value="">Choose Status...</option>
-							<?php 
-							$Status = array("Open", "Close");
-	  						for($i = 0; $i < count($Status); $i++)
-							{
-								echo "<option value = \"".$Status[$i]."\"";
-								if($BookingSlotRec['bookingSlotStatus'] == $Status[$i])
-								echo "SELECTED"; 
-								echo ">".$Status[$i]."</option>";
-							} 
-	  						?>
-						</select>
-					</div>
+				    <span class="label-input100">Status</span>
+					<select class="form-control" name="bookingSlotStatus" id="bookingSlotStatus" required>
+						<option selected disabled value="">Choose Status...</option>
+						<?php 
+						$Status = array("Open", "Close");
+	  					for($i = 0; $i < count($Status); $i++)
+						{
+							echo "<option value = \"".$Status[$i]."\"";
+							if($BookingSlotRec['bookingSlotStatus'] == $Status[$i])
+							echo "SELECTED"; 
+							echo ">".$Status[$i]."</option>";
+						}?>
+					</select>
 				</div>
-
 			</div>	
 			<div class="row">
 				<div class="form-group row col-md-5 p-3 mx-auto">
@@ -318,7 +315,6 @@
   </footer>
 </div>
 </body>
-
 
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

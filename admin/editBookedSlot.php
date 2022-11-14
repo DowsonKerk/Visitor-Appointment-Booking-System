@@ -57,7 +57,6 @@
 							<li><button class="dropdown-item" type="button" onclick="location.href='editBookedSlot.php'">Add Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=E'">Edit Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=V'">View Booked Slot</button></li>
-
 						</ul>
                     </div>
                 </li>
@@ -149,7 +148,14 @@
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product Catalogue</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Product Catalogue
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
+						</ul>
+                    </div>
                 </li>
 
                 <li class="nav-item p-1">
@@ -248,56 +254,48 @@
 
 				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Booking Slot Id is required">
 					<span class="col-form-label col-md-3">Booking Slot Id</span>
-					<div>
-						<select class="custom-select" name="bookingSlotId" id="bookingSlotId" required>
-							<option selected disabled value="">Choose Booking Slot...</option>
-							<?php 
-								$SQL = "SELECT * FROM tblbookingSlot WHERE tblbookingSlot.bookingSlotStatus = 'OPEN'";
-								$Result = mysqli_query($con, $SQL);
-								$List = array();
-								while($Row = mysqli_fetch_array($Result))
-								{
-									$List[] = $Row;
-								}
-								for($i = 0; $i < count($List); $i++)
-								{
-									echo "<option value = \"".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."\"";
-									if($bookedSlotRec["bookingSlotId"] == strtoupper($List[$i]["bookingSlotId"])) 
-									echo "SELECTED"; 
-									echo ">".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."</option>";
-								} 		
-	  							?>
-						</select>
-					</div>
+					<select class="form-control" name="bookingSlotId" id="bookingSlotId" required>
+						<option selected disabled value="">Choose Booking Slot...</option>
+						<?php 
+							$SQL = "SELECT * FROM tblbookingSlot WHERE tblbookingSlot.bookingSlotStatus = 'OPEN'";
+							$Result = mysqli_query($con, $SQL);
+							$List = array();
+							while($Row = mysqli_fetch_array($Result))
+							{
+								$List[] = $Row;
+							}
+							for($i = 0; $i < count($List); $i++)
+							{
+								echo "<option value = \"".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."\"";
+								if($bookedSlotRec["bookingSlotId"] == strtoupper($List[$i]["bookingSlotId"])) 
+								echo "SELECTED"; 
+								echo ">".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."</option>";
+							}?>
+					</select>
 				</div>	
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Visitor Id is required">
 					<span class="label-input100">Visitor Id</span>
-					<div>
-						<select class="custom-select" name="bookedBy" id="bookedBy" required>
-							<option selected disabled value="">Choose Visitor..</option>
-							<?php 
-								$SQL = "SELECT * FROM users";
-								$Result = mysqli_query($con, $SQL);
-								$List = array();
-								while($Row = mysqli_fetch_array($Result))
-								{
-									$List[] = $Row;
-								}
-								for($i = 0; $i < count($List); $i++)
-								{
-									echo "<option value = \"".$List[$i]["id"]." ".$List[$i]["username"]."\"";
-									if($bookedSlotRec["bookedBy"] == strtoupper($List[$i]["id"])) 
-									echo "SELECTED"; 
-									echo ">".$List[$i]["id"]." ".$List[$i]["username"]."</option>";
-								} 		
-	  						?>
-						</select>
-					</div>
+					<select class="form-control" name="bookedBy" id="bookedBy" required>
+						<option selected disabled value="">Choose Visitor..</option>
+						<?php 
+							$SQL = "SELECT * FROM users";
+							$Result = mysqli_query($con, $SQL);
+							$List = array();
+							while($Row = mysqli_fetch_array($Result))
+							{
+								$List[] = $Row;
+							}
+							for($i = 0; $i < count($List); $i++)
+							{
+								echo "<option value = \"".$List[$i]["id"]." ".$List[$i]["username"]."\"";
+								if($bookedSlotRec["bookedBy"] == strtoupper($List[$i]["id"])) 
+								echo "SELECTED"; 
+								echo ">".$List[$i]["id"]." ".$List[$i]["username"]."</option>";
+							}?>
+					</select>
 				</div>
-
 			</div>	
-
             <div class="row">
 				<div class="form-group row col-md-5 p-3 mx-auto">
 					<div class="col-md-7">

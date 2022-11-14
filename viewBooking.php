@@ -47,6 +47,7 @@ if (!isLoggedIn()) {
 
                 <li class="nav-item p-1">
                     <a class="nav-link active" href="home.php">Home</a>
+                    
                 </li>
 
                 <li class="nav-item p-1">

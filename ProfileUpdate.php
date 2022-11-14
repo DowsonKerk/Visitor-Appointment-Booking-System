@@ -1,9 +1,12 @@
 <?php
 require 'dbcon.php';
 
+<<<<<<< HEAD
  
 $errors1  = array(); 
 
+=======
+>>>>>>> 39097092bfab9574b6ec0b2fc173eff755f8abe7
 
 
 if(isset($_POST['update_user']))

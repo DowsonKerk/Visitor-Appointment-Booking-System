@@ -76,7 +76,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Cancelled Booking</button>
-                            </li>   
+                            </li>  
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -133,7 +133,7 @@
                         </ul>
                     </div>
                 </li>  
-
+ 
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
@@ -154,10 +154,11 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
-						</ul>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
+                        </ul>
                     </div>
                 </li>
-
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -174,55 +175,86 @@
     </div>
 </nav>
 </br></br></br>
+
 <?php
-	if(isset($_POST["btnBack"]))
-	{
-		echo "<script>location = 'searchBookedSlot.php';</script>";
-	}
-	$SQL = "SELECT * FROM tblBookedSlot WHERE tblBookedSlot.bookedSlotId = '".$_GET['Id']."'";
+	$SQL = "SELECT * FROM tblProductCatalogue";
 	$Result = mysqli_query($con, $SQL);
 	if(mysqli_num_rows($Result) > 0)
 	{
-		$bookedSlotRec = mysqli_fetch_array($Result);
-	}
-?>
-	<div class="row">
-		<form method="POST" enctype="multipart/form-data">
-        <div class="form-group row col-md-5 p-3 mx-auto">
-			    <h5>
-				    View Booked Slot
-                </h5>
-            </div>
-			<div class="row">		
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Slot Id</span></br>
-					<input class="form-control" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
-					<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked By</span></br>
-					<input class="form-control" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>				
-				<br/>			
-            </div>	
+	?>
+		<div class="row">
+			<div class="form-group row col-md-5 p-3 mx-auto">							
+				<h5>
+					<?php if($_GET['Id'] == "E") echo "Edit Product Catalogue"; 
+						else echo "Product Catalogue"; ?>
+				</h5>
+			
+                <div class="callout callout-warning">
+				 <?php 
+				 	if($_GET["Id"] == "E")	echo "<span>Click the list row to edit product catalogue!</span>"; 
+		 			else echo "<span>Click the list row to view product catalogue!</span>";  ?>
+                </div>
+         		<br/>
+				<form class="contact100-form validate-form" method="POST">
+					<table id="example" class="table table-bordered table-hover">
+				 		<thead>
+                			<tr>
+            					<th>Stock Id</th>
+								<th>Stock Name</th>
+								<th>Stock Price</th>
+                                <th>Stock Quantity</th>
+                                <th>Stock Status</th>
+           					</tr>
+                  		</thead>
+                		<tbody>
+						<?php
+							for($i = 0; $i < mysqli_num_rows($Result); $i++)
+							{
+								$RecRow = mysqli_fetch_array($Result);
+								echo "<tr class = \"Row\"";
+								if($_GET['Id'] == "E")
+								echo "onclick = \"location = 'addProductCatalogue.php?Id=".$RecRow['stockId']."'\"";
+								else echo  "onclick = \"location = 'viewProductCatalogue.php?Id=".$RecRow['stockId']."'\"";
+								echo ">";
+								echo "<td>".$RecRow['stockId']."</td>";
+								echo "<td>".$RecRow['stockName']."</td>";
+								echo "<td>".$RecRow['stockPrice']."</td>";
+                                echo "<td>".$RecRow['stockQuantity']."</td>";
+								echo "<td>".$RecRow['stockStatus']."</td>";
+								echo "</tr>";
+								$_SESSION['stockId'] = $RecRow['stockId'];
+							}
+						?>
+					  	</tbody>
+					</table>
+				</form>
 				<div class="row">
 					<div class="form-group row col-md-5 p-3 mx-auto">
 						<div class="col-md-7">
-						    <button class="btn btn-primary" type="submit" name="btnBack">						
-								Back						
+						    <button type="submit" class="btn btn-primary" onclick="history.back()">
+							    Back					
 						    </button>
                         </div>
 					</div>
-				</div>
+				</div>			
 			</div>
-		</form>
-	</div>
+		</div>
+	<?php
+	}	
+ 	else
+	{
+		if($_GET['Id'] == "E") 
+			echo"<script>alert('Fail to search Product Catalogue, try again!')
+			location = 'searchProductCatalogue.php?Id=E';</script>";
+		else
+			echo "<script>alert('Fail to search Product Catalogue, try again!')
+			location = 'searchProductCatalogue.php';</script>";
+	} 		
+?>		
 </body>
 
 </html>
-<div class="container-fluid border" style="width: 100%; ">
+<div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2 fixed-bottom">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>

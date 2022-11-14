@@ -39,7 +39,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="admin.php">Home</a>
+                    <a class="nav-link active" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -146,7 +146,6 @@
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Report</a>
                 </li>
-                
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -154,6 +153,8 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
 						</ul>
                     </div>
                 </li>
@@ -174,56 +175,75 @@
     </div>
 </nav>
 </br></br></br>
+
 <?php
 	if(isset($_POST["btnBack"]))
 	{
-		echo "<script>location = 'searchBookedSlot.php';</script>";
+		echo "<script>location = 'searchProductCatalogue.php';</script>";
 	}
-	$SQL = "SELECT * FROM tblBookedSlot WHERE tblBookedSlot.bookedSlotId = '".$_GET['Id']."'";
+	$SQL = "SELECT * FROM tblProductCatalogue WHERE tblProductCatalogue.stockId = '".$_GET['Id']."'";
 	$Result = mysqli_query($con, $SQL);
 	if(mysqli_num_rows($Result) > 0)
 	{
-		$bookedSlotRec = mysqli_fetch_array($Result);
+		$StockRec = mysqli_fetch_array($Result);
 	}
 ?>
 	<div class="row">
 		<form method="POST" enctype="multipart/form-data">
-        <div class="form-group row col-md-5 p-3 mx-auto">
+            <div class="form-group row col-md-5 p-3 mx-auto">
 			    <h5>
-				    View Booked Slot
+				    View Product Catalogue
                 </h5>
             </div>
 			<div class="row">		
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Slot Id</span></br>
-					<input class="form-control" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Id</span>
+					<input class="form-control" type="text" name="stockId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
 				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
-					<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
+
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Name</span>
+					<input class="form-control" type="text" name="stockName" value="<?php echo $StockRec["stockName"];?>" required autofocus autocomplete="off" readonly="readonly">
 				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked By</span></br>
-					<input class="form-control" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>				
-				<br/>			
-            </div>	
-				<div class="row">
-					<div class="form-group row col-md-5 p-3 mx-auto">
-						<div class="col-md-7">
-						    <button class="btn btn-primary" type="submit" name="btnBack">						
-								Back						
-						    </button>
-                        </div>
-					</div>
+
+				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Detail</span>					
+                    <textarea class="form-control" name="stockDetail" required autofocus autocomplete="off" readonly="readonly"><?php echo $StockRec["stockDetail"];?></textarea>					
+				</div>
+
+                <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Type</span>					
+                    <input class="form-control" type="text" name="stockType" value="<?php echo $StockRec["stockType"];?>" required autofocus autocomplete="off" readonly="readonly">
+				</div>
+
+                <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Picture</span><br/>
+					<img height="150" width="150" align="left" src="uploadedimage/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
+				</div>
+
+                <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Price</span>
+					<input class="form-control" type="text" name="srockPrice" value="RM <?php echo $StockRec["stockPirce"];?>" required autofocus autocomplete="off" readonly="readonly">
+				</div>
+
+                <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Quantity</span>
+					<input class="form-control" type="text" name="stockQuantity" value="<?php echo $StockRec["stockQuantity"];?>" required autofocus autocomplete="off" readonly="readonly">
+				</div>
+
+                <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Status</span>
+					<input class="form-control" type="text" name="stockStatus" value="<?php echo $StockRec["stockStatus"];?>" required autofocus autocomplete="off" readonly="readonly">
+				</div>
+
+				<br/>
+            </div>
+			<div class="row">
+				<div class="form-group row col-md-5 p-3 mx-auto">
+					<div class="col-md-7">
+					    <button class="btn btn-primary" type="submit" name="btnBack">						
+							Back							
+					    </button>
+                    </div>
 				</div>
 			</div>
-		</form>
+        </form>
 	</div>
-</body>
 
-</html>
-<div class="container-fluid border" style="width: 100%; ">
-  <footer class="py-1 my-2 fixed-bottom">
+<div class="container-fluid border" style="width: 100%;">
+  <footer class="py-1 my-2">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
@@ -235,4 +255,7 @@
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
+</body>
+
+</html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

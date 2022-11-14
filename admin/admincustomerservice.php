@@ -1,28 +1,31 @@
 <?php
-    session_start();
-	error_reporting(0);
-    include('../dbcon.php');
-    include('../Account.php');
-    if (!isAdmin()) {
-        $_SESSION['msg'] = "You must log in first";
-        header('location: ../login.php');
-    }
-    
-    if (isset($_GET['logout'])) {
-        session_destroy();
-        unset($_SESSION['user']);
-        header("location: ../login.php");
-    }
+session_start();
+include('../dbcon.php');
+include('../Account.php');
+if (!isAdmin()) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: ../login.php');
+}
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['user']);
+    header("location: ../login.php");
+}
 ?>
-<!DOCTYPE html>
+
+
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Home</title>
+        <title>Customer Service</title>
         <link rel="icon" href="../images\icon.png" type="image/icon type">
-        <link rel="stylesheet" href="..\styles\homepage.css">
+        <link rel="stylesheet" href="../styles\homepage.css">
+        <link rel="stylesheet" href="../styles\chat.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     </head>
 <body>
 
@@ -45,6 +48,7 @@
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
+
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,7 +80,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Cancelled Booking</button>
-                            </li>   
+                            </li>    
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -133,14 +137,14 @@
                         </ul>
                     </div>
                 </li>  
-
+ 
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Customer Service</a>
+                    <a class="nav-link" href="admincustomerservice.php">Customer Service</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -173,66 +177,103 @@
         </div>
     </div>
 </nav>
-</br></br></br>
-<?php
-	if(isset($_POST["btnBack"]))
-	{
-		echo "<script>location = 'searchBookedSlot.php';</script>";
-	}
-	$SQL = "SELECT * FROM tblBookedSlot WHERE tblBookedSlot.bookedSlotId = '".$_GET['Id']."'";
-	$Result = mysqli_query($con, $SQL);
-	if(mysqli_num_rows($Result) > 0)
-	{
-		$bookedSlotRec = mysqli_fetch_array($Result);
-	}
-?>
-	<div class="row">
-		<form method="POST" enctype="multipart/form-data">
-        <div class="form-group row col-md-5 p-3 mx-auto">
-			    <h5>
-				    View Booked Slot
-                </h5>
-            </div>
-			<div class="row">		
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked Slot Id</span></br>
-					<input class="form-control" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booking Slot Availability Id</span></br>
-					<input class="form-control" type="text" name="bookingSlotId" value="<?php echo $bookedSlotRec["bookingSlotId"];?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>
-				
-				<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Booked By</span></br>
-					<input class="form-control" type="text" name="bookedBy" value="<?php echo $bookedSlotRec["bookedBy"];?>" required autofocus autocomplete="off" readonly="readonly">
-				</div>				
-				<br/>			
-            </div>	
-				<div class="row">
-					<div class="form-group row col-md-5 p-3 mx-auto">
-						<div class="col-md-7">
-						    <button class="btn btn-primary" type="submit" name="btnBack">						
-								Back						
-						    </button>
-                        </div>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-</body>
 
-</html>
-<div class="container-fluid border" style="width: 100%; ">
-  <footer class="py-1 my-2 fixed-bottom">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
+
+<br></br><br></br>
+<div class="row col-12">  
+
+    
+    <div class="row mx-auto my-auto">
+        <div class="col-9 mx-auto">  
+        <hr>
+        <h5 class="text-center">Customer Service</h5> 
+        <hr>
+        </div>
+    </div>
+
+    <div class="row mx-auto">
+    <div class="wrapper">
+        <section class="users">
+        <header>
+            <div class="content">
+                <div class="details">
+                    <span class="text">Click The button below to start chat with admin</span>
+                </div>
+            </div>
+        </header>
+        <div class="search">
+            <input type="text" placeholder="Enter name to search...">
+        </div>
+            <a href="adminchat.php?user_id=1" class="text-decoration-none">
+            <button class="btn btn-dark shadow p-1">Chat With Admin</button>
+            </a>
+        </section>
+    </div>
+    </div>
+   
+    
+</div>
+
+<div class="wrapper">
+    <section class="users">
+      <header>
+        <div class="content">
+          <?php 
+            $sql = mysqli_query($con, "SELECT * FROM users WHERE id = {$_SESSION['user']['id']}");
+            if(mysqli_num_rows($sql) > 0){
+              $row = mysqli_fetch_assoc($sql);
+            }
+          ?>
+          <img src="../images/admin.png" alt="">
+          <div class="details">
+            <span><?php echo $row['username'] ?></span>
+          </div>
+        </div>
+      </header>
+        <h4 class="text header">User List</h4>
+      <div class="users-list">
+         <?php 
+            $sql = mysqli_query($con, "SELECT * FROM users WHERE id != {$_SESSION['user']['id']}");
+            if(mysqli_num_rows($sql) > 0){
+              $list = mysqli_fetch_assoc($sql);
+            }
+          ?>
+            <a href="adminchat.php?user_id=<?php echo $list['id'] ?>">
+                <div class="content">
+                <img src="php/images/'. $row['img'] .'" alt="">
+                <div class="details">
+                    <span><?php echo $list['username'] ?></span>
+                    <p> $msg </p>
+                </div>
+                </div>
+                <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
+            </a> 
+      </div>
+    </section>
+  </div>
+
+
+<br></br><br></br>
+<br></br><br>
+
+
+
+<div class="container-fluid border foot">
+  <footer class="py-1 my-2">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li> -->
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+<script src="Users.js"></script>
+</html>

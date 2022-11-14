@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2022 at 07:14 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Nov 10, 2022 at 02:26 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,7 +66,8 @@ CREATE TABLE `tblbookedslot` (
 --
 
 INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
-('AID-0001', 'BID-0001', '24', '2022-10-25 13:43:53');
+('AID-0001', 'BID-0001', '24', '2022-10-25 13:43:53'),
+('AID-0002', 'BID-0001', '25', '2022-11-10 12:44:22');
 
 -- --------------------------------------------------------
 
@@ -114,6 +115,50 @@ INSERT INTO `tbldeleted` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_o
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblproductcatalogue`
+--
+
+CREATE TABLE `tblproductcatalogue` (
+  `stockId` varchar(15) NOT NULL,
+  `stockName` varchar(50) DEFAULT NULL,
+  `stockDetail` varchar(500) DEFAULT NULL,
+  `stockType` varchar(50) DEFAULT NULL,
+  `stockPicture` varchar(100) DEFAULT NULL,
+  `stockPrice` varchar(10) DEFAULT NULL,
+  `stockQuantity` varchar(10) DEFAULT NULL,
+  `stockStatus` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblproductcatalogue`
+--
+
+INSERT INTO `tblproductcatalogue` (`stockId`, `stockName`, `stockDetail`, `stockType`, `stockPicture`, `stockPrice`, `stockQuantity`, `stockStatus`) VALUES
+('1', 'Old Lady Cactus (Mammillaria hahniana)', 'The old lady cactus, a type of powder puff cactus, is covered with spines and white down, hence its name. This easy-to-grow, sun-loving plant is a great choice for a beginner.', 'cactus', 'cactus.jpeg', '49', '20', 'Y'),
+('2', 'Golden Barrel Cactus (Echinocactus grusonii)', 'This plant, nicknamed the \"mother-in-law cushion\" (ouch!), needs plenty of sun and not much water. A barrel cactus can thrive with watering as infrequently as once every two to three months.', 'cactus', 'cactus1.jpeg', '59', '10', 'Y'),
+('3', 'Fairy Castle Cactus (Acanthocereus tetragonus)', 'Who knew a cactus could be whimsical? The varied stems resemble the turrets of a castle, making it the perfect addition to any whimsical garden. This slow-growing cactus can reach up to 6 feet in height. Take note that the fairy castle cactus rarely produces flowers—they\'re often sold with artificial blooms attached. Place it where it will get lots of sun.', 'cactus', 'cactus2.jpeg', '99', '34', 'Y'),
+('4', 'Bluebell', 'These beautiful bell-shaped flowers make an impact when planted in large swaths. Bunnies and deer usually leave them alone. Prefers part shade and tend to like moist soils.', 'flower', 'flower.jpg', '99', '30', 'Y'),
+('5', 'Tulip', 'There are so many different sizes, shapes and colors of tulips that it\'s impossible to pick just one for your garden! They bloom from early to late spring, and some types are considered annuals because they don\'t put on as good a show in subsequent seasons. Protect tulip bulbs from rodents! Prefers full sun to part shade, depending on the type.', 'flower', 'flower1.jpg', '69', '4', 'Y'),
+('6', 'Lavender Bundle Garden Gloves', 'Most gardeners can attest that they go through gloves quite often. Whether they get too dirty, have a hole in them, or a new pair catches their eye, a gardener will always welcome a new pair of gloves.', 'accessory', 'accessory.png', '19', '78', 'Y'),
+('7', '9-Piece Succulent Mini Tool Set', 'Tiny succulents, bonsai trees, and other houseplants need tiny tools, and this nine-piece set is ideal for transplanting or digging around in small indoor potted plants. Plus, it\'s super cute!', 'accessory', 'accessory1.jpg', '49', '50', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblreview`
+--
+
+CREATE TABLE `tblreview` (
+  `reviewId` int(15) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `rating` int(1) NOT NULL,
+  `submitDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -136,7 +181,8 @@ INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`
 (1, 'Dowson Kerk', 'Dowson', '2022-10-12', '123123', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
 (20, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
 (22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', '2147483647', 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef'),
-(23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
+(23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
+(25, 'ahbert', 'Wong Chung Hing', '2000-04-02', '0109771761', 'bertbert0402@gmail.com', 'user', '8a5e98f6f0324362aa9d9ec9ced1a3fd');
 
 --
 -- Indexes for dumped tables
@@ -161,6 +207,18 @@ ALTER TABLE `tblbookingslot`
   ADD PRIMARY KEY (`bookingSlotId`);
 
 --
+-- Indexes for table `tblproductcatalogue`
+--
+ALTER TABLE `tblproductcatalogue`
+  ADD PRIMARY KEY (`stockId`);
+
+--
+-- Indexes for table `tblreview`
+--
+ALTER TABLE `tblreview`
+  ADD PRIMARY KEY (`reviewId`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -177,10 +235,16 @@ ALTER TABLE `banner`
   MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
 
 --
+-- AUTO_INCREMENT for table `tblreview`
+--
+ALTER TABLE `tblreview`
+  MODIFY `reviewId` int(15) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 DELIMITER $$
 --
