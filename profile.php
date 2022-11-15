@@ -126,7 +126,7 @@
 
 
                                 </div>
-                                <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE-->
+                                
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
                                 <?php
                                     $id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
@@ -138,8 +138,7 @@
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
                                     <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Booking Canceled"; ?><br> 
-                                    <?php echo "Appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
+                                    <?php echo "Your appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
                                     </li></button>
                                 <?php }
                                 }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
@@ -148,7 +147,6 @@
                         </ul>
                     </div>
                 </li>
-                
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
@@ -172,6 +170,7 @@
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
+                               
                             <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
@@ -240,7 +239,7 @@ if($userInfo=mysqli_fetch_assoc($result))
 
               <div class="form-group pt-3">
                 <button type="submit" name="edit" class="btn btn-primary"><a class="text-light text-decoration-none" href="editprofile.php?id=<?= $userInfo['id']; ?>">Edit</a></button>
-                <button type="submit" name="back" class="btn btn-primary"><a class="text-light text-decoration-none" href="index.php">Back</a></button>
+                <button type="submit" name="back" class="btn btn-primary"><a class="text-light text-decoration-none" href="home.php">Back</a></button>
               </div>
 
             </form>

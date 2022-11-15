@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('../dbcon.php');
+    include('AdminEnquiry.php');
     include('../Account.php');
 
     if (!isAdmin()) {
@@ -20,17 +21,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Home</title>
-
         <link rel="icon" href="../images\icon.png" type="image/icon type">
         <link rel="stylesheet" href="..\styles\homepage.css">
-        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
     
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="admin.php">
             <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
@@ -39,15 +38,14 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
             <ul class="navbar-nav">
-    
+
                 <li class="nav-item p-1">
-                    <a class="nav-link " href="admin.php">Home</a>
+                    <a class="nav-link active" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
-
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,7 +58,6 @@
 							<li><button class="dropdown-item" type="button" onclick="location.href='editBookedSlot.php'">Add Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=E'">Edit Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=V'">View Booked Slot</button></li>
-
 						</ul>
                     </div>
                 </li>
@@ -91,7 +88,7 @@
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
                                     <?php echo "Reminder"; ?><br>
                                     <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
                                     <?php echo $row["bookingSlotId"]; ?>
@@ -137,9 +134,9 @@
                         </ul>
                     </div>
                 </li>  
- 
+
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="enquiryManage.php">Enquiry Page</a>
+                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
@@ -151,7 +148,16 @@
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product Catalogue</a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Product Catalogue
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
+                        </ul>
+                    </div>
                 </li>
 
                 <li class="nav-item p-1">
@@ -161,7 +167,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
-                            <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
+                            <li><a href="../home.php?logout='1'" class="text-decoration-none text-black"><button class="dropdown-item" type="button">Logout</button></a></li>
                         </ul>
                     </div>
                 </li>
@@ -173,18 +179,7 @@
   
 <br></br><br></br>
 
-<?php if (isset($_SESSION['message'])) : ?>
-<br>
-<br>
-<div class="alert alert-danger" style=" margin:0;" role="alert">
-        <div>
-                <?php 
-                    echo $_SESSION['message']; 
-                    unset($_SESSION['message']);
-                ?>
-        </div>
-</div>
-<?php endif ?>
+
 
 
 
@@ -199,7 +194,7 @@
             </div>
             <div class="card-body">
 
-                <?php echo display_error(); ?>
+                <?php echo display_error_enquiry(); ?>
 
                 <table id="myTable"class="table table-bordered table-striped">
                     <thead>

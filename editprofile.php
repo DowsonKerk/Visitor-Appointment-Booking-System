@@ -1,6 +1,7 @@
 <?php
  session_start();
  require 'dbcon.php';
+ include('ProfileUpdate.php');
  include('Account.php');
  if (!isLoggedIn()) {
      $_SESSION['msg'] = "You must log in first";
@@ -59,7 +60,7 @@ $userInfo = mysqli_fetch_array($query_run);
 						</ul>
                     </div>
                 </li>
-
+                
                 <li class="nav-item p-1">
                     <div class="dropdown" >
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
@@ -132,7 +133,7 @@ $userInfo = mysqli_fetch_array($query_run);
 
 
                                 </div>
-                                <!-- CANCELLATION NOTIFICATION NOT YET COMPLETE-->
+                                
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
                                 <?php
                                     $id = mysqli_real_escape_string($con, $_SESSION['user']['id']);
@@ -144,8 +145,7 @@ $userInfo = mysqli_fetch_array($query_run);
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
                                     <small><i><?php echo $row["create_on"] ?></i></small><br>
-                                    <?php echo "Booking Canceled"; ?><br> 
-                                    <?php echo "Appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
+                                    <?php echo "Your appointment at "; ?><?php echo $row["bookedSlotId"]; ?> <?php echo "has been cancelled."; ?><br>
                                     </li></button>
                                 <?php }
                                 }else echo "<li><button class="."dropdown-item border"." type="."button".">No Canceled Appoinment</li>"; ?>
@@ -177,6 +177,7 @@ $userInfo = mysqli_fetch_array($query_run);
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
+                               
                             <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
@@ -264,13 +265,13 @@ $userInfo = mysqli_fetch_array($query_run);
 </div>
 
   
-
 <br></br><br></br>
 
 
 
+
 <div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2 fixed-bottom">
+  <footer class="py-1 my-2 ">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>

@@ -1,19 +1,11 @@
 <?php
 require 'dbcon.php';
 
-<<<<<<< HEAD
- 
 $errors1  = array();
-
-
-=======
->>>>>>> 39097092bfab9574b6ec0b2fc173eff755f8abe7
-
 
 if(isset($_POST['update_user']))
 {
 	
-
     $user_id = mysqli_real_escape_string($con,$_POST['id']);
     $name =  mysqli_real_escape_string($con,$_POST['name']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
@@ -26,10 +18,6 @@ if(isset($_POST['update_user']))
 		array_push($errors1, 'Only alphabets and whitespace are allowed.');
 	}
 	
-	
-
-    
-
     if (count($errors1) == 0) {
 
         $query = "UPDATE users SET full_name='$name', email='$email', contact_number='$contactnum', birthday='$birthday',username='$username'  WHERE id='$user_id' ";
@@ -37,8 +25,6 @@ if(isset($_POST['update_user']))
 		array_push($errors1, "success to update");
 		echo"<script> alert('Success!'); window.location.assign('Profile.php?id={$user_id}') </script>"; 
        
-        
-
     }else{ 
 		echo"<script> alert('fail');window.history.replaceState( $errors1, '', 'editProfile.php?id={$user_id}'); </script>"; 
     }

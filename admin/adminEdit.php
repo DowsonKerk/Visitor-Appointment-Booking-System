@@ -41,13 +41,12 @@ if (isset($_GET['logout'])) {
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="admin.php">Home</a>
+                    <a class="nav-link active" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
-
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -79,7 +78,7 @@ if (isset($_GET['logout'])) {
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Cancelled Booking</button>
-                            </li>    
+                            </li>  
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -90,7 +89,7 @@ if (isset($_GET['logout'])) {
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
                                     <?php echo "Reminder"; ?><br>
                                     <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
                                     <?php echo $row["bookingSlotId"]; ?>
@@ -136,8 +135,6 @@ if (isset($_GET['logout'])) {
                         </ul>
                     </div>
                 </li>  
- 
-
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
@@ -158,7 +155,9 @@ if (isset($_GET['logout'])) {
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
-						</ul>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
+                        </ul>
                     </div>
                 </li>
 
@@ -169,7 +168,7 @@ if (isset($_GET['logout'])) {
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
-                            <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
+                            <li><a href="../home.php?logout='1'" class="text-decoration-none text-black"><button class="dropdown-item" type="button">Logout</button></a></li>
                         </ul>
                     </div>
                 </li>
