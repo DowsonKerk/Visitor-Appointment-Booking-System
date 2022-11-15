@@ -159,10 +159,10 @@
                 <!-- <li class="nav-item p-1">
                     <a class="nav-link" href="#">Report</a>
                 </li>
-                
+                            -->
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product Catalogue</a>
-                </li> -->
+                    <a class="nav-link" href="productcatalogue.php">Product Catalogue</a>
+                </li>
 
                 <li class="nav-item p-1">
                     <div class="dropdown">
