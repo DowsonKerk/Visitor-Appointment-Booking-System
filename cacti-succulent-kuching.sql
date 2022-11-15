@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 15, 2022 at 09:51 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- 主机： 127.0.0.1
+-- 生成日期： 2022-11-15 14:33:59
+-- 服务器版本： 10.4.25-MariaDB
+-- PHP 版本： 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cacti-succulent-kuching`
+-- 数据库： `cacti-succulent-kuching`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banner`
+-- 表的结构 `banner`
 --
 
 CREATE TABLE `banner` (
@@ -40,7 +40,7 @@ CREATE TABLE `banner` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `banner`
+-- 转存表中的数据 `banner`
 --
 
 INSERT INTO `banner` (`product_id`, `product_name`, `images`, `product_description`, `product_price`, `product_offer`, `product_date_start`, `product_date_end`, `create_on`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `banner` (`product_id`, `product_name`, `images`, `product_descripti
 -- --------------------------------------------------------
 
 --
--- Table structure for table `enquiry`
+-- 表的结构 `enquiry`
 --
 
 CREATE TABLE `enquiry` (
@@ -64,15 +64,38 @@ CREATE TABLE `enquiry` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `enquiry`
+-- 转存表中的数据 `enquiry`
 --
 
 INSERT INTO `enquiry` (`form_Id`, `full_name`, `email`, `phone_number`, `user_subject`, `comment`) VALUES
 (1, 'Welson Wu', 'welson123@gmail.com', 198821132, 'promotion', 'when does the promotion end?');
 
 -- --------------------------------------------------------
+
 --
--- Table structure for table `tblbookedslot`
+-- 表的结构 `messages`
+--
+
+CREATE TABLE `messages` (
+  `msg_id` int(11) NOT NULL,
+  `incoming_msg_id` int(255) NOT NULL,
+  `outgoing_msg_id` int(255) NOT NULL,
+  `msg` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 转存表中的数据 `messages`
+--
+
+INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) VALUES
+(1, 1, 23, 'i want to ask question'),
+(2, 23, 20, 'asdasd'),
+(3, 1, 23, 'adasd');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `tblbookedslot`
 --
 
 CREATE TABLE `tblbookedslot` (
@@ -83,7 +106,7 @@ CREATE TABLE `tblbookedslot` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tblbookedslot`
+-- 转存表中的数据 `tblbookedslot`
 --
 
 INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
@@ -92,7 +115,7 @@ INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `creat
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblbookingslot`
+-- 表的结构 `tblbookingslot`
 --
 
 CREATE TABLE `tblbookingslot` (
@@ -105,7 +128,7 @@ CREATE TABLE `tblbookingslot` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tblbookingslot`
+-- 转存表中的数据 `tblbookingslot`
 --
 
 INSERT INTO `tblbookingslot` (`bookingSlotId`, `bookingSlotDate`, `bookingSlotTime`, `bookingSlotTimeNotif`, `bookingSlotStatus`, `create_on`) VALUES
@@ -115,7 +138,7 @@ INSERT INTO `tblbookingslot` (`bookingSlotId`, `bookingSlotDate`, `bookingSlotTi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbldeleted`
+-- 表的结构 `tbldeleted`
 --
 
 CREATE TABLE `tbldeleted` (
@@ -126,7 +149,7 @@ CREATE TABLE `tbldeleted` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbldeleted`
+-- 转存表中的数据 `tbldeleted`
 --
 
 INSERT INTO `tbldeleted` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
@@ -135,7 +158,7 @@ INSERT INTO `tbldeleted` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_o
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblproductcatalogue`
+-- 表的结构 `tblproductcatalogue`
 --
 
 CREATE TABLE `tblproductcatalogue` (
@@ -150,7 +173,7 @@ CREATE TABLE `tblproductcatalogue` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tblproductcatalogue`
+-- 转存表中的数据 `tblproductcatalogue`
 --
 
 INSERT INTO `tblproductcatalogue` (`stockId`, `stockName`, `stockDetail`, `stockType`, `stockPicture`, `stockPrice`, `stockQuantity`, `stockStatus`) VALUES
@@ -170,7 +193,7 @@ INSERT INTO `tblproductcatalogue` (`stockId`, `stockName`, `stockDetail`, `stock
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- 表的结构 `users`
 --
 
 CREATE TABLE `users` (
@@ -185,74 +208,86 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- 转存表中的数据 `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`, `email`, `user_type`, `password`) VALUES
-(1, 'Dowson Kerk', 'Dowson', '2022-10-12', '123123', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
-(20, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
+(1, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
+(3, 'Dowson Kerk', 'Dowson', '2022-10-12', '123123', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
 (22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', '2147483647', 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef'),
 (23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
 
 --
--- Indexes for dumped tables
+-- 转储表的索引
 --
 
 --
--- Indexes for table `banner`
+-- 表的索引 `banner`
 --
 ALTER TABLE `banner`
   ADD PRIMARY KEY (`product_id`);
 
 --
--- Indexes for table `tblbookedslot`
+-- 表的索引 `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`msg_id`);
+
+--
+-- 表的索引 `tblbookedslot`
 --
 ALTER TABLE `tblbookedslot`
   ADD PRIMARY KEY (`bookedSlotId`);
 
 --
--- Indexes for table `tblbookingslot`
+-- 表的索引 `tblbookingslot`
 --
 ALTER TABLE `tblbookingslot`
   ADD PRIMARY KEY (`bookingSlotId`);
 
 --
--- Indexes for table `tblproductcatalogue`
+-- 表的索引 `tblproductcatalogue`
 --
 ALTER TABLE `tblproductcatalogue`
   ADD PRIMARY KEY (`stockId`);
 
 --
--- Indexes for table `users`
+-- 表的索引 `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- 在导出的表使用AUTO_INCREMENT
 --
 
 --
--- AUTO_INCREMENT for table `banner`
+-- 使用表AUTO_INCREMENT `banner`
 --
 ALTER TABLE `banner`
   MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
 
 --
--- AUTO_INCREMENT for table `tblproductcatalogue`
+-- 使用表AUTO_INCREMENT `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- 使用表AUTO_INCREMENT `tblproductcatalogue`
 --
 ALTER TABLE `tblproductcatalogue`
   MODIFY `stockId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `users`
+-- 使用表AUTO_INCREMENT `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 DELIMITER $$
 --
--- Events
+-- 事件
 --
 CREATE DEFINER=`root`@`localhost` EVENT `notif_30` ON SCHEDULE EVERY 1 MINUTE STARTS '2022-10-24 21:06:04' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tblbookingslot
 SET bookingSlotTimeNotif = bookingSlotTime - INTERVAL 30 MINUTE$$
