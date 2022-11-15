@@ -286,14 +286,11 @@
 
 <div class="container-fluid border foot">
   <footer class="py-1 my-2">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
-      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
-      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li> -->
+      <li class="nav-item"><a href="productcatalogue.php" class="nav-link px-2 text-muted">Product</a></li>
+      <li class="nav-item"><a href="enquiryPage.php" class="nav-link px-2 text-muted">Enquiry Page</a></li>
+      <li class="nav-item"><a href="customerservice.php" class="nav-link px-2 text-muted">Customer Service</a></li>
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
