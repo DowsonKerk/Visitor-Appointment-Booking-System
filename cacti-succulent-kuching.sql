@@ -51,6 +51,27 @@ INSERT INTO `banner` (`product_id`, `product_name`, `images`, `product_descripti
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `enquiry`
+--
+
+CREATE TABLE `enquiry` (
+  `form_Id` int(11) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone_number` int(60) NOT NULL,
+  `user_subject` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `enquiry`
+--
+
+INSERT INTO `enquiry` (`form_Id`, `full_name`, `email`, `phone_number`, `user_subject`, `comment`) VALUES
+(1, 'Welson Wu', 'welson123@gmail.com', 198821132, 'promotion', 'when does the promotion end?');
+
+-- --------------------------------------------------------
+--
 -- Table structure for table `tblbookedslot`
 --
 
