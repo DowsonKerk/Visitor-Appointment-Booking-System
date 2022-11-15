@@ -32,12 +32,12 @@
                 <li class="nav-item p-1">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-
+<!--
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Product</a>
                 </li>
 
-                <!-- <li class="nav-item p-1">
+                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Booking</a>
                 </li>
 
@@ -46,7 +46,7 @@
                 </li>  -->
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
+                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">

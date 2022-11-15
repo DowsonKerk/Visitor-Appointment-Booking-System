@@ -2,11 +2,7 @@
  session_start();
  require 'dbcon.php';
  include('PostEnquiry.php');
- include('Account.php');
- if (!isLoggedIn()) {
-     $_SESSION['msg'] = "You must log in first";
-     header('location: login.php');
- }
+
 ?>
 
 
