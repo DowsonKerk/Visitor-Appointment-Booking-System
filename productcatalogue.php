@@ -33,7 +33,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="home.php">Home</a>
+                    <a class="nav-link" href="home.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -161,7 +161,7 @@
                 </li> -->
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="productcatalogue.php">Product Catalogue</a>
+                    <a class="nav-link active" href="productcatalogue.php">Product Catalogue</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -230,12 +230,10 @@
 <div class="col-4">
 <div class="card mb-4">
     <div class="row col-10 mx-auto">
-
-    
             <a class="text-decoration-none text-dark" href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" style="height: 150px;" alt="picture">
+                        <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" style="height: 150px;width: 150px;" alt="picture">
                     </div>
                     
                     <div class="col-md-8 my-auto">
