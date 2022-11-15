@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link active" href="productcatalogue.php">Product</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -153,15 +153,7 @@
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Customer Service</a>
-                </li>
-
-                <!-- <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Report</a>
-                </li> -->
-                
-                <li class="nav-item p-1">
-                    <a class="nav-link active" href="productcatalogue.php">Product Catalogue</a>
+                    <a class="nav-link" href="customerservice.php">Customer Service</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -246,7 +238,6 @@
     </div>
 </div>
 </div>
-
             <?php
                 }
             }
