@@ -148,13 +148,12 @@
                     </div>
                 </li>
 
-
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
+                    <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">
@@ -214,7 +213,6 @@
             foreach($query_run as $productcatalogue)
             {
         ?>
-            <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-md-2">
                         <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" alt="...">
@@ -222,8 +220,8 @@
                     
                     <div class="col-md-8 my-auto">
                         <div class="card-body">
-                            <h5 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h5>
-                            <p class="card-text text-center"><?php echo $productcatalogue['stockDetail']?></p>
+                            <h3 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h3><br>
+                            <p class="card-text text-left"><?php echo $productcatalogue['stockDetail']?></p>
                             <p class="card-text d-flex align-items-center justify-content-center pt-5"><?php echo "Stock left: ", $productcatalogue['stockQuantity'] ?></p>
                         </div>
                     </div>
@@ -234,7 +232,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
             <?php
                 }
@@ -242,6 +239,8 @@
             ?>
     </div>
 </div>
+
+<br>
 
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2 ">

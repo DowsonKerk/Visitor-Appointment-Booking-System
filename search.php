@@ -149,11 +149,11 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
+                    <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">
@@ -197,14 +197,13 @@
 <?php endif ?>
 
 <br><br><br>
-<div class="row col-12">  
-    <div class="row col-10 mx-auto">
     <div class="row mx-auto my-auto">
         <div class="col">
             <h2 class="text-center">Product Catalogue</h2>
         </div>
     </div>
 
+    <br>
 
     <form  action="search.php" method="POST">
         <div class="d-flex justify-content-center mx-auto">
@@ -214,8 +213,10 @@
             <button type="submit" name="submit-search" class="btn btn-primary">Search</button>
         </div>
     </form>
-    <br><br><br>
 
+    <br>
+
+<div class="row col-12 mx-auto">
     <?php 
         if (isset($_POST['submit-search']))
         {
@@ -232,20 +233,30 @@
                 while ($productcatalogue = mysqli_fetch_assoc($query_run))
                 {
         ?>
-                <a href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>"><div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-2">
-                            <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" alt="...">
-                        </div>
-                            
-                        <div class="col-md-10 my-auto">
-                            <div class="card-body">
-                                <h5 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h5>
-                            </div>
+
+<div class="col-4">
+<div class="card mb-4">
+    <div class="row col-10 mx-auto">
+
+    
+            <a class="text-decoration-none text-dark" href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" style="height: 150px;" alt="picture">
+                    </div>
+                    
+                    <div class="col-md-8 my-auto">
+                        <div class="card-body">
+                            <h5 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h5>
                         </div>
                     </div>
-                </div></a>
-            <?php        
+                </div>
+            </a>
+    </div>
+</div>
+</div>
+
+            <?php
                 }
             }
             else{
@@ -254,7 +265,6 @@
             }
         }
         ?>
-    </div>
 </div>
 
 

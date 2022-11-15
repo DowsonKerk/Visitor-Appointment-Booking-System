@@ -148,13 +148,12 @@
                     </div>
                 </li>
 
-
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
+                    <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">
@@ -216,7 +215,8 @@
     </form>
 
     <br><br><br>
-<div class="row col-12">
+
+<div class="row col-12 mx-auto">
     <?php 
         $query = "SELECT * FROM tblproductcatalogue";
         $query_run = mysqli_query($con, $query);
@@ -226,26 +226,27 @@
             foreach($query_run as $productcatalogue)
             {
         ?>
-<div class="col-4" style="padding: 0;">  
+
+<div class="col-4">
+<div class="card mb-4">
     <div class="row col-10 mx-auto">
 
     
-            <a href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>"><div class="card mb-2">
+            <a class="text-decoration-none text-dark" href="productdetail.php?title=<?=$productcatalogue['stockId']; ?>">
                 <div class="row g-0">
-                    <div class="col-md-2">
-                        <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" alt="...">
+                    <div class="col-md-4">
+                        <img src="admin\uploadedimage\<?php echo $productcatalogue['stockPicture']?>" class="img-fluid rounded-start" style="height: 150px;" alt="picture">
                     </div>
                     
-                    <div class="col-md-10 my-auto">
+                    <div class="col-md-8 my-auto">
                         <div class="card-body">
                             <h5 class="card-title text-center"><?php echo $productcatalogue['stockName']?></h5>
                         </div>
                     </div>
                 </div>
-            </div></a>
-
-            
+            </a>
     </div>
+</div>
 </div>
 
             <?php
