@@ -282,12 +282,12 @@
 						if($StockRec['stockPicture'] == "") 
 						{
 						?>
-							<img height="150" width="150" align="left" src="images/photo.png" title="Stock Picture"/>
+							<img class="form-control" src="images/photo.png" title="Stock Picture"/>
 						<?php 
 						}
 						else
 						{?>
-							<img height="150" width="150" align="left" src="uploadedimage/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
+							<img class="form-control" src="uploadedimage/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
 						<?php 
 						} 
 					}
