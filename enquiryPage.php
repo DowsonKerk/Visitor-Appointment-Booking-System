@@ -98,12 +98,11 @@
                 <div class="row">
 
                     <?php echo display_error2(); ?>
-               
 
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="fullName" id="fullName" placeholder="full name">
+                            <input type="text" class="form-control" name="fullName" id="fullName" placeholder="your full name">
                             <label for="fullName">Full Name</label>
                         </div>
                     </div>
@@ -113,7 +112,7 @@
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
 
-                            <input type="text" id="enquiryEmail" name="enquiryEmail" class="form-control" placeholder="kel@gamil.com">
+                            <input type="text" id="enquiryEmail" name="enquiryEmail" class="form-control" placeholder="123@gamil.com" required>
                             <label for="enquiryEmail" class="">Your Email</label>
     
                         </div>
@@ -127,7 +126,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-floating mb-3">
-                            <input type="int" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="016883123">
+                            <input type="int" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="016883123" required>
                             <label for="phoneNumber" class="">Phone Number</label>
                             
                         </div>
@@ -137,10 +136,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-floating mb-3">
-                            <input type="text" id="subject" name="subject" class="form-control" placeholder="promotion">
+                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Any comment" required>
                             <label for="subject" class="">Subject</label>
-                            
-                            
                         </div>
                     </div>
                 </div>
@@ -148,17 +145,12 @@
 
                 <!--Grid row-->
                 <div class="row">
-
                     <!--Grid column-->
                     <div class="col-md-12">
-
                         <div class="form-floating">
                             <textarea type="text" id="Comments" name="Comments" rows="2" class="form-control md-textarea" placeholder="Leave a comment here"></textarea>
                             <label for="Comments">Your Comments</label>
-                            
-                            
                         </div>
-
                     </div>
                 </div>
                 <!--Grid row-->

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('../dbcon.php');
+include('AdminUpdateProfile.php');
 include('../Account.php');
 if (!isAdmin()) {
     $_SESSION['msg'] = "You must log in first";
@@ -187,7 +188,7 @@ if (isset($_GET['logout'])) {
             </div>
             <div class="card-body">
 
-
+            <?php echo display_error2(); ?>
 
                 <?php
                     if(isset($_GET['id'])){
@@ -223,7 +224,7 @@ if (isset($_GET['logout'])) {
                             </div>
                             <div class="form-group pb-3">
                               <label for="mobile">Mobile Number</label>
-                              <input type="text" id="contact_number" name="contact_number" value="<?php echo $userInfo['contact_number']; ?>" class="form-control" required>
+                              <input type="text" id="contact_number" name="contact_number" value="<?php echo $userInfo['contact_number']; ?>" class="form-control" pattern="^(01)[0-46-9]*[0-9]{7,8}$" required>
                             </div>
 
                             <div class="form-group pt-3">
