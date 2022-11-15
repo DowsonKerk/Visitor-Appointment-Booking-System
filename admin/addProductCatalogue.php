@@ -296,8 +296,8 @@
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Price is required">
-					<span class="label-input100">Stock Price(RM)</span>				
-					<input class="form-control" type="text" name="txtstockPrice" placeholder="Enter stock unit price(RM)"<?php if($_GET['Id'] != ""){?><?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockPrice"]; else {if(isset($_POST['txtstockPrice'])) echo $_POST['txtstockPrice']; }?>" required autocomplete="off">	
+					<span class="label-input100">Stock Price ($)</span>				
+					<input class="form-control" type="text" name="txtstockPrice" placeholder="Enter stock unit price($)"<?php if($_GET['Id'] != ""){?><?php } ?> value="<?php if($_GET['Id'] != "") echo $StockRec["stockPrice"]; else {if(isset($_POST['txtstockPrice'])) echo $_POST['txtstockPrice']; }?>" required autocomplete="off">	
 				</div>
 
                 <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Stock Quantity is required">

@@ -255,7 +255,7 @@
 
 </html>
 <div class="container-fluid border" style="width: 100%;">
-  <footer class="py-1 my-2 fixed-bottom">
+  <footer class="py-1 my-2">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="viewEnquiry.php" class="nav-link px-2 text-muted">Enquiry Page</a></li>
