@@ -229,7 +229,7 @@ if($formInfo=mysqli_fetch_assoc($result))
               </div>
 
               <div class="form-group pt-3">
-                <button type="submit" name="edit" class="btn btn-primary"><a class="text-light text-decoration-none" >Reply</a></button>
+                
                 <button type="submit" name="back" class="btn btn-primary"><a class="text-light text-decoration-none" href="enquiryManage.php">Back</a></button>
               </div>
 

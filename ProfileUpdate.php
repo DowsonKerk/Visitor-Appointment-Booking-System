@@ -3,7 +3,8 @@ require 'dbcon.php';
 
 <<<<<<< HEAD
  
-$errors1  = array(); 
+$errors1  = array();
+
 
 =======
 >>>>>>> 39097092bfab9574b6ec0b2fc173eff755f8abe7
@@ -11,48 +12,35 @@ $errors1  = array();
 
 if(isset($_POST['update_user']))
 {
-
-    require 'dbcon.php';
 	
 
-    $user_id = mysqli_real_escape_string($con, $_POST['id']);
-    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $user_id = mysqli_real_escape_string($con,$_POST['id']);
+    $name =  mysqli_real_escape_string($con,$_POST['name']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
-    $contactnum = mysqli_real_escape_string($con, $_POST['contactnum']);
+    $contactnum =  mysqli_real_escape_string($con,$_POST['contactnum']);
     $birthday = mysqli_real_escape_string($con, $_POST['birthday']);
     
-    if (empty($username)) { 
-		array_push($errors1, "Username is required"); 
-	}
-
-	if (empty($email)) { 
-		array_push($errors1, "Email is required"); 
-	}
-	if (!preg_match ("/^[a-zA-z]*$/", $name) ) { 
-		array_push($errors1, "Only alphabets and whitespace are allowed.");
+	
+	if (!preg_match ('/^[\p{L} ]+$/u', $name) ) { 
+		array_push($errors1, 'Only alphabets and whitespace are allowed.');
 	}
 	
-	if (empty($contactnum)) { 
-		array_push($errors1, "Contact number is required"); 
-	}
-    if (empty($birthday)) { 
-		array_push($errors1, "Birthday is required"); 
-	}
+	
+
+    
 
     if (count($errors1) == 0) {
 
         $query = "UPDATE users SET full_name='$name', email='$email', contact_number='$contactnum', birthday='$birthday',username='$username'  WHERE id='$user_id' ";
         mysqli_query($con, $query);
-        header("Location: profile.php?id={$user_id}");
-        exit(0);
+		array_push($errors1, "success to update");
+		echo"<script> alert('Success!'); window.location.assign('Profile.php?id={$user_id}') </script>"; 
+       
+        
 
     }else{ 
-
-        array_push($errors1, "Fail to update"); 
-        header("Location: editProfile.php?id={$user_id}");
-        exit(0);
-
+		echo"<script> alert('fail');window.history.replaceState( $errors1, '', 'editProfile.php?id={$user_id}'); </script>"; 
     }
 
 }
@@ -62,8 +50,8 @@ function display_error1() {
 
 	if (count($errors1) > 0){
 		echo '<div class="error">';
-			foreach ($errors1 as $error){
-				echo $error .'<br>';
+			foreach ($errors1 as $error1){
+				echo $error1 .'<br>';
 			}
 		echo '</div>';
 	}

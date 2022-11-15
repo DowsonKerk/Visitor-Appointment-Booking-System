@@ -6,6 +6,11 @@
      $_SESSION['msg'] = "You must log in first";
      header('location: login.php');
  }
+
+$id = mysqli_real_escape_string($con, $_GET['id']);
+$query = "SELECT * FROM users WHERE id='$id'";
+$query_run = mysqli_query($con, $query);
+$userInfo = mysqli_fetch_array($query_run);
 ?>
 
 
@@ -194,12 +199,10 @@
         <div class="card">
             <div class="card-header">
                 <h4>Edit profile Details
-                    <a href="profile.php" class="btn btn-danger float-end">BACK</a>
+                    <a href="profile.php?id=<?= $userInfo['id']; ?>" class="btn btn-danger float-end">BACK</a>
                 </h4>
             </div>
             <div class="card-body">
-
-
 
                 <?php
                     if(isset($_GET['id'])){
@@ -213,9 +216,10 @@
                         $userInfo = mysqli_fetch_array($query_run);
                         ?>
                         
-                        <form class="" action="profileUpdate.php" method="POST">
+                        <form class="" action="" method="POST">
 
-                            <?php echo display_error(); ?>
+                            <?php echo display_error1(); ?>
+                        
                             <br>
 
                             <input type="hidden" name="id" value="<?php echo $userInfo['id']; ?>" class="form-control">
@@ -234,11 +238,11 @@
                             </div>
                             <div class="form-group pb-3">
                               <label for="email">Email address</label>
-                              <input type="email" id="email" name="email" value="<?php echo $userInfo['email']; ?>" class="form-control" required />
+                              <input type="email" id="email" name="email" value="<?php echo $userInfo['email']; ?>" class="form-control"required  />
                             </div>
                             <div class="form-group pb-3">
                               <label for="mobile">Mobile Number</label>
-                              <input type="text" id="contactnum" name="contactnum" value="<?php echo $userInfo['contact_number']; ?>" class="form-control" required />
+                              <input type="text" id="contactnum" name="contactnum" value="<?php echo $userInfo['contact_number']; ?>" class="form-control" pattern="^(01)[0-46-9]*[0-9]{7,8}$" required  />
                             </div>
 
                             <div class="form-group pt-3">
