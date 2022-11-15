@@ -167,20 +167,28 @@ if (isset($_GET['logout'])) {
                     <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 
-                <li class="nav-item p-1">
+                <!-- <li class="nav-item p-1">
                     <a class="nav-link" href="admincustomerservice.php">Customer Service</a>
+                </li> -->
+
+                <li class="nav-item p-1">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Product Catalogue
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Booking Slot Availability</button></li>    
+                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Booking Slot Availability</button></li>
+                        </ul>
+                    </div>
                 </li>
 
                 <!-- <li class="nav-item p-1">
                     <a class="nav-link" href="#">Report</a>
-                </li>
-                
-
-                
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product Catalogue</a>
                 </li> -->
-
+                
+            
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
