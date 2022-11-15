@@ -158,13 +158,9 @@
                     <a class="nav-link" href="customerservice.php">Customer Service</a>
                 </li>
 
-                <!-- <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Report</a>
-                </li>
-                
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product Catalogue</a>
-                </li> -->
+                    <a class="nav-link" href="productcatalogue.php">Product Catalogue</a>
+                </li>
 
                 <li class="nav-item p-1">
                     <div class="dropdown">
@@ -236,13 +232,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-floating mb-3">
-                            <input type="int" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="016883123" required>
+                            <input type="int" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="016883123" pattern="^(01)[0-46-9]*[0-9]{7,8}$" required>
                             <label for="phoneNumber" class="">Phone Number</label>
                             
                         </div>
                     </div>
                 </div>
-
+asd
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-floating mb-3">
@@ -258,7 +254,7 @@
                     <!--Grid column-->
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <textarea type="text" id="Comments" name="Comments" rows="2" class="form-control md-textarea" placeholder="Leave a comment here"></textarea>
+                            <textarea type="text" id="Comments" name="Comments" rows="2" class="form-control md-textarea" placeholder="Leave a comment here" required></textarea>
                             <label for="Comments">Your Comments</label>
                         </div>
                     </div>
