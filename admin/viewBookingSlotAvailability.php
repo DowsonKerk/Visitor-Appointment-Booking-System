@@ -28,8 +28,8 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="admin.php">
-            <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
+        <a class="navbar-brand" href="#">
+            <img src="../images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -43,9 +43,6 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
-                </li>
-                <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                              Booking
@@ -57,7 +54,6 @@
 							<li><button class="dropdown-item" type="button" onclick="location.href='editBookedSlot.php'">Add Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=E'">Edit Booked Slot</button></li>
 							<li><button class="dropdown-item" type="button" onclick="location.href='searchBookedSlot.php?Id=V'">View Booked Slot</button></li>
-
 						</ul>
                     </div>
                 </li>
@@ -77,7 +73,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Cancelled Booking</button>
-                            </li>    
+                            </li>  
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -113,10 +109,8 @@
                                 <?php }
                                 }?>
                                 </div>
-
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
-                                <?php
-                        
+                                <?php 
                                     // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
                                     $sql = "SELECT * FROM tbldeleted ORDER BY create_on DESC LIMIT 5";
                                     $res = mysqli_query($con, $sql);
@@ -135,7 +129,6 @@
                         </ul>
                     </div>
                 </li>  
- 
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>

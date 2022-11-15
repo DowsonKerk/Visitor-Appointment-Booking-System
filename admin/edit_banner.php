@@ -28,7 +28,7 @@ if (isset($_GET['logout'])) {
    
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="admin.php">
+        <a class="navbar-brand" href="#">
             <img src="../images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
@@ -39,11 +39,7 @@ if (isset($_GET['logout'])) {
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="admin.php">Home</a>
-                </li>
-
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link active" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -77,7 +73,7 @@ if (isset($_GET['logout'])) {
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link text-black" id="push-tab" data-bs-toggle="tab" data-bs-target="#push-tab-pane" type="button" role="tab" aria-controls="push-tab-pane" aria-selected="false">Cancelled Booking</button>
-                            </li>   
+                            </li>  
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
@@ -114,8 +110,7 @@ if (isset($_GET['logout'])) {
                                 }?>
                                 </div>
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
-                                <?php
-                        
+                                <?php 
                                     // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
                                     $sql = "SELECT * FROM tbldeleted ORDER BY create_on DESC LIMIT 5";
                                     $res = mysqli_query($con, $sql);
@@ -166,7 +161,7 @@ if (isset($_GET['logout'])) {
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li><button class="dropdown-item" type="button">Edit Profile</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>

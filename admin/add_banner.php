@@ -39,11 +39,7 @@ if (isset($_GET['logout'])) {
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="#">Home</a>
-                </li>
-
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link active" href="admin.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -165,7 +161,7 @@ if (isset($_GET['logout'])) {
                              Welcome Back, <?php echo $_SESSION['user']['username']; ?>!
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li><button class="dropdown-item" type="button">Edit Profile</button></li>
+                            <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>

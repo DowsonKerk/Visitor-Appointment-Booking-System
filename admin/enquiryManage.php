@@ -29,8 +29,8 @@
     
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="admin.php">
-            <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
+        <a class="navbar-brand" href="#">
+            <img src="../images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -40,12 +40,9 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="admin.php">Home</a>
+                    <a class="nav-link" href="admin.php">Home</a>
                 </li>
 
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
-                </li>
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -88,7 +85,7 @@
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
                                     <?php echo "Reminder"; ?><br>
                                     <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
                                     <?php echo $row["bookingSlotId"]; ?>
@@ -114,8 +111,7 @@
                                 }?>
                                 </div>
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
-                                <?php
-                        
+                                <?php 
                                     // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
                                     $sql = "SELECT * FROM tbldeleted ORDER BY create_on DESC LIMIT 5";
                                     $res = mysqli_query($con, $sql);
@@ -136,7 +132,7 @@
                 </li>  
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
+                    <a class="nav-link active" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
@@ -167,7 +163,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
-                            <li><a href="../home.php?logout='1'" class="text-decoration-none text-black"><button class="dropdown-item" type="button">Logout</button></a></li>
+                            <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>
                 </li>
