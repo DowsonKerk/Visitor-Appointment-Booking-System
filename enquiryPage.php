@@ -218,7 +218,7 @@
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
 
-                            <input type="text" id="enquiryEmail" name="enquiryEmail" class="form-control" placeholder="123@gamil.com" required>
+                            <input type="email" id="enquiryEmail" name="enquiryEmail" class="form-control" placeholder="123@gamil.com" required>
                             <label for="enquiryEmail" class="">Your Email</label>
     
                         </div>
