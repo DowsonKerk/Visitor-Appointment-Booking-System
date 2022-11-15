@@ -311,7 +311,7 @@
 	  						for($i = 0; $i < count($Status); $i++)
 							{
 								echo "<option value = \"".substr($Status[$i], 0, 1)."\"";
-								if($StockRec['stockStatus'] == substr($Status{$i}, 0, 1))
+								if($StockRec['stockStatus'] == substr($Status[$i], 0, 1))
 								echo "SELECTED"; 
 								echo ">".$Status[$i]."</option>";
 							} 
