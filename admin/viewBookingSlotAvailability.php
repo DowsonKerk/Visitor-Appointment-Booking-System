@@ -130,8 +130,6 @@
                     </div>
                 </li>  
 
-<<<<<<< Updated upstream
-=======
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -144,7 +142,6 @@
                     </div>
                 </li>
  
->>>>>>> Stashed changes
                 <li class="nav-item p-1">
                     <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>

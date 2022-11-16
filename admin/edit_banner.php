@@ -131,9 +131,6 @@ if (isset($_GET['logout'])) {
                 </li>  
 
                 <li class="nav-item p-1">
-<<<<<<< Updated upstream
-                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
-=======
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                              Review
@@ -146,8 +143,7 @@ if (isset($_GET['logout'])) {
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
->>>>>>> Stashed changes
+                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">

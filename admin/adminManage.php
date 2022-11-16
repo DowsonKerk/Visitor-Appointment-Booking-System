@@ -129,8 +129,6 @@
                         </ul>
                     </div>
                 </li>  
-<<<<<<< Updated upstream
-=======
 
                 <li class="nav-item p-1">
                     <div class="dropdown">
@@ -144,7 +142,6 @@
                     </div>
                 </li>
  
->>>>>>> Stashed changes
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>

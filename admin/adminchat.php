@@ -134,6 +134,18 @@ if (isset($_GET['logout'])) {
                 </li>  
 
                 <li class="nav-item p-1">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Review
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><button class="dropdown-item" type="button" onclick="location.href='adminReview.php'">View Review</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='deleteReview.php'">Delete Review</button></li>
+						</ul>
+                    </div>
+                </li>
+
+                <li class="nav-item p-1">
                     <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
                 </li>
                 

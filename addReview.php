@@ -60,7 +60,7 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                <a class="nav-link" href="productcatalogue.php">Product</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -185,11 +185,11 @@ if (!isLoggedIn()) {
                 </li>
                                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
+                <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Customer Service</a>
+                    <a class="nav-link" href="customerservice.php">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">

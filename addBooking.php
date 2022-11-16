@@ -38,7 +38,7 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                <a class="nav-link" href="productcatalogue.php">Product</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -150,9 +150,6 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
-<<<<<<< Updated upstream
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
-=======
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                              Review
@@ -166,8 +163,7 @@ if (!isLoggedIn()) {
                 </li>                
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
->>>>>>> Stashed changes
+                <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">

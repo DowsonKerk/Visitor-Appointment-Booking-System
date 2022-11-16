@@ -51,7 +51,7 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                <a class="nav-link" href="productcatalogue.php">Product</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -164,9 +164,7 @@ if (!isLoggedIn()) {
 
 
                 <li class="nav-item p-1">
-<<<<<<< Updated upstream
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
-=======
+                    
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                              Review
@@ -180,8 +178,7 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Enquiry Page</a>
->>>>>>> Stashed changes
+                <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
@@ -225,13 +222,13 @@ if (!isLoggedIn()) {
 		$bookedSlotRec = mysqli_fetch_array($Result);
 	}
 ?>
-	<div class="container-contact100">
+	<div class="row">
 		<form method="POST" enctype="multipart/form-data">
 			<span class="contact100-form-title">
 				<h3>View Booked Slot</h3>
 			</span>
 			<div class="wrap-contact100">		
-				<div class="wrap-input100 validate-input"><span class="label-input100">Booked Sloy Id:</span>
+				<div class="wrap-input100 validate-input"><span class="label-input100">Booked Slot Id:</span>
 					<input class="input100" type="text" name="bookedSlotId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
 				</div></br>
 				

@@ -156,6 +156,20 @@ $userInfo = mysqli_fetch_array($query_run);
                 </li>
 
                 <li class="nav-item p-1">
+                    
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Review
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item active" type="button" onclick="location.href='addReview.php'">Add Review</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='editReview.php'">Edit Review</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='viewReview.php'">View Review</button></li>
+						</ul>
+                    </div>
+                </li>
+
+                <li class="nav-item p-1">
                     <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
                 </li>
                 
