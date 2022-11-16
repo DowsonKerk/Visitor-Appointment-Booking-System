@@ -236,22 +236,10 @@
 
                         <div class="collapse p-1" id="collapsequestion3">
                             <div class="card card-body">
-                                You can access the enquiry 
+                                You can access the enquiry page to make enquiry form.
                             </div>
                         </div>
-                    </div>
-
-                    <div class="p-1">
-                        <button class="btn btn-dark shadow p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapsequestion4" aria-expanded="false" aria-controls="collapsequestion">
-                            Most Frequent Ask Question
-                        </button>
-
-                        <div class="collapse p-1" id="collapsequestion4">
-                            <div class="card card-body">
-                                Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-                            </div>
-                        </div>
-                    </div>            
+                    </div>       
                 </div>
             </div>
         </div>
@@ -280,6 +268,7 @@
 
 
 <br></br><br></br>
+<br></br><br>
 <br></br><br>
 
 
