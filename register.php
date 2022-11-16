@@ -74,7 +74,7 @@
                     <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
                     <form method="post" action="register.php" enctype="multipart/form-data">
-                    <?php echo display_error(); ?>
+                        <?php echo display_error(); ?>
                     <div class="form-outline mb-4">
                         <input type="text" id="username" name="username" class="form-control form-control-lg"/>
                         <label class="form-label" for="username">Your Username</label>

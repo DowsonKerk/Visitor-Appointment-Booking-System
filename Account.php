@@ -15,11 +15,11 @@ if(isset($_POST['register_btn']))
     $password_1 = mysqli_real_escape_string($con, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($con, $_POST['password_2']);
 
-    if (empty($username)) { 
-		array_push($errors, "Username is required"); 
+    if (empty($username) || !preg_match("/^[a-zA-Z-' ]*$/",$username)) { 
+		array_push($errors, "There are only letters and white space allowed in Username"); 
 	}
-	if (empty($email)) { 
-		array_push($errors, "Email is required"); 
+	if (empty($email)|| !filter_var($email, FILTER_VALIDATE_EMAIL)) { 
+		array_push($errors, "Email is incorrect"); 
 	}
 	if (empty($password_1)) { 
 		array_push($errors, "Password is required"); 
@@ -73,7 +73,7 @@ function display_error() {
 	global $errors;
 
 	if (count($errors) > 0){
-		echo '<div class="error">';
+		echo '<div class="alert alert-danger error" role="alert">';
 			foreach ($errors as $error){
 				echo $error .'<br>';
 			}
