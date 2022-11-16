@@ -33,11 +33,11 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="home.php">Home</a>
+                    <a class="nav-link" href="home.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link" href="productcatalogue.php">Product</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -156,9 +156,6 @@
                     <a class="nav-link" href="customerservice.php">Customer Service</a>
                 </li>
 
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="productcatalogue.php">Product Catalogue</a>
-                </li>
 
                 <li class="nav-item p-1">
                     <div class="dropdown">
@@ -167,7 +164,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                                
-                            <li><button class="dropdown-item" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
+                            <li><button class="dropdown-item active" type="button" onclick="location.href='profile.php?id=<?= $_SESSION['user']['id']; ?>'">Profile</button></li>
                             <li><button class="dropdown-item" type="button"><a href="home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
                         </ul>
                     </div>

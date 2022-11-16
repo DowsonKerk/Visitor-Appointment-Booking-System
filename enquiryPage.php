@@ -31,11 +31,11 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link active" href="home.php">Home</a>
+                    <a class="nav-link" href="home.php">Home</a>
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link" href="productcatalogue.php">Product</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -147,16 +147,14 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
+                    <a class="nav-link active" href="enquiryPage.php">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="customerservice.php">Customer Service</a>
                 </li>
 
-                <li class="nav-item p-1">
-                    <a class="nav-link" href="productcatalogue.php">Product Catalogue</a>
-                </li>
+
 
                 <li class="nav-item p-1">
                     <div class="dropdown">

@@ -37,7 +37,7 @@
                 </li>
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link" href="productcatalogue.php">Product</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -159,10 +159,10 @@
                 <!-- <li class="nav-item p-1">
                     <a class="nav-link" href="#">Report</a>
                 </li>
-                            -->
+                           
                 <li class="nav-item p-1">
                     <a class="nav-link" href="productcatalogue.php">Product Catalogue</a>
-                </li>
+                </li> -->
 
                 <li class="nav-item p-1">
                     <div class="dropdown">
