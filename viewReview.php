@@ -18,7 +18,29 @@ if (!isLoggedIn()) {
         <link rel="icon" href="images\icon.png" type="image/icon type">
         <link rel="stylesheet" href="styles\homepage.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    </head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+</head>
+<style>
+.progress-label-left
+{
+    float: left;
+    margin-right: 0.5em;
+    line-height: 1em;
+}
+.progress-label-right
+{
+    float: right;
+    margin-left: 0.3em;
+    line-height: 1em;
+}
+.star-light
+{
+	color:#e9ecef;
+}
+</style>
 <body>
 
 <nav class="navbar navbar-expand-lg">
@@ -150,9 +172,6 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
-<<<<<<< Updated upstream
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
-=======
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                              Review
@@ -163,15 +182,27 @@ if (!isLoggedIn()) {
 							<li><button class="dropdown-item" type="button" onclick="location.href='viewReview.php'">View Review</button></li>
 						</ul>
                     </div>
-                </li>                
+                </li>
 
                 <li class="nav-item p-1">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Review
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item active" type="button" onclick="location.href='addReview.php'">Add Review</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='editReview.php'">Edit Review</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='viewReview.php'">View Review</button></li>
+						</ul>
+                    </div>
+                </li>
+                                
+                <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
->>>>>>> Stashed changes
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">
@@ -200,134 +231,196 @@ if (!isLoggedIn()) {
 </nav>
                             </br></br>
 
-    <?php
-    $bookedSlotId = strtoupper(trim($_POST['txtbookedSlotId']));
-    $piece = strtoupper(trim($_POST['bookingSlotId']));
-    $ppiece = explode(" ", $piece);
-    $bookingSlotId = $ppiece[0];
-    $bookedBy = $_SESSION['user']['id'];
-	
-	if(isset($_POST["btnSave"]))
-	{
-		$UpdateBookingSlot = mysqli_query($con, "UPDATE tblBookedSlot SET bookingSlotId = '".$bookingSlotId."', bookedBy = '".$bookedBy."' WHERE bookedSlotId = '".$_GET['Id']."'");
-		if($UpdateBookingSlot)
-		{	
-			echo "<script>alert('Booked Slot Updated Successfully!')
-			location = 'home.php';</script>";	
-		}
-	}
-	if(isset($_POST["btnAdd"]))
-	{		
-		$Check = "SELECT * FROM tblBookedSlot WHERE bookingSlotId = '".$bookingSlotId."' AND bookedBy = '".$bookedBy."'";
-		$CheckResult = mysqli_query($con, $Check);
-		if(mysqli_num_rows($CheckResult) > 1)
-		{
-			echo "<script>alert('Booked Slot not available, try again!')
-			location = 'addBooking.php';</script>";
-		}
-		else
-		{		
-			$SQL = "SELECT COUNT(bookedSlotId) AS foundbooked FROM tblBookedSlot";
-			$Result = mysqli_query($con, $SQL);
-			$Row = mysqli_fetch_array($Result);
-			$AID= "1" + $Row['foundbooked'];
-			$bookedSlotId = "AID-".sprintf('%04d',$AID);
-			$AddBookedSlot = mysqli_query($con, "INSERT INTO tblBookedSlot(bookedSlotId, bookingSlotId, bookedBy)
-            VALUES('$bookedSlotId', '$bookingSlotId', '$bookedBy')");
-			if($AddBookedSlot)
-			{	
-				echo "<script>alert('Add Booked Slot Successfully!')
-				location = 'home.php';</script>";	
-			}
-		}	
-	}
-	if($_GET['Id'] != "") 
-	{
-		$SQL = "SELECT * FROM tblBookedSlot WHERE bookedSlotId = '".$_GET['Id']."'";
-		$Result = mysqli_query($con, $SQL);
-		if(mysqli_num_rows($Result) > 0)
-		{
-			$bookedSlotRec = mysqli_fetch_array($Result);
-		}
-	}
-?>
-    </br>
-	<div class="row">
-		<form method="POST" enctype="multipart/form-data">
-			<span>
-				<?php 
-				if($_GET['Id'] != "") echo "<h4>Edit Booked Slot Time</h4>"; 
-				else echo "<h4>Add Booking For Appointment</h4>"; 
-				?>
-			</span>
-			<div>		
-				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Booked Slot ID is required">
-					<span class="label-input100">Booked Slot ID:</span>
-					<input class="form-control" type="text" name="txtbookedSlotId" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
-					else 
-					{
-						$SQL = "SELECT COUNT(bookedSlotId) AS foundbooked FROM tblBookedSlot";
-						$Result = mysqli_query($con, $SQL);
-						$Row = mysqli_fetch_array($Result);
-						$AID= "1" + $Row['foundbooked'];
-						echo $bookedSlotId = "AID-".sprintf('%04d',$AID);
-					}?>" readonly="readonly"/>
-					<span class="focus-input100"></span>
-				</div></br>
+    <div class="container">
+    	<h3 class="mt-5 mb-5">Review Page</h3>
+    	<div class="card">
+    		<div class="card-header">Review Form</div>
+    		<div class="card-body">
+    			<div class="row">
+    				<div class="col-sm-4 text-center">
+    					<h1 class="text-warning mt-4 mb-4">
+    						<b><span id="average_rating">0.0</span> / 5</b>
+    					</h1>
+    					<div class="mb-3">
+    						<i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+                            <i class="fas fa-star star-light mr-1 main_star"></i>
+	    				</div>
+    					<h3><span id="total_review">0</span> Review</h3>
+    				</div>
+    				<div class="col-sm-4">
+    					<p>
+                            <div class="progress-label-left"><b>5</b> <i class="fas fa-star text-warning"></i></div>
 
-				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Booking Slot Id is required">
-					<span class="label-input100">Choose Booking Slot Date & Time:</span>
-						<select class="custom-select" name="bookingSlotId" id="bookingSlotId" required>
-							<option selected disabled value="">Choose Here...</option>
-							<?php 
-								$SQL = "SELECT * FROM tblbookingSlot WHERE tblbookingSlot.bookingSlotStatus = 'OPEN'";
-								$Result = mysqli_query($con, $SQL);
-								$List = array();
-								while($Row = mysqli_fetch_array($Result))
-								{
-									$List[] = $Row;
-								}
-								for($i = 0; $i < count($List); $i++)
-								{
-									echo "<option value = \"".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."\"";
-									if($bookedSlotRec["bookingSlotId"] == strtoupper($List[$i]["bookingSlotId"])) 
-									echo "SELECTED"; 
-									echo ">".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."</option>";
-								} 		
-	  							?>
-						</select>
-					<span class="focus-input100"></span>
-				</div>	
-			</div></br>
-
-			<div class="row">
-				<div class="form-group row col-md-5 p-3 mx-auto">
-					<div class="col-md-7">
-					
-                        <center><button class="btn btn-primary" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
-						<span>
-							<?php if($_GET['Id'] != "") echo "Save"; else echo "Add"; ?>
-		
-						</span>
-					    </button>
-                        <button type="submit" class="btn btn-primary" onclick="history.back()">Back</button></center>
-                    </div>
-				</div>
-			</div>
-		</form>
-	</div>
+                            <div class="progress-label-right">(<span id="total_five_star_review">0</span>)</div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                            </div>
+                        </p>
+    					<p>
+                            <div class="progress-label-left"><b>4</b> <i class="fas fa-star text-warning"></i></div>
+                            
+                            <div class="progress-label-right">(<span id="total_four_star_review">0</span>)</div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="four_star_progress"></div>
+                            </div>               
+                        </p>
+    					<p>
+                            <div class="progress-label-left"><b>3</b> <i class="fas fa-star text-warning"></i></div>
+                            
+                            <div class="progress-label-right">(<span id="total_three_star_review">0</span>)</div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="three_star_progress"></div>
+                            </div>               
+                        </p>
+    					<p>
+                            <div class="progress-label-left"><b>2</b> <i class="fas fa-star text-warning"></i></div>
+                            
+                            <div class="progress-label-right">(<span id="total_two_star_review">0</span>)</div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="two_star_progress"></div>
+                            </div>               
+                        </p>
+    					<p>
+                            <div class="progress-label-left"><b>1</b> <i class="fas fa-star text-warning"></i></div>
+                            
+                            <div class="progress-label-right">(<span id="total_one_star_review">0</span>)</div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="one_star_progress"></div>
+                            </div>               
+                        </p>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="mt-5" id="review_content"></div>
+    </div>
 </body>
-
 </html>
+
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="productcatalogue.php" class="nav-link px-2 text-muted">Product</a></li>
-      <li class="nav-item"><a href="enquiryPage.php" class="nav-link px-2 text-muted">Enquiry Page</a></li>
-      <li class="nav-item"><a href="customerservice.php" class="nav-link px-2 text-muted">Customer Service</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li> -->
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
+<script>
+$(document).ready(function(){
+
+load_rating_data();
+
+
+    function load_rating_data()
+    {
+        $.ajax({
+            url:"submitReview.php",
+            method:"POST",
+            data:{action:'load_data'},
+            dataType:"JSON",
+            success:function(data)
+            {
+                $('#average_rating').text(data.average_rating);
+                $('#total_review').text(data.total_review);
+
+                var count_star = 0;
+
+                $('.main_star').each(function(){
+                    count_star++;
+                    if(Math.ceil(data.average_rating) >= count_star)
+                    {
+                        $(this).addClass('text-warning');
+                        $(this).addClass('star-light');
+                    }
+                });
+
+                $('#total_five_star_review').text(data.five_star_review);
+
+                $('#total_four_star_review').text(data.four_star_review);
+
+                $('#total_three_star_review').text(data.three_star_review);
+
+                $('#total_two_star_review').text(data.two_star_review);
+
+                $('#total_one_star_review').text(data.one_star_review);
+
+                $('#five_star_progress').css('width', (data.five_star_review/data.total_review) * 100 + '%');
+
+                $('#four_star_progress').css('width', (data.four_star_review/data.total_review) * 100 + '%');
+
+                $('#three_star_progress').css('width', (data.three_star_review/data.total_review) * 100 + '%');
+
+                $('#two_star_progress').css('width', (data.two_star_review/data.total_review) * 100 + '%');
+
+                $('#one_star_progress').css('width', (data.one_star_review/data.total_review) * 100 + '%');
+
+                if(data.review_data.length > 0)
+                {
+
+                    var html = '';
+
+                    for(var count = 0; count < data.review_data.length; count++)
+                    {
+                        html += '<div class="row mb-3">';
+
+                        html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].user_name.charAt(0)+'</h3></div></div>';
+
+                        html += '<div class="col-sm-11">';
+
+                        html += '<div class="card">';
+
+                        html += '<div class="card-header"><b>'+data.review_data[count].user_name+'</b></div>';
+
+                        html += '<div class="card-body">';
+
+                        for(var star = 1; star <= 5; star++)
+                        {
+                            var class_name = '';
+
+                            if(data.review_data[count].rating >= star)
+                            {
+                                class_name = 'text-warning';
+                            }
+                            else
+                            {
+                                class_name = 'star-light';
+                            }
+
+                            html += '<i class="fas fa-star '+class_name+' mr-1"></i>';
+                        }
+
+                        html += '<br />';
+
+                        html += data.review_data[count].user_review;
+
+                        html += '</div>';
+
+                        html += '</div>';
+
+                        html += '</div>';
+
+                        html += '</div>';
+                    }
+
+                    $('#review_content').html(html);
+                }
+            }
+        })
+    }
+
+});
+
+</script>

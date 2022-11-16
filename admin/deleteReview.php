@@ -1,6 +1,5 @@
 <?php
     session_start();
-	error_reporting(0);
     include('../dbcon.php');
     include('../Account.php');
     if (!isAdmin()) {
@@ -14,7 +13,8 @@
         header("location: ../login.php");
     }
 ?>
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -25,11 +25,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 <body>
-
+    
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid fixed-top shadow-sm bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="../images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
+        <a class="navbar-brand" href="admin.php">
+            <img src="..\images\logo.png" alt="logo" style="width:250px;" class="rounded-pill"> 
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -39,9 +39,12 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="admin.php">Home</a>
+                    <a class="nav-link active" href="admin.php">Home</a>
                 </li>
 
+                <li class="nav-item p-1">
+                    <a class="nav-link" href="#">Product</a>
+                </li>
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -84,7 +87,7 @@
                                         while ($row = mysqli_fetch_assoc($res)){
                                     ?>
                                     <li><button class="dropdown-item border" type="button">
-                                    <small><i><?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
+                                    <small><i><?php echo $row["bookingSlotDate"] ?> <?php echo $row["bookingSlotTimeNotif"] ?></i></small><br>
                                     <?php echo "Reminder"; ?><br>
                                     <?php echo "Appointment at "; ?><?php echo $row["bookingSlotTime"]; ?><?php echo " in slot " ?>
                                     <?php echo $row["bookingSlotId"]; ?>
@@ -110,7 +113,8 @@
                                 }?>
                                 </div>
                                 <div class="tab-pane fade" id="push-tab-pane" role="tabpanel" aria-labelledby="push-tab" tabindex="0">
-                                <?php 
+                                <?php
+                        
                                     // $sql = "SELECT * FROM tblbookedslot INNER JOIN tblbookingslot ON tblbookedslot.bookedSlotId = tblbookingslot.bookingSlotId ORDER BY create_on DESC LIMIT 3";
                                     $sql = "SELECT * FROM tbldeleted ORDER BY create_on DESC LIMIT 5";
                                     $res = mysqli_query($con, $sql);
@@ -130,8 +134,6 @@
                     </div>
                 </li>  
 
-<<<<<<< Updated upstream
-=======
                 <li class="nav-item p-1">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -144,14 +146,12 @@
                     </div>
                 </li>
 
-
->>>>>>> Stashed changes
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="enquiryManage.php">Enquiry Page</a>
+                    <a class="nav-link" href="#">Enquiry Page</a>
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="admincustomerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <li class="nav-item p-1">
@@ -165,9 +165,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
 							<li><button class="dropdown-item" type="button" onclick="location.href='addProductCatalogue.php'">Add Product Catalogue</button></li>
-                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=E'">Edit Product Catalogue</button></li>    
-                            <li><button class="dropdown-item" type="button" onclick="location.href='searchProductCatalogue.php?Id=V'">View Product Catalogue</button></li>
-                        </ul>
+						</ul>
                     </div>
                 </li>
 
@@ -178,7 +176,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button" onclick="location.href='adminManage.php'">Edit Profile</button></li>
-                            <li><button class="dropdown-item" type="button"><a href="../home.php?logout='1'" class="text-decoration-none text-black">Logout</a></button></li>
+                            <li><a href="../home.php?logout='1'" class="text-decoration-none text-black"><button class="dropdown-item" type="button">Logout</button></a></li>
                         </ul>
                     </div>
                 </li>
@@ -186,74 +184,76 @@
         </div>
     </div>
 </nav>
-</br></br></br>
 
 <?php
-	if(isset($_POST["btnBack"]))
-	{
-		echo "<script>location = 'searchProductCatalogue.php';</script>";
-	}
-	$SQL = "SELECT * FROM tblProductCatalogue WHERE tblProductCatalogue.stockId = '".$_GET['Id']."'";
+	$SQL = "SELECT * FROM tblReview";
 	$Result = mysqli_query($con, $SQL);
+    
 	if(mysqli_num_rows($Result) > 0)
 	{
-		$StockRec = mysqli_fetch_array($Result);
-	}
 ?>
-	<div class="row">
-		<form method="POST" enctype="multipart/form-data">
-            <div class="form-group row col-md-5 p-3 mx-auto">
-			    <h5>
-				    View Product Catalogue
-                </h5>
-            </div>
-			<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Id</span>
-				<input class="form-control" type="text" name="stockId" value="<?php echo $_GET['Id'] ;?>" required autofocus autocomplete="off" readonly="readonly">
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+            <br/>							
+            <div><h3 class="mt-5 mb-5">Delete Review Here</h3></div>
+				<form class="contact100-form validate-form" method="POST">
+					<table id="example" class="table table-bordered table-hover">
+				 		<thead>
+                         <tr>
+                                <th>Review ID</th>
+            					<th>User Name</th>
+								<th>User Rating</th>
+								<th>User Review</th>
+           					</tr>
+                  		</thead>
+                		<tbody>
+						<?php
+							for($i = 0; $i < mysqli_num_rows($Result); $i++)
+							{
+								$RecRow = mysqli_fetch_array($Result);
+								echo "<tr class = \"Row\"";
+								echo ">";
+								echo "<td>".$RecRow['review_id']."</td>";
+								echo "<td>".$RecRow['user_name']."</td>";
+								echo "<td>".$RecRow['user_rating']."</td>";
+                                echo "<td>".$RecRow['user_review']."</td>";
+                                echo "<td>"?><a href="reviewProcess.php?id=<?php echo $RecRow["review_id"]; ?>" class="btnLogout" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td><?php
+								echo "</tr>";
+							}
+						?>
+					  	</tbody>
+					</table>
+				</form>
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<center><button type="submit" class="contact100-form-btn" onclick="history.back()">
+							Back					
+						</button></center>
+					</div>
+				</div>			
 			</div>
-			<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Name</span>
-				<input class="form-control" type="text" name="stockName" value="<?php echo $StockRec["stockName"];?>" required autofocus autocomplete="off" readonly="readonly">
-			</div>
-			<div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Detail</span>					
-                <textarea class="form-control" name="stockDetail" required autofocus autocomplete="off" readonly="readonly"><?php echo $StockRec["stockDetail"];?></textarea>					
-			</div>
-            <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Type</span>					
-                <input class="form-control" type="text" name="stockType" value="<?php echo $StockRec["stockType"];?>" required autofocus autocomplete="off" readonly="readonly">
-			</div>
-            <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Picture</span>
-				<img class="form-control" src="uploadedimage/<?php echo $StockRec['stockPicture']?>" title="Picture of <?php echo $StockRec['stockName'];?>"/>
-			</div>
-            <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Price</span>
-				<input class="form-control" type="text" name="srockPrice" value="$ <?php echo $StockRec["stockPrice"];?>" required autofocus autocomplete="off" readonly="readonly">
-			</div>
-            <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Quantity</span>
-				<input class="form-control" type="text" name="stockQuantity" value="<?php echo $StockRec["stockQuantity"];?>" required autofocus autocomplete="off" readonly="readonly">
-			</div>
-            <div class="form-group row col-md-5 p-3 mx-auto"><span class="label-input100">Stock Status</span>
-				<input class="form-control" type="text" name="stockStatus" value="<?php if ($StockRec["stockStatus"] == Y){echo "Yes"; } else echo "No";?>" required autofocus autocomplete="off" readonly="readonly">
-			</div>
-    		<div class="row">
-				<div class="form-group row col-md-5 p-3 mx-auto">
-					<div class="col-md-7">
-					    <button class="btn btn-primary" type="submit" name="btnBack">						
-							Back							
-					    </button>
-                    </div>
-				</div>
-			</div>
-        </form>
-	</div>
+		</div>
+	<?php
+	}			
+    ?>
+
+
+</body>
+</html>
 <div class="container-fluid border" style="width: 100%;">
   <footer class="py-1 my-2">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="admin.php" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="viewEnquiry.php" class="nav-link px-2 text-muted">Enquiry Page</a></li>
-      <li class="nav-item"><a href="admincustomerservice.php" class="nav-link px-2 text-muted">Customer Service</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li> -->
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
 </div>
-</body>
-
-</html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

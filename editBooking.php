@@ -150,7 +150,24 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
+<<<<<<< Updated upstream
                     <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
+=======
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Review
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item active" type="button" onclick="location.href='addReview.php'">Add Review</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='editReview.php'">Edit Review</button></li>
+							<li><button class="dropdown-item" type="button" onclick="location.href='viewReview.php'">View Review</button></li>
+						</ul>
+                    </div>
+                </li>
+
+                <li class="nav-item p-1">
+                    <a class="nav-link" href="#">Enquiry Page</a>
+>>>>>>> Stashed changes
                 </li>
                 
                 <li class="nav-item p-1">
@@ -184,14 +201,14 @@ if (!isLoggedIn()) {
                             </br></br>
 
 <?php
-	$SQL = "SELECT * FROM tblBookedSlot WHERE bookedBy = '".$_SESSION['user']['id']."'";
+	$SQL = "SELECT * FROM tblBookedSlot INNER JOIN tblBookingSlot WHERE bookedBy = '".$_SESSION['user']['id']."'";
 	$Result = mysqli_query($con, $SQL);
     
 	if(mysqli_num_rows($Result) > 0)
 	{
 	?>
-		<div class="container-contact100">
-			<div class="wrap-contact100"></br>								
+		<div class="row">
+			<div class="form-group row col-md-5 p-3 mx-auto"></br>								
                 <div class="callout callout-warning">
                 <?php 
 				 	if($_GET["Id"] == "")	echo "<h5>Click the list row to edit Booking slot time!</h5>"; 
@@ -204,6 +221,7 @@ if (!isLoggedIn()) {
                 			<tr>
             					<th>Booked Slot ID</th>
 								<th>Booking Slot Availability ID</th>
+                                <th>Booked Slot Time</th>
 								<th>Booked By</th>
            					</tr>
                   		</thead>
@@ -219,7 +237,8 @@ if (!isLoggedIn()) {
 								echo ">";
 								echo "<td>".$RecRow['bookedSlotId']."</td>";
 								echo "<td>".$RecRow['bookingSlotId']."</td>";
-								echo "<td>".$RecRow['bookedBy']."</td>";
+								echo "<td>".$RecRow['bookingSlotTime']."</td>";
+                                echo "<td>".$RecRow['bookedBy']."</td>";
 								echo "</tr>";
 								$_SESSION['bookedId'] = $RecRow['bookedSlotId'];
 							}
@@ -227,10 +246,10 @@ if (!isLoggedIn()) {
 					  	</tbody>
 					</table>
 				</form>
-				<div class="container-contact100-form-btn">
-					<div class="wrap-contact100-form-btn">
-						<div class="contact100-form-bgbtn"></div>
-						<center><button type="submit" class="contact100-form-btn" onclick="history.back()">
+				<div class="row">
+					<div class="form-group row col-md-5 p-3 mx-auto">
+						<div class="col-md-7"></div>
+						<center><button type="submit" class="btn btn-primary" onclick="history.back()">
 							Back					
 						</button></center>
 					</div>

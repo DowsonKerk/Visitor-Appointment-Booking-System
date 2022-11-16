@@ -150,9 +150,6 @@ if (!isLoggedIn()) {
                 </li>
 
                 <li class="nav-item p-1">
-<<<<<<< Updated upstream
-                    <a class="nav-link" href="enquiryPage.php">Enquiry Page</a>
-=======
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                              Review
@@ -163,15 +160,14 @@ if (!isLoggedIn()) {
 							<li><button class="dropdown-item" type="button" onclick="location.href='viewReview.php'">View Review</button></li>
 						</ul>
                     </div>
-                </li>                
+                </li>
 
                 <li class="nav-item p-1">
                     <a class="nav-link" href="#">Enquiry Page</a>
->>>>>>> Stashed changes
                 </li>
                 
                 <li class="nav-item p-1">
-                    <a class="nav-link" href="customerservice.php">Customer Service</a>
+                    <a class="nav-link" href="#">Customer Service</a>
                 </li>
 
                 <!-- <li class="nav-item p-1">
@@ -201,101 +197,62 @@ if (!isLoggedIn()) {
                             </br></br>
 
     <?php
-    $bookedSlotId = strtoupper(trim($_POST['txtbookedSlotId']));
-    $piece = strtoupper(trim($_POST['bookingSlotId']));
-    $ppiece = explode(" ", $piece);
-    $bookingSlotId = $ppiece[0];
-    $bookedBy = $_SESSION['user']['id'];
+    $reviewId = strtoupper(trim($_POST['review_id']));
+    $userreview = strtolower(trim($_POST['user_review']));
+    $userrating = strtolower(trim($_POST['user_rating']));
+    $username = $_SESSION['user']['username'];
+    $userId = $_SESSION['user']['id'];
 	
 	if(isset($_POST["btnSave"]))
 	{
-		$UpdateBookingSlot = mysqli_query($con, "UPDATE tblBookedSlot SET bookingSlotId = '".$bookingSlotId."', bookedBy = '".$bookedBy."' WHERE bookedSlotId = '".$_GET['Id']."'");
-		if($UpdateBookingSlot)
+		$UpdateReview = mysqli_query($con, "UPDATE tblReview SET review_id = '".$reviewId."', user_name = '".$username."', user_rating = '".$userrating."', user_review = '".$userreview."' WHERE user_id = '".$userId."'");
+		if($UpdateReview)
 		{	
-			echo "<script>alert('Booked Slot Updated Successfully!')
+			echo "<script>alert('Review Updated Successfully!')
 			location = 'home.php';</script>";	
 		}
 	}
-	if(isset($_POST["btnAdd"]))
-	{		
-		$Check = "SELECT * FROM tblBookedSlot WHERE bookingSlotId = '".$bookingSlotId."' AND bookedBy = '".$bookedBy."'";
-		$CheckResult = mysqli_query($con, $Check);
-		if(mysqli_num_rows($CheckResult) > 1)
-		{
-			echo "<script>alert('Booked Slot not available, try again!')
-			location = 'addBooking.php';</script>";
-		}
-		else
-		{		
-			$SQL = "SELECT COUNT(bookedSlotId) AS foundbooked FROM tblBookedSlot";
-			$Result = mysqli_query($con, $SQL);
-			$Row = mysqli_fetch_array($Result);
-			$AID= "1" + $Row['foundbooked'];
-			$bookedSlotId = "AID-".sprintf('%04d',$AID);
-			$AddBookedSlot = mysqli_query($con, "INSERT INTO tblBookedSlot(bookedSlotId, bookingSlotId, bookedBy)
-            VALUES('$bookedSlotId', '$bookingSlotId', '$bookedBy')");
-			if($AddBookedSlot)
-			{	
-				echo "<script>alert('Add Booked Slot Successfully!')
-				location = 'home.php';</script>";	
-			}
-		}	
-	}
 	if($_GET['Id'] != "") 
 	{
-		$SQL = "SELECT * FROM tblBookedSlot WHERE bookedSlotId = '".$_GET['Id']."'";
+		$SQL = "SELECT * FROM tblReview WHERE review_id = '".$_GET['Id']."'";
 		$Result = mysqli_query($con, $SQL);
 		if(mysqli_num_rows($Result) > 0)
 		{
-			$bookedSlotRec = mysqli_fetch_array($Result);
+			$reviewRec = mysqli_fetch_array($Result);
 		}
 	}
 ?>
     </br>
 	<div class="row">
 		<form method="POST" enctype="multipart/form-data">
-			<span>
-				<?php 
-				if($_GET['Id'] != "") echo "<h4>Edit Booked Slot Time</h4>"; 
-				else echo "<h4>Add Booking For Appointment</h4>"; 
-				?>
-			</span>
-			<div>		
-				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Booked Slot ID is required">
-					<span class="label-input100">Booked Slot ID:</span>
-					<input class="form-control" type="text" name="txtbookedSlotId" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
+			<div>	
+                <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Name is required">
+					<span class="label-input100">Review ID: </span>
+					<input class="form-control" type="text" name="review_id" value="<?php if($_GET['Id'] != "") echo $_GET['Id'];
 					else 
 					{
-						$SQL = "SELECT COUNT(bookedSlotId) AS foundbooked FROM tblBookedSlot";
+						$SQL = "SELECT COUNT(review_id) AS foundReview FROM tblReview";
 						$Result = mysqli_query($con, $SQL);
 						$Row = mysqli_fetch_array($Result);
-						$AID= "1" + $Row['foundbooked'];
-						echo $bookedSlotId = "AID-".sprintf('%04d',$AID);
-					}?>" readonly="readonly"/>
-					<span class="focus-input100"></span>
+						$AID= "1" + $Row['foundReview'];
+						echo $reviewId = sprintf($AID);
+					}?>" readonly="readonly" />
+				</div></br>    
+            
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Name is required">
+					<span class="label-input100">Name: </span>
+					<input class="form-control" type="text" name="user_name" value="<?php echo $_SESSION['user']['username']; ?>" readonly="readonly" />
 				</div></br>
 
-				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Booking Slot Id is required">
-					<span class="label-input100">Choose Booking Slot Date & Time:</span>
-						<select class="custom-select" name="bookingSlotId" id="bookingSlotId" required>
-							<option selected disabled value="">Choose Here...</option>
-							<?php 
-								$SQL = "SELECT * FROM tblbookingSlot WHERE tblbookingSlot.bookingSlotStatus = 'OPEN'";
-								$Result = mysqli_query($con, $SQL);
-								$List = array();
-								while($Row = mysqli_fetch_array($Result))
-								{
-									$List[] = $Row;
-								}
-								for($i = 0; $i < count($List); $i++)
-								{
-									echo "<option value = \"".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."\"";
-									if($bookedSlotRec["bookingSlotId"] == strtoupper($List[$i]["bookingSlotId"])) 
-									echo "SELECTED"; 
-									echo ">".$List[$i]["bookingSlotId"]." ".$List[$i]["bookingSlotDate"]." ".$List[$i]["bookingSlotTime"]."</option>";
-								} 		
-	  							?>
-						</select>
+				<div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Rating is required">
+					<span class="label-input100">Rating: </span>
+						<input class="form-control" type="text" name="user_rating" id="user_rating" value="<?php echo $reviewRec['user_rating'];?>" required>
+					<span class="focus-input100"></span>
+				</div><br/>
+                
+                <div class="form-group row col-md-5 p-3 mx-auto" data-validate = "Review Content is required">
+					<span class="label-input100">Review Content: </span>
+						<input class="form-control" type="text" name="user_review" id="user_review" value="<?php echo $reviewRec['user_review']; ?>" required>
 					<span class="focus-input100"></span>
 				</div>	
 			</div></br>
@@ -307,9 +264,9 @@ if (!isLoggedIn()) {
                         <center><button class="btn btn-primary" type="submit" name="<?php if($_GET['Id'] != "")echo "btnSave"; else echo "btnAdd"; ?>">
 						<span>
 							<?php if($_GET['Id'] != "") echo "Save"; else echo "Add"; ?>
-		
 						</span>
 					    </button>
+                        
                         <button type="submit" class="btn btn-primary" onclick="history.back()">Back</button></center>
                     </div>
 				</div>
@@ -323,9 +280,13 @@ if (!isLoggedIn()) {
   <footer class="py-1 my-2">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="home.php" class="nav-link px-2 text-muted">Home</a></li>
-      <li class="nav-item"><a href="productcatalogue.php" class="nav-link px-2 text-muted">Product</a></li>
-      <li class="nav-item"><a href="enquiryPage.php" class="nav-link px-2 text-muted">Enquiry Page</a></li>
-      <li class="nav-item"><a href="customerservice.php" class="nav-link px-2 text-muted">Customer Service</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Booking</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Notification</a></li> -->
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Enquiry Page</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Customer Service</a></li>
+      <!-- <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Report</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Product Catalogue</a></li> -->
     </ul>
     <p class="text-center text-muted">© 2022 Cacti-Succulent Kuching</p>
   </footer>
