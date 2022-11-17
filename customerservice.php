@@ -270,6 +270,7 @@
                 </div>
             </div>
         </header>
+        <br>
             <a href="chat.php?user_id=1" class="text-decoration-none">
             <button class="btn btn-dark shadow p-1">Chat With Admin</button>
             </a>

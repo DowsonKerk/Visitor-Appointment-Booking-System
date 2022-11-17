@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../dbcon.php');
+    include('dbcon.php');
     include('../Account.php');
     if (!isAdmin()) {
         $_SESSION['msg'] = "You must log in first";

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2022 at 07:59 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Nov 17, 2022 at 08:15 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,6 +51,43 @@ INSERT INTO `banner` (`product_id`, `product_name`, `images`, `product_descripti
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `enquiry`
+--
+
+CREATE TABLE `enquiry` (
+  `form_Id` int(11) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone_number` int(60) NOT NULL,
+  `user_subject` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `enquiry`
+--
+
+INSERT INTO `enquiry` (`form_Id`, `full_name`, `email`, `phone_number`, `user_subject`, `comment`) VALUES
+(1, 'Welson Wu', 'welson123@gmail.com', 198821132, 'promotion', 'when does the promotion end?'),
+(0, 'Hid', 'adasdad', 0, 'asdasdas', 'dasdad'),
+(0, 'asdasdasd', 'asdadsasd', 0, 'asdasdasd', 'asdasdasd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `msg_id` int(11) NOT NULL,
+  `incoming_msg_id` int(255) NOT NULL,
+  `outgoing_msg_id` int(255) NOT NULL,
+  `msg` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblbookedslot`
 --
 
@@ -66,10 +103,7 @@ CREATE TABLE `tblbookedslot` (
 --
 
 INSERT INTO `tblbookedslot` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
-('AID-0001', 'BID-0001', '24', '2022-10-25 13:43:53'),
-('AID-0002', 'BID-0001', '26', '2022-11-16 14:27:43'),
-('AID-0003', 'BID-0002', '26', '2022-11-16 14:27:50'),
-('AID-0004', 'BID-0001', '25', '2022-11-16 15:12:02');
+('AID-0001', 'BID-0001', '24', '2022-10-25 13:43:53');
 
 -- --------------------------------------------------------
 
@@ -112,8 +146,7 @@ CREATE TABLE `tbldeleted` (
 --
 
 INSERT INTO `tbldeleted` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_on`) VALUES
-('AID-0002', 'BID-0001', '23', '2022-10-26 16:59:48'),
-('AID-0002', 'BID-0001', '25', '2022-11-10 13:53:38');
+('AID-0002', 'BID-0001', '23', '2022-10-26 16:59:48');
 
 -- --------------------------------------------------------
 
@@ -122,9 +155,9 @@ INSERT INTO `tbldeleted` (`bookedSlotId`, `bookingSlotId`, `bookedBy`, `create_o
 --
 
 CREATE TABLE `tblproductcatalogue` (
-  `stockId` varchar(15) NOT NULL,
+  `stockId` int(10) NOT NULL,
   `stockName` varchar(50) DEFAULT NULL,
-  `stockDetail` varchar(500) DEFAULT NULL,
+  `stockDetail` text DEFAULT NULL,
   `stockType` varchar(50) DEFAULT NULL,
   `stockPicture` varchar(100) DEFAULT NULL,
   `stockPrice` varchar(10) DEFAULT NULL,
@@ -137,13 +170,18 @@ CREATE TABLE `tblproductcatalogue` (
 --
 
 INSERT INTO `tblproductcatalogue` (`stockId`, `stockName`, `stockDetail`, `stockType`, `stockPicture`, `stockPrice`, `stockQuantity`, `stockStatus`) VALUES
-('1', 'Old Lady Cactus (Mammillaria hahniana)', 'The old lady cactus, a type of powder puff cactus, is covered with spines and white down, hence its name. This easy-to-grow, sun-loving plant is a great choice for a beginner.', 'cactus', 'cactus.jpeg', '49', '20', 'Y'),
-('2', 'Golden Barrel Cactus (Echinocactus grusonii)', 'This plant, nicknamed the \"mother-in-law cushion\" (ouch!), needs plenty of sun and not much water. A barrel cactus can thrive with watering as infrequently as once every two to three months.', 'cactus', 'cactus1.jpeg', '59', '10', 'Y'),
-('3', 'Fairy Castle Cactus (Acanthocereus tetragonus)', 'Who knew a cactus could be whimsical? The varied stems resemble the turrets of a castle, making it the perfect addition to any whimsical garden. This slow-growing cactus can reach up to 6 feet in height. Take note that the fairy castle cactus rarely produces flowers—they\'re often sold with artificial blooms attached. Place it where it will get lots of sun.', 'cactus', 'cactus2.jpeg', '99', '34', 'Y'),
-('4', 'Bluebell', 'These beautiful bell-shaped flowers make an impact when planted in large swaths. Bunnies and deer usually leave them alone. Prefers part shade and tend to like moist soils.', 'flower', 'flower.jpg', '99', '30', 'Y'),
-('5', 'Tulip', 'There are so many different sizes, shapes and colors of tulips that it\'s impossible to pick just one for your garden! They bloom from early to late spring, and some types are considered annuals because they don\'t put on as good a show in subsequent seasons. Protect tulip bulbs from rodents! Prefers full sun to part shade, depending on the type.', 'flower', 'flower1.jpg', '69', '4', 'Y'),
-('6', 'Lavender Bundle Garden Gloves', 'Most gardeners can attest that they go through gloves quite often. Whether they get too dirty, have a hole in them, or a new pair catches their eye, a gardener will always welcome a new pair of gloves.', 'accessory', 'accessory.png', '19', '78', 'Y'),
-('7', '9-Piece Succulent Mini Tool Set', 'Tiny succulents, bonsai trees, and other houseplants need tiny tools, and this nine-piece set is ideal for transplanting or digging around in small indoor potted plants. Plus, it\'s super cute!', 'accessory', 'accessory1.jpg', '49', '50', 'Y');
+(1, 'Old Lady Cactus (Mammillaria hahniana)', 'The old lady cactus, a type of powder puff cactus, is covered with spines and white down, hence its name. This easy-to-grow, sun-loving plant is a great choice for a beginner.', 'cactus', 'cactus.jpeg', '49', '20', 'Y'),
+(2, 'Golden Barrel Cactus (Echinocactus grusonii)', 'This plant, nicknamed the \"mother-in-law cushion\" (ouch!), needs plenty of sun and not much water. A barrel cactus can thrive with watering as infrequently as once every two to three months.', 'cactus', 'cactus1.jpeg', '59', '10', 'Y'),
+(3, 'Fairy Castle Cactus (Acanthocereus tetragonus)', 'Who knew a cactus could be whimsical? The varied stems resemble the turrets of a castle, making it the perfect addition to any whimsical garden. This slow-growing cactus can reach up to 6 feet in height. Take note that the fairy castle cactus rarely produces flowers—they\'re often sold with artificial blooms attached. Place it where it will get lots of sun.', 'cactus', 'cactus2.jpeg', '99', '34', 'Y'),
+(4, 'Bluebell', 'These beautiful bell-shaped flowers make an impact when planted in large swaths. Bunnies and deer usually leave them alone. Prefers part shade and tend to like moist soils.', 'flower', 'flower.png', '99', '30', 'Y'),
+(5, 'Tulip', 'There are so many different sizes, shapes and colors of tulips that it\'s impossible to pick just one for your garden! They bloom from early to late spring, and some types are considered annuals because they don\'t put on as good a show in subsequent seasons. Protect tulip bulbs from rodents! Prefers full sun to part shade, depending on the type.', 'flower', 'flower1.png', '69', '4', 'Y'),
+(6, 'Saguaro Cactus (Carnegiea gigantea)', 'The tree-like saguaro cactus is native only to the Sonoran Desert and can live for 200 years. Its slow growth rate (about an inch per year for the first eight years of its life) makes it possible to grow indoors—as long as it gets ample direct bright light.', 'cactus', 'cactus3.png', '99', '7', 'Y'),
+(7, '9-Piece Succulent Mini Tool Set', 'Tiny succulents, bonsai trees, and other houseplants need tiny tools, and this nine-piece set is ideal for transplanting or digging around in small indoor potted plants. Plus, it\'s super cute!', 'accessory', 'accessory1.png', '49', '50', 'Y'),
+(8, 'Lavender Bundle Garden Gloves', 'Most gardeners can attest that they go through gloves quite often. Whether they get too dirty, have a hole in them, or a new pair catches their eye, a gardener will always welcome a new pair of gloves.', 'accessory', 'accessory.png', '19', '78', 'Y'),
+(9, 'Ron Finley\'s Gardening Lessons', 'Ron Finley has been teaching folks to garden—and fighting for better food and more beautiful spaces in South Central Los Angeles—since 2010. He\'s an expert at helping anyone grow plants in nearly any kind of space. In this Masterclass series of online lessons, he\'ll teach you how to grow anything from snapdragons to fruit trees and more!', 'accessory', 'accessory2.png', '199', '4', 'Y'),
+(10, 'Leucojum', 'These plants, also called snowflake, bloom profusely, lending a wispy, baby\'s breath-type effect to other nearby plantings. They tend to naturalize well and are pest-resistant, tolerating a wide range of soil types and exposures. Prefers full sun to part shade.', 'flower', 'flower2.jpg', '89', '9', 'Y'),
+(11, 'Happy Plant', 'This all-new book will give her all of the information she needs to care for her house plants. The guide covers everything from fertilizing and repotting to watering to propagating. It includes a planting journal so she can keep tabs on her favorites.', 'accessory', 'accessory3.jpg', '89', '7', 'Y'),
+(12, 'Tempest Weather System', '\"I love keeping track of exactly how much rain is falling on my lawn and garden. Personal weather stations can cost thousands of dollars and take a lot of setup, but this one is easy to install and relatively affordable,\" says Christopher Michel, Country Living Senior Garden Editor.', 'accessory', 'accessory4.jpg', '79', '56', 'Y');
 
 -- --------------------------------------------------------
 
@@ -158,17 +196,6 @@ CREATE TABLE `tblreview` (
   `user_review` varchar(255) NOT NULL,
   `user_id` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tblreview`
---
-
-INSERT INTO `tblreview` (`review_id`, `user_name`, `user_rating`, `user_review`, `user_id`) VALUES
-(2, 'Ah', 1, 'sick product', 0),
-(7, 'xoxo', 4, 'asdadasdada', 26),
-(8, 'xoxo', 1, '1231231231', 26),
-(9, 'ahbert', 2, 'hello my fren', 25),
-(10, 'ahbert', 5, '5 star product', 25);
 
 -- --------------------------------------------------------
 
@@ -192,12 +219,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`, `email`, `user_type`, `password`) VALUES
-(1, 'Dowson Kerk', 'Dowson', '2022-10-12', '123123', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
-(20, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
+(1, 'admin', NULL, NULL, NULL, 'admin@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3'),
+(3, 'Dowson Kerk', 'Dowson', '2022-10-12', '123123', 'dowson@kerk.gmail', 'user', '900150983cd24fb0d6963f7d28e17f72'),
 (22, 'kelvinc616', 'Kelvin Chen Wei Lung', '2022-10-09', '2147483647', 'kelvinc616@gmail.com', 'user', 'b0eea31431079145436d4c76f4b9c8ef'),
-(23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b'),
-(25, 'ahbert', 'Wong Chung Hing', '2000-04-02', '0109771761', 'bertbert0402@gmail.com', 'user', '8a5e98f6f0324362aa9d9ec9ced1a3fd'),
-(26, 'xoxo', 'Wong', '2000-11-11', '01111111111', '123aa@gmail.com', 'user', '8cd0fee89585a5d46ed73fc3b25dbc11');
+(23, 'UwU', 'Dowson', '2022-09-25', '0167735586', 'dowsonkerk@gmail.com', 'user', 'c4ca4238a0b923820dcc509a6f75849b');
 
 --
 -- Indexes for dumped tables
@@ -208,6 +233,12 @@ INSERT INTO `users` (`id`, `username`, `full_name`, `birthday`, `contact_number`
 --
 ALTER TABLE `banner`
   ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`msg_id`);
 
 --
 -- Indexes for table `tblbookedslot`
@@ -228,12 +259,6 @@ ALTER TABLE `tblproductcatalogue`
   ADD PRIMARY KEY (`stockId`);
 
 --
--- Indexes for table `tblreview`
---
-ALTER TABLE `tblreview`
-  ADD PRIMARY KEY (`review_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -250,10 +275,16 @@ ALTER TABLE `banner`
   MODIFY `product_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
 
 --
--- AUTO_INCREMENT for table `tblreview`
+-- AUTO_INCREMENT for table `messages`
 --
-ALTER TABLE `tblreview`
-  MODIFY `review_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `messages`
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tblproductcatalogue`
+--
+ALTER TABLE `tblproductcatalogue`
+  MODIFY `stockId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
